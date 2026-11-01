@@ -32,4 +32,4 @@ The script compiles the manuscript and response and generates the tagged marked 
 
 ## Latest revision
 
-The clean manuscript has 16 pages, the tagged marked manuscript 17 pages, and the combined response 22 pages. All 19 reviewer comments are covered with 37 manuscript excerpts. Coverage-prior explanations, timing scope, and manuscript/response consistency have been checked. Repeated future-work commitments have been removed from the response. See `Revision_Notes_20261101.md` and `Final_Consistency_Check.md`.
+The clean manuscript has 17 pages, the tagged marked manuscript 17 pages, and the combined response 22 pages. All 19 reviewer comments are covered with 37 manuscript excerpts. Coverage-prior explanations, timing scope, and manuscript/response consistency have been checked. Repeated future-work commitments have been removed from the response. See `Revision_Notes_20261101.md` and `Final_Consistency_Check.md`.
