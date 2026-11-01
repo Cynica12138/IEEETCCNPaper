@@ -1,0 +1,324 @@
+[
+  {
+    "page": 1,
+    "anchor": "To support ubiquitous connectivity",
+    "ids": [
+      "R1-C5"
+    ],
+    "side": "right",
+    "desired_y": 201.145357,
+    "height": 12,
+    "y": 201.145357
+  },
+  {
+    "page": 3,
+    "anchor": "Each satellite can cover at most J cells and activate at most",
+    "ids": [
+      "R2-C3",
+      "R3-C2"
+    ],
+    "side": "right",
+    "desired_y": 109.238357,
+    "height": 19,
+    "y": 109.238357
+  },
+  {
+    "page": 4,
+    "anchor": "User-level resource allocation uses",
+    "ids": [
+      "R2-C6"
+    ],
+    "side": "left",
+    "desired_y": 189.565357,
+    "height": 12,
+    "y": 189.565357
+  },
+  {
+    "page": 4,
+    "anchor": "RT packets have a time-to-live",
+    "ids": [
+      "R2-C1",
+      "R2-C6"
+    ],
+    "side": "right",
+    "desired_y": 465.512357,
+    "height": 19,
+    "y": 465.512357
+  },
+  {
+    "page": 5,
+    "anchor": "The association remains fixed",
+    "ids": [
+      "R1-C1"
+    ],
+    "side": "left",
+    "desired_y": 634.475357,
+    "height": 12,
+    "y": 634.475357
+  },
+  {
+    "page": 5,
+    "anchor": "The overall utility combines",
+    "ids": [
+      "R2-C2"
+    ],
+    "side": "right",
+    "desired_y": 633.763357,
+    "height": 12,
+    "y": 633.763357
+  },
+  {
+    "page": 6,
+    "anchor": "Constraint C1 restricts illumination",
+    "ids": [
+      "R2-C3",
+      "R3-C2"
+    ],
+    "side": "left",
+    "desired_y": 318.640357,
+    "height": 19,
+    "y": 318.640357
+  },
+  {
+    "page": 7,
+    "anchor": "The optimized cell-satellite association matrix",
+    "ids": [
+      "R3-C4"
+    ],
+    "side": "left",
+    "desired_y": 403.475357,
+    "height": 12,
+    "y": 403.475357
+  },
+  {
+    "page": 7,
+    "anchor": "During offline centralized training",
+    "ids": [
+      "R1-C3",
+      "R3-C3"
+    ],
+    "side": "left",
+    "desired_y": 558.656357,
+    "height": 19,
+    "y": 558.656357
+  },
+  {
+    "page": 7,
+    "anchor": "The local observation is organized",
+    "ids": [
+      "R1-C4",
+      "R2-C5"
+    ],
+    "side": "right",
+    "desired_y": 487.408357,
+    "height": 19,
+    "y": 487.408357
+  },
+  {
+    "page": 7,
+    "anchor": "The critic receives the five features",
+    "ids": [
+      "R3-C3"
+    ],
+    "side": "right",
+    "desired_y": 348.806357,
+    "height": 12,
+    "y": 348.806357
+  },
+  {
+    "page": 8,
+    "anchor": "MAPPO uses the expected discounted return",
+    "ids": [
+      "R2-C2"
+    ],
+    "side": "right",
+    "desired_y": 262.843357,
+    "height": 12,
+    "y": 262.843357
+  },
+  {
+    "page": 9,
+    "anchor": "Fig. 2. Framework of the proposed MAPPO-based beam hopping",
+    "ids": [
+      "R2-C4",
+      "R2-C5"
+    ],
+    "side": "left",
+    "desired_y": 296.752272,
+    "height": 19,
+    "y": 296.752272
+  },
+  {
+    "page": 10,
+    "anchor": "For PPO updates",
+    "ids": [
+      "R2-C4"
+    ],
+    "side": "left",
+    "desired_y": 93.545357,
+    "height": 12,
+    "y": 93.545357
+  },
+  {
+    "page": 10,
+    "anchor": "Offline trajectories are collected",
+    "ids": [
+      "R1-C3"
+    ],
+    "side": "left",
+    "desired_y": 540.153357,
+    "height": 12,
+    "y": 540.153357
+  },
+  {
+    "page": 11,
+    "anchor": "All compared association schemes",
+    "ids": [
+      "R3-C1"
+    ],
+    "side": "left",
+    "desired_y": 715.218357,
+    "height": 12,
+    "y": 715.218357
+  },
+  {
+    "page": 11,
+    "anchor": "A controlled pairwise diagnostic evaluates",
+    "ids": [
+      "R1-C4",
+      "R2-C5"
+    ],
+    "side": "right",
+    "desired_y": 715.218357,
+    "height": 19,
+    "y": 715.218357
+  },
+  {
+    "page": 11,
+    "anchor": "Error bars in Figs.",
+    "ids": [
+      "R3-C6"
+    ],
+    "side": "right",
+    "desired_y": 691.244357,
+    "height": 12,
+    "y": 691.244357
+  },
+  {
+    "page": 13,
+    "anchor": "Fig. 6.",
+    "ids": [
+      "R3-C1",
+      "R3-C6"
+    ],
+    "side": "left",
+    "desired_y": 482.305272,
+    "height": 19,
+    "y": 482.305272
+  },
+  {
+    "page": 13,
+    "anchor": "Fig. 7.",
+    "ids": [
+      "R2-C1",
+      "R3-C6"
+    ],
+    "side": "right",
+    "desired_y": 457.800272,
+    "height": 19,
+    "y": 457.800272
+  },
+  {
+    "page": 13,
+    "anchor": "3) Ablation Analysis:",
+    "ids": [
+      "R2-C7"
+    ],
+    "side": "right",
+    "desired_y": 631.631983,
+    "height": 12,
+    "y": 631.631983
+  },
+  {
+    "page": 14,
+    "anchor": "Fig. 8. Ablation results of the proposed method",
+    "ids": [
+      "R1-C4",
+      "R2-C5",
+      "R2-C7",
+      "R3-C6"
+    ],
+    "side": "left",
+    "desired_y": 329.032272,
+    "height": 33,
+    "y": 329.032272
+  },
+  {
+    "page": 14,
+    "anchor": "4) Hotspot-Reversal Sensitivity:",
+    "ids": [
+      "R1-C1"
+    ],
+    "side": "left",
+    "desired_y": 548.030983,
+    "height": 12,
+    "y": 548.030983
+  },
+  {
+    "page": 14,
+    "anchor": "5) ISA Parameter Sensitivity:",
+    "ids": [
+      "R1-C2"
+    ],
+    "side": "right",
+    "desired_y": 557.983983,
+    "height": 12,
+    "y": 557.983983
+  },
+  {
+    "page": 15,
+    "anchor": "Fig. 9.",
+    "ids": [
+      "R1-C2"
+    ],
+    "side": "left",
+    "desired_y": 304.959272,
+    "height": 12,
+    "y": 304.959272
+  },
+  {
+    "page": 15,
+    "anchor": "The actor forward-pass latency was measured",
+    "ids": [
+      "R1-C6",
+      "R3-C5"
+    ],
+    "side": "left",
+    "desired_y": 679.352357,
+    "height": 19,
+    "y": 679.352357
+  },
+  {
+    "page": 15,
+    "anchor": "7) Action-Delay Sensitivity:",
+    "ids": [
+      "R1-C6"
+    ],
+    "side": "right",
+    "desired_y": 411.991983,
+    "height": 12,
+    "y": 411.991983
+  },
+  {
+    "page": 16,
+    "anchor": "The coverage priors are static within each association period",
+    "ids": [
+      "R1-C4",
+      "R2-C5"
+    ],
+    "side": "left",
+    "desired_y": 69.639357,
+    "height": 19,
+    "y": 69.639357
+  }
+]

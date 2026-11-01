@@ -1,0 +1,699 @@
+{
+  "baseline": "E:\\LatexPaper\\outputs\\TCCN_Final_Revision_20261101\\Original_Manuscript.tex",
+  "clean": "E:\\LatexPaper\\outputs\\TCCN_Final_Revision_20261101\\Revised_Manuscript_Clean.tex",
+  "marked_units": [
+    {
+      "block": 14,
+      "kind": "prose",
+      "preview": "Low-Earth-orbit (LEO) satellite networks provide wide-area direct-to-cell coverage, but uneven traffic distribution, dynamic service demands, and inter-beam int"
+    },
+    {
+      "block": 26,
+      "kind": "prose",
+      "preview": "To support ubiquitous connectivity, He et al.~\\cite{refD2S} examined the technical routes, challenges, and key technologies of direct-to-smartphone communicatio"
+    },
+    {
+      "block": 37,
+      "kind": "prose",
+      "preview": "Despite the progress reported above, most existing studies mainly focus on single-satellite scenarios. When directly extended to multi-satellite systems, these "
+    },
+    {
+      "block": 39,
+      "kind": "prose",
+      "preview": "Although existing studies on satellite beam hopping scheduling have achieved notable progress in improving user satisfaction, mitigating inter-beam interference"
+    },
+    {
+      "block": 42,
+      "kind": "itemize",
+      "preview": "\\begin{itemize}[\\setlength{\\topsep}{2pt}] \\item A hierarchical multi-satellite cooperative beam hopping framework is proposed for direct-to-cell LEO satellite n"
+    },
+    {
+      "block": 49,
+      "kind": "prose",
+      "preview": "The forward-link model of a LEO-based multi-satellite multi-beam communication system is illustrated in Fig.~\\ref{fig:system-model}. The system comprises multip"
+    },
+    {
+      "block": 59,
+      "kind": "prose",
+      "preview": "Each satellite can cover at most $J$ cells and activate at most $K_{\\max}$ beams simultaneously. For a given satellite and time slot, $K$ denotes the actual num"
+    },
+    {
+      "block": 60,
+      "kind": "equation",
+      "preview": "\\begin{equation} \\mathcal{K}=\\{k\\mid k=1,2,\\ldots,K_{\\max}\\}. \\end{equation}"
+    },
+    {
+      "block": 68,
+      "kind": "equation",
+      "preview": "\\begin{equation} |h_t^{n,k,u}|^2 = \\frac{ G_T^{n,k,u}G_R^{n,u} }{ \\left(\\frac{4\\pi d_{n,u}}{\\lambda}\\right)^2 L_{\\mathrm{sh}}^{n,u} }, \\quad k\\in\\mathcal{K}, n\\"
+    },
+    {
+      "block": 69,
+      "kind": "prose",
+      "preview": "where the gains $G_T^{n,k,u}$ and $G_R^{n,u}$ correspond to beam $k$ toward user $u$ and the user's receive antenna, respectively; $d_{n,u}$ is the propagation "
+    },
+    {
+      "block": 79,
+      "kind": "prose",
+      "preview": "The total transmission power of a single satellite is denoted by $P_{\\mathrm{tot}}$. The bandwidth assigned to user $u$ at slot $t$ is denoted by $B_u(t)$. The "
+    },
+    {
+      "block": 81,
+      "kind": "prose",
+      "preview": "User-level resource allocation uses proportional-fair (PF) scheduling~\\cite{refPFclassic,refPFrb}. Each illuminated beam divides $B_{\\mathrm{tot}}$ into $N_{\\ma"
+    },
+    {
+      "block": 92,
+      "kind": "equation",
+      "preview": "\\begin{equation} \\mathrm{SINR}_t^u = \\frac{ {P}_t^{n,k,u}|h_t^{n,k,u}|^2 }{ N_u(t)+I_t^{n,k,u} }, \\label{eq:sinr} \\end{equation}"
+    },
+    {
+      "block": 94,
+      "kind": "equation",
+      "preview": "\\begin{equation} N_u(t)=\\kappa T_{\\mathrm{noise}}B_u(t), \\end{equation}"
+    },
+    {
+      "block": 95,
+      "kind": "prose",
+      "preview": "where $\\kappa$ is the Boltzmann constant and $T_{\\mathrm{noise}}$ is the equivalent noise temperature."
+    },
+    {
+      "block": 98,
+      "kind": "equation",
+      "preview": "\\begin{equation} R_t^u = B_u(t)\\log_2(1+\\mathrm{SINR}_t^u). \\label{eq:rate} \\end{equation}"
+    },
+    {
+      "block": 99,
+      "kind": "prose",
+      "preview": "The model assumes a frequency-flat channel and uniform power spectral density; users without allocated RBs have $R_t^u=0$."
+    },
+    {
+      "block": 101,
+      "kind": "prose",
+      "preview": "Since simultaneously illuminated adjacent or overlapping beams may cause non-negligible inter-beam interference, both intra-satellite and inter-satellite interf"
+    },
+    {
+      "block": 107,
+      "kind": "prose",
+      "preview": "The satellite forwards packets according to the first-in-first-out (FIFO) principle within each service queue. Since different users may have different service "
+    },
+    {
+      "block": 111,
+      "kind": "prose",
+      "preview": "RT packets have a time-to-live (TTL) of $t_{\\mathrm{th},\\mathrm{R}}$ slots, whereas BULK packets are not subject to TTL-based expiration, so $D_t^{u,\\mathrm{B}}"
+    },
+    {
+      "block": 115,
+      "kind": "prose",
+      "preview": "where user $u$ lies in cell $m$ associated with satellite $n$, $R_t^u$ is its allocated rate, $T_{\\mathrm{slot}}$ is the slot duration, and $L_p$ is the packet "
+    },
+    {
+      "block": 124,
+      "kind": "prose",
+      "preview": "Due to the spatial and temporal non-uniformity of ground traffic, the cell-satellite association stage aims to balance the forward-link traffic load among satel"
+    },
+    {
+      "block": 126,
+      "kind": "prose",
+      "preview": "where $T_m$ denotes the aggregate statistical traffic demand of users in cell $m$ for the current association period. The visibility indicator $V_{n,m}\\in\\{0,1\\"
+    },
+    {
+      "block": 129,
+      "kind": "prose",
+      "preview": "The association remains fixed within each period, while slot-wise beam hopping and power allocation respond to local queue variations."
+    },
+    {
+      "block": 135,
+      "kind": "prose",
+      "preview": "The data volume delivered by the system in time slot $t$ is defined as"
+    },
+    {
+      "block": 137,
+      "kind": "prose",
+      "preview": "where $S_t^u$ denotes the number of packets successfully transmitted for user $u$ at time slot $t$, and $L_p$ denotes the packet size in bits."
+    },
+    {
+      "block": 141,
+      "kind": "prose",
+      "preview": "The aggregate delivered data volume over the evaluation horizon is expressed as"
+    },
+    {
+      "block": 144,
+      "kind": "prose",
+      "preview": "To characterize the RT queue of user $u$, packets are grouped into age bins. The number of packets in age bin $l$ at the beginning of slot $t$ is denoted by $\\n"
+    },
+    {
+      "block": 150,
+      "kind": "prose",
+      "preview": "The average RT queueing delay of user $u$ is defined as the current queue's mean packet age, expressed as"
+    },
+    {
+      "block": 159,
+      "kind": "prose",
+      "preview": "The overall utility combines the average per-slot delivered data volume and average RT queueing delay, expressed as"
+    },
+    {
+      "block": 160,
+      "kind": "equation",
+      "preview": "\\begin{equation} \\label{eq:p2-utility} \\Upsilon= \\alpha\\cdot\\frac{\\zeta}{N_{\\mathrm{slot}}\\zeta_{\\mathrm{norm}}} - (1-\\alpha)\\cdot\\frac{\\Gamma}{\\Gamma_{\\mathrm{"
+    },
+    {
+      "block": 161,
+      "kind": "prose",
+      "preview": "where $\\Upsilon$ denotes the weighted utility, $\\zeta_{\\mathrm{norm}}$ and $\\Gamma_{\\mathrm{norm}}$ are fixed normalization factors for the slot-wise delivered "
+    },
+    {
+      "block": 164,
+      "kind": "equation",
+      "preview": "\\begin{equation} \\label{prob:p2} \\begin{aligned} \\mathrm{P2}:\\quad \\max_{\\mathbf{x},\\mathbf{p}}\\quad & \\Upsilon \\\\ \\mathrm{s.t.}\\quad & C_1:x_t^{n,m}\\leq z_{n,m"
+    },
+    {
+      "block": 166,
+      "kind": "prose",
+      "preview": "where $x_t^{n,m}$ is the binary illumination decision, and $p_t^{n,m}$ is the normalized power allocation ratio, yielding the actual cell power $P_t^{n,m}=P_{\\m"
+    },
+    {
+      "block": 168,
+      "kind": "prose",
+      "preview": "Problem~\\hyperref[prob:p2]{P2} is a high-dimensional mixed-integer nonlinear programming problem, which is generally NP-hard. Queue evolution couples scheduling"
+    },
+    {
+      "block": 198,
+      "kind": "prose",
+      "preview": "In the proposed framework, each satellite is an agent. During offline training, a centralized critic uses global cell features for value estimation. During exec"
+    },
+    {
+      "block": 204,
+      "kind": "prose",
+      "preview": "During offline centralized training, the ground-based simulator provides time-aligned global cell features to the centralized critic. The underlying environment"
+    },
+    {
+      "block": 205,
+      "kind": "equation",
+      "preview": "\\begin{equation} g_t^m=[\\bar q_t^m,\\bar d_t^m,\\bar w_t^m,\\bar\\zeta_t^m,v_{\\mathrm{cov}}^m], \\end{equation}"
+    },
+    {
+      "block": 206,
+      "kind": "prose",
+      "preview": "where the first four entries denote normalized queue length, average queueing delay, head-of-line waiting time, and historical average throughput, respectively."
+    },
+    {
+      "block": 208,
+      "kind": "prose",
+      "preview": "By concatenating the features of all cells in a fixed order, the global critic input is obtained as"
+    },
+    {
+      "block": 209,
+      "kind": "equation",
+      "preview": "\\begin{equation} s_t=[g_t^1,g_t^2,\\ldots,g_t^M]\\in\\mathbb{R}^{5M}, \\end{equation}"
+    },
+    {
+      "block": 210,
+      "kind": "prose",
+      "preview": "where $M$ is the total number of cells. The representation $s_t$ is used by the centralized critic to evaluate traffic, service status, and coverage overlap acr"
+    },
+    {
+      "block": 214,
+      "kind": "prose",
+      "preview": "During decentralized execution, satellite $n$ observes up to $J$ visible candidate cells, which may include cells associated with other satellites. Let $m=\\chi_"
+    },
+    {
+      "block": 215,
+      "kind": "equation",
+      "preview": "\\begin{equation} f_t^{n,j}=[\\bar q_t^{n,j},\\bar d_t^{n,j},\\bar w_t^{n,j},\\bar\\zeta_t^{n,j},v_j^n]^\\top, \\end{equation}"
+    },
+    {
+      "block": 216,
+      "kind": "prose",
+      "preview": "where $v_j^n$ denotes the fraction of other satellites covering candidate cell $j$, given by"
+    },
+    {
+      "block": 217,
+      "kind": "equation",
+      "preview": "\\begin{equation} v_j^n=\\frac{1}{N-1}\\sum_{n'\\in\\mathcal N\\setminus\\{n\\}}V_{n',\\chi_n(j)}. \\label{eq:coverage-degree} \\end{equation}"
+    },
+    {
+      "block": 218,
+      "kind": "prose",
+      "preview": "The local and global coverage degrees satisfy $v_j^n=v_{\\mathrm{cov}}^{\\chi_n(j)}$. The NOCC can compute these topology summaries from the visibility matrix and"
+    },
+    {
+      "block": 221,
+      "kind": "prose",
+      "preview": "The critic receives the five features of all $M$ cells, whereas each actor observes its candidate-cell features and the associated topology summaries. Each acto"
+    },
+    {
+      "block": 222,
+      "kind": "equation",
+      "preview": "\\begin{equation} \\mathbf{F}_t^n= \\begin{bmatrix} (f_t^{n,1})^\\top\\\\ (f_t^{n,2})^\\top\\\\ \\vdots\\\\ (f_t^{n,J})^\\top \\end{bmatrix} \\in\\mathbb{R}^{J\\times 5}. \\end{e"
+    },
+    {
+      "block": 224,
+      "kind": "prose",
+      "preview": "The local observation is organized as a weighted spatial graph with coverage-overlap information, denoted by"
+    },
+    {
+      "block": 225,
+      "kind": "equation",
+      "preview": "\\begin{equation} \\mathcal{G}_t^n=(\\mathcal{V}_n,\\mathcal{E}_n,\\mathbf{F}_t^n,\\Omega_n,\\mathbf C_n), \\end{equation}"
+    },
+    {
+      "block": 226,
+      "kind": "prose",
+      "preview": "where $\\mathcal V_n=\\{1,2,\\ldots,J\\}$ is the candidate-cell node set, $\\mathcal E_n$ is the edge set connecting all pairs of real candidate-cell nodes, $\\mathbf"
+    },
+    {
+      "block": 228,
+      "kind": "prose",
+      "preview": "where $d_{ij}^n$ is the distance between the user centroids of candidate cells $i$ and $j$ in the local graph of satellite $n$, $d_{\\mathrm{th}}$ is a distance "
+    },
+    {
+      "block": 230,
+      "kind": "prose",
+      "preview": "For candidate cells $i$ and $j$, the common-visibility count and its normalized value are defined as"
+    },
+    {
+      "block": 231,
+      "kind": "equation",
+      "preview": "\\begin{equation} \\begin{aligned} c_{ij}^n&=\\sum_{n'\\in\\mathcal N\\setminus\\{n\\}}V_{n',\\chi_n(i)}V_{n',\\chi_n(j)},\\\\ \\bar c_{ij}^n&=\\frac{c_{ij}^n}{N-1}. \\end{ali"
+    },
+    {
+      "block": 232,
+      "kind": "prose",
+      "preview": "Both $v_j^n$ and $\\bar c_{ij}^n$ lie in $[0,1]$. The normalized value $\\bar c_{ij}^n$ denotes the fraction of other satellites covering both candidate cells. Un"
+    },
+    {
+      "block": 239,
+      "kind": "prose",
+      "preview": "where $m_t^{n,j}=1$ only if candidate cell $j$ is associated with satellite $n$, and is zero otherwise. When fewer than $J$ candidates are available, zero-featu"
+    },
+    {
+      "block": 249,
+      "kind": "prose",
+      "preview": "where $b_t^{n,j}=1$ indicates that satellite $n$ illuminates the $j$-th candidate cell at time slot $t$, and $b_t^{n,j}=0$ otherwise. The beam hopping decision "
+    },
+    {
+      "block": 250,
+      "kind": "equation",
+      "preview": "\\begin{equation} \\sum_{j=1}^{J} b_t^{n,j}=K. \\end{equation}"
+    },
+    {
+      "block": 266,
+      "kind": "prose",
+      "preview": "where $\\zeta_t$ and $\\Gamma_t$ denote the delivered system data volume and average RT queueing delay at time slot $t$, respectively. The normalization factors a"
+    },
+    {
+      "block": 270,
+      "kind": "prose",
+      "preview": "MAPPO uses the expected discounted return as a surrogate objective for approximately optimizing the undiscounted utility in P2. This return is expressed as"
+    },
+    {
+      "block": 271,
+      "kind": "equation",
+      "preview": "\\begin{equation} \\mathcal{J}(\\pi)=\\mathbb{E}_{\\pi}\\left[\\sum_{t=1}^{N_{\\mathrm{slot}}}\\gamma^{t-1}\\mathcal{R}_t\\right]. \\label{eq:discounted-surrogate} \\end{equ"
+    },
+    {
+      "block": 272,
+      "kind": "prose",
+      "preview": "Following the GAE framework~\\cite{refGAE}, discounting is used in return and advantage estimation to balance bias and variance. For $\\gamma<1$, the discounted t"
+    },
+    {
+      "block": 274,
+      "kind": "prose",
+      "preview": "The state transition probability"
+    },
+    {
+      "block": 275,
+      "kind": "equation",
+      "preview": "\\begin{equation} \\mathcal{P}(\\mathsf{s}_{t+1}\\mid\\mathsf{s}_t,\\mathbf a_t) \\end{equation}"
+    },
+    {
+      "block": 276,
+      "kind": "prose",
+      "preview": "is implicitly determined by traffic arrivals, queue evolution, beam service, data transmission, and interference coupling. Since an explicit transition model is"
+    },
+    {
+      "block": 281,
+      "kind": "prose",
+      "preview": "Based on the above POMDP formulation, MAPPO uses a shared actor and a centralized critic during training. Each satellite executes a local actor using its candid"
+    },
+    {
+      "block": 283,
+      "kind": "figure*",
+      "preview": "\\begin{figure*}[!t] \\centering \\includegraphics[width=0.95\\textwidth,height=0.72\\textheight,keepaspectratio]{Fig files/Fig 2_coverage_20261027.png} \\caption{Fra"
+    },
+    {
+      "block": 285,
+      "kind": "prose",
+      "preview": "The GAT encodes the traffic, service, and coverage features of the candidate cells, using distance and common-visibility priors to guide attention. Following th"
+    },
+    {
+      "block": 287,
+      "kind": "prose",
+      "preview": "where $\\mathbf W_{\\mathrm{f}}\\in\\mathbb R^{d_g\\times5}$ is the trainable node feature projection matrix in the shared actor network. Then, the raw attention sco"
+    },
+    {
+      "block": 291,
+      "kind": "prose",
+      "preview": "The distance and common-visibility priors are incorporated into attention normalization, yielding"
+    },
+    {
+      "block": 292,
+      "kind": "equation",
+      "preview": "\\begin{equation} \\psi_t^{n,ij}= \\frac{\\exp(e_t^{n,ij}+\\xi_1\\omega_{ij}^n+\\xi_2\\bar c_{ij}^n)} {\\sum_{j'\\in\\mathcal V_i^{\\mathrm{nbr}}}\\exp(e_t^{n,ij'}+\\xi_1\\ome"
+    },
+    {
+      "block": 293,
+      "kind": "prose",
+      "preview": "where $\\mathcal V_i^{\\mathrm{nbr}}$ contains the real neighbors of node $i$, and the fixed coefficients $\\xi_1$ and $\\xi_2$ weight the distance and common-visib"
+    },
+    {
+      "block": 301,
+      "kind": "prose",
+      "preview": "The spatially enhanced observation matrix $\\hat{\\mathbf O}_t^n$ is flattened and projected through a fully connected layer before being passed to the GRU. The G"
+    },
+    {
+      "block": 303,
+      "kind": "prose",
+      "preview": "On top of the actor backbone, hybrid action heads are designed for joint beam hopping and power allocation. The discrete branch outputs preference scores for al"
+    },
+    {
+      "block": 306,
+      "kind": "prose",
+      "preview": "where $\\mathbf W_{\\mathrm{h}}$ projects the hidden state, $\\mathbf W_{\\mu}$ and $\\mathbf W_{\\sigma}$ are output projection matrices, and $\\mathbf b_{\\mu}$ and $"
+    },
+    {
+      "block": 309,
+      "kind": "equation",
+      "preview": "\\begin{equation} p_t^{n,j}= \\frac{\\exp(y_t^{n,j})} {\\sum_{j':\\,b_t^{n,j'}=1}\\exp(y_t^{n,j'})}, \\qquad b_t^{n,j}=1. \\label{eq:mappo-power} \\end{equation}"
+    },
+    {
+      "block": 310,
+      "kind": "prose",
+      "preview": "During testing, the Gaussian mean $\\mu_t^{n,j}$ replaces $y_t^{n,j}$ in \\eqref{eq:mappo-power}, yielding deterministic power ratios for the cells selected by ma"
+    },
+    {
+      "block": 312,
+      "kind": "prose",
+      "preview": "The centralized critic uses a multilayer perceptron to estimate the value from the global cell-feature input,"
+    },
+    {
+      "block": 314,
+      "kind": "prose",
+      "preview": "where $f_\\phi(\\cdot)$ denotes the value network parameterized by $\\phi$. The network-wide features provide context for value estimation during policy updates."
+    },
+    {
+      "block": 316,
+      "kind": "prose",
+      "preview": "For PPO updates, $\\widetilde a_t^n=(\\mathbf j_t^n,\\mathbf y_t^n)$ records the ordered selections $\\mathbf j_t^n=(j_1,\\ldots,j_K)$ and selected-cell Gaussian sam"
+    },
+    {
+      "block": 317,
+      "kind": "equation",
+      "preview": "\\begin{equation} \\begin{aligned} \\log\\pi_{\\theta}(\\widetilde a_t^n|o_t^n) ={}&\\sum_{i=1}^{K}\\log\\pi_{\\theta}^{\\mathrm{dis}}(j_i|o_t^n,\\mathbf j_{<i})\\\\ &+\\sum_{"
+    },
+    {
+      "block": 318,
+      "kind": "prose",
+      "preview": "where $\\pi_{\\theta}^{\\mathrm{con}}$ is the Gaussian density with mean $\\mu_t^{n,j}$ and variance $(\\sigma_t^{n,j})^2$, evaluated at the independent pre-Softmax "
+    },
+    {
+      "block": 323,
+      "kind": "equation",
+      "preview": "\\begin{equation} r_t(\\theta)= \\frac{\\pi_{\\theta}(\\widetilde a_t^n|o_t^n)} {\\pi_{\\theta^{\\mathrm{old}}}(\\widetilde a_t^n|o_t^n)}, \\end{equation}"
+    },
+    {
+      "block": 324,
+      "kind": "prose",
+      "preview": "$\\hat A_t$ is the advantage estimate, $\\epsilon$ is the PPO clipping coefficient, and $\\beta_d,\\beta_c$ are entropy weights. $H_d$ sums the stepwise masked cate"
+    },
+    {
+      "block": 328,
+      "kind": "prose",
+      "preview": "where $\\hat R_t$ is the target return. Offline trajectories are collected in the simulator, and mini-batch PPO updates the shared actor and centralized critic a"
+    },
+    {
+      "block": 330,
+      "kind": "algorithm",
+      "preview": "\\begin{algorithm}[!b] \\caption{MAPPO-based Beam Hopping and Power Allocation Algorithm} \\label{alg:mappo} \\footnotesize \\begin{algorithmic}[1] \\STATE Initialize"
+    },
+    {
+      "block": 336,
+      "kind": "prose",
+      "preview": "Table~\\ref{tab:network_architecture} lists the network input dimensions and layer sizes. Each candidate-cell node has four traffic and service features and one "
+    },
+    {
+      "block": 337,
+      "kind": "table",
+      "preview": "\\begin{table}[t] \\centering \\caption{Network Architecture of the Proposed MAPPO} \\label{tab:network_architecture} \\renewcommand{\\arraystretch}{1.15} \\setlength{"
+    },
+    {
+      "block": 339,
+      "kind": "prose",
+      "preview": "A typical LEO multi-satellite multi-beam communication scenario is considered. As summarized in Table~\\ref{tab:sim_params}, the system consists of 16 satellites"
+    },
+    {
+      "block": 340,
+      "kind": "table",
+      "preview": "\\begin{table}[t] \\centering \\caption{Simulation Parameters} \\label{tab:sim_params} \\renewcommand{\\arraystretch}{1.08} \\begin{tabular}{l|l} \\hline \\textbf{PARAME"
+    },
+    {
+      "block": 344,
+      "kind": "prose",
+      "preview": "\\textit{1) Cell-satellite association algorithms (with Algorithm~\\ref{alg:mappo} used for subsequent scheduling):}"
+    },
+    {
+      "block": 346,
+      "kind": "prose",
+      "preview": "All compared association schemes, including ISA, NLB, MEA, and MMTG, assign each cell to exactly one visible satellite and at most $J$ cells to each satellite."
+    },
+    {
+      "block": 348,
+      "kind": "itemize",
+      "preview": "\\begin{itemize} \\item \\textbf{No Load Balancing scheme (NLB):} A feasible association is randomly generated without traffic-load information, assigning each cel"
+    },
+    {
+      "block": 350,
+      "kind": "prose",
+      "preview": "\\textit{2) Beam hopping scheduling algorithms (with the association from Algorithm~\\ref{alg:isa}):}"
+    },
+    {
+      "block": 356,
+      "kind": "prose",
+      "preview": "Per-user input rates combine RT and BULK traffic. Throughput rates are obtained by dividing delivered data volumes by the evaluation duration; per-user throughp"
+    },
+    {
+      "block": 358,
+      "kind": "prose",
+      "preview": "A controlled pairwise diagnostic evaluates the distance prior $\\omega_{ij}^n$ using the antenna and channel models over 200 independent scenarios with 300 users"
+    },
+    {
+      "block": 362,
+      "kind": "prose",
+      "preview": "The training behavior of the proposed MAPPO algorithm is evaluated in terms of average reward, total throughput, and average RT queueing delay. Two ablation var"
+    },
+    {
+      "block": 364,
+      "kind": "prose",
+      "preview": "As shown in Fig.~\\ref{fig:reward-convergence}, the proposed scheme achieves the fastest reward growth and converges to the highest average reward. At the early "
+    },
+    {
+      "block": 366,
+      "kind": "prose",
+      "preview": "Similar trends can be observed in Fig.~\\ref{fig:training-metrics}(a) and Fig.~\\ref{fig:training-metrics}(b). The proposed scheme achieves the highest total thro"
+    },
+    {
+      "block": 368,
+      "kind": "figure",
+      "preview": "\\begin{figure}[!t] \\centering \\includegraphics[width=\\columnwidth]{Fig files/Fig 3_five20261012.png} \\caption{Convergence of the average reward during MAPPO tra"
+    },
+    {
+      "block": 370,
+      "kind": "figure",
+      "preview": "\\begin{figure}[!t] \\centering \\subfloat[]{\\includegraphics[width=0.48\\columnwidth]{Fig files/Fig 4(a)_five20261012.png}} \\hfill \\subfloat[]{\\includegraphics[wid"
+    },
+    {
+      "block": 376,
+      "kind": "prose",
+      "preview": "\\textit{a) Performance under different weight coefficients:} To analyze the impact of the reward weight coefficient $\\alpha$, the per-user input traffic rate is"
+    },
+    {
+      "block": 378,
+      "kind": "figure",
+      "preview": "\\begin{figure}[!t] \\centering \\subfloat[]{\\includegraphics[width=0.48\\columnwidth]{Fig files/Fig 5(a)_five20261012.png}} \\hfill \\subfloat[]{\\includegraphics[wid"
+    },
+    {
+      "block": 380,
+      "kind": "prose",
+      "preview": "\\textit{b) Performance under different cell-satellite association schemes:} Given the beam hopping scheduling scheme in Algorithm~\\ref{alg:mappo}, Fig.~\\ref{fig"
+    },
+    {
+      "block": 382,
+      "kind": "figure",
+      "preview": "\\begin{figure}[!t] \\centering \\subfloat[]{\\includegraphics[width=\\columnwidth]{Fig files/Fig 6(a)_ci20261012.png}} \\vspace{0.5em} \\subfloat[]{\\includegraphics[w"
+    },
+    {
+      "block": 391,
+      "kind": "prose",
+      "preview": "\\textit{c) Long-term network throughput under different BH schemes:} Given the cell-satellite association strategy in Algorithm~\\ref{alg:isa}, Fig.~\\ref{fig:bh-"
+    },
+    {
+      "block": 393,
+      "kind": "prose",
+      "preview": "\\textit{d) Long-term average delay under different BH schemes:} Given the cell-satellite association strategy in Algorithm~\\ref{alg:isa}, Fig.~\\ref{fig:bh-perfo"
+    },
+    {
+      "block": 396,
+      "kind": "figure",
+      "preview": "\\begin{figure}[!t] \\centering \\includegraphics[width=\\columnwidth]{Fig files/Fig 7(a)_ci20261012.png} \\vspace{0.5em} \\includegraphics[width=\\columnwidth]{Fig fi"
+    },
+    {
+      "block": 398,
+      "kind": "heading",
+      "preview": "\\subsubsection{Ablation Analysis}"
+    },
+    {
+      "block": 399,
+      "kind": "prose",
+      "preview": "Fig.~\\ref{fig:ablation-performance} compares the proposed method with four ablation variants: without coverage priors, without GAT, without GRU, and with equal "
+    },
+    {
+      "block": 401,
+      "kind": "prose",
+      "preview": "The full model has the highest mean throughput and lowest mean RT queueing delay at all three tested rates. At 50~Mbps, it achieves 45.94~Mbps per user (95\\% CI"
+    },
+    {
+      "block": 403,
+      "kind": "figure*",
+      "preview": "\\begin{figure*}[!t] \\centering \\includegraphics[width=\\textwidth]{Fig files/Fig ablation.pdf} \\caption{Ablation results of the proposed method: (a) throughput p"
+    },
+    {
+      "block": 405,
+      "kind": "heading",
+      "preview": "\\subsubsection{Hotspot-Reversal Sensitivity}"
+    },
+    {
+      "block": 406,
+      "kind": "prose",
+      "preview": "The hotspot-reversal test comprises 200 test cases, each containing 144 cells and 300 users. In each test case, the cells are partitioned into groups A and B, e"
+    },
+    {
+      "block": 408,
+      "kind": "table",
+      "preview": "\\begin{table}[t] \\centering \\caption{Mean throughput and RT queueing delay in the hotspot-reversal test.} \\label{tab:hotspot-reversal} \\renewcommand{\\arraystret"
+    },
+    {
+      "block": 410,
+      "kind": "prose",
+      "preview": "With the association fixed, reversal reduces throughput by 7.66\\% and increases RT delay by 8.45\\%. After updating the association, throughput and delay are wit"
+    },
+    {
+      "block": 412,
+      "kind": "heading",
+      "preview": "\\subsubsection{ISA Parameter Sensitivity}"
+    },
+    {
+      "block": 413,
+      "kind": "prose",
+      "preview": "ISA is evaluated on 200 test cases with randomized traffic-demand distributions. The cases are ranked by the coefficient of variation of the input cell demands "
+    },
+    {
+      "block": 415,
+      "kind": "prose",
+      "preview": "Both groups exhibit similar mean sensitivity trends. Slower cooling initially reduces load variance, but the variance at $\\rho=0.98$ is slightly higher than at "
+    },
+    {
+      "block": 417,
+      "kind": "prose",
+      "preview": "The group-wise mean runtimes are close (435 and 439~$\\mu$s at the default setting), consistent with a search budget determined by the temperature stages and ite"
+    },
+    {
+      "block": 419,
+      "kind": "figure*",
+      "preview": "\\begin{figure*}[!t] \\centering \\includegraphics[width=\\textwidth]{Fig files/Fig ISA sensitivity compact.pdf} \\caption{ISA parameter sensitivity: (a) varying the"
+    },
+    {
+      "block": 422,
+      "kind": "prose",
+      "preview": "The computational cost of the framework comprises cell-satellite association on the long timescale and online MAPPO execution on the short timescale. For cell-s"
+    },
+    {
+      "block": 424,
+      "kind": "prose",
+      "preview": "The actor forward-pass latency was measured on a workstation with an Intel Core i7-13700K processor and an NVIDIA RTX 4060 GPU. A single-actor forward pass aver"
+    },
+    {
+      "block": 426,
+      "kind": "heading",
+      "preview": "\\subsubsection{Action-Delay Sensitivity}"
+    },
+    {
+      "block": 427,
+      "kind": "prose",
+      "preview": "The action-delay evaluation considers action delays of 0, 1, and 2 slots (0, 2, and 4~ms) at per-user total input rates of 20 and 50~Mbps, with 200 test instanc"
+    },
+    {
+      "block": 431,
+      "kind": "prose",
+      "preview": "This paper presents a hierarchical framework combining ISA-based load balancing with MAPPO-based beam hopping and power allocation. The GAT encodes local traffi"
+    },
+    {
+      "block": 444,
+      "kind": "reference",
+      "preview": "\\bibitem{refD2S} Y. He, Y. Xiao, S. Zhang, M. Jia, and Z. Li, ``Direct-to-smartphone for 6G NTN: Technical routes, challenges, and key technologies,'' \\textit{I"
+    },
+    {
+      "block": 446,
+      "kind": "reference",
+      "preview": "\\bibitem{refRSMA} Z. Lin, M. Lin, T. de Cola, J.-B. Wang, W.-P. Zhu, and J. Cheng, ``Supporting IoT with rate-splitting multiple access in satellite and aerial-"
+    },
+    {
+      "block": 448,
+      "kind": "reference",
+      "preview": "\\bibitem{refRefractingRIS} Z. Lin \\textit{et al.}, ``Refracting RIS-aided hybrid satellite-terrestrial relay networks: Joint beamforming design and optimization"
+    },
+    {
+      "block": 450,
+      "kind": "reference",
+      "preview": "\\bibitem{refSecureRIS} Z. Lin \\textit{et al.}, ``Self-powered absorptive reconfigurable intelligent surfaces for securing satellite-terrestrial integrated netwo"
+    },
+    {
+      "block": 454,
+      "kind": "reference",
+      "preview": "\\bibitem{refCuiLatency2023} G. Cui, P. Duan, L. Xu, and W. Wang, ``Latency optimization for hybrid GEO--LEO satellite-assisted IoT networks,'' \\textit{IEEE Inte"
+    },
+    {
+      "block": 456,
+      "kind": "reference",
+      "preview": "\\bibitem{refCuiOffloading2026} G. Cui \\textit{et al.}, ``Joint beam hopping and computing offloading design for LEO satellite networks,'' \\textit{IEEE Trans. Ve"
+    },
+    {
+      "block": 486,
+      "kind": "reference",
+      "preview": "\\bibitem{refCuiPrecoding2025} G. Cui, X. Xin, L. Xu, W. Wang, and X. Tang, ``Joint beam hopping and precoding for dense LEO satellite communication systems,'' \\"
+    },
+    {
+      "block": 508,
+      "kind": "reference",
+      "preview": "\\bibitem{refPFclassic} P. Viswanath, D. N. C. Tse, and R. Laroia, ``Opportunistic beamforming using dumb antennas,'' \\textit{IEEE Trans. Inf. Theory}, vol. 48, "
+    },
+    {
+      "block": 510,
+      "kind": "reference",
+      "preview": "\\bibitem{refPFrb} D. Parruca and J. Gross, ``Throughput analysis of proportional fair scheduling for sparse and ultra-dense interference-limited OFDMA/LTE netwo"
+    },
+    {
+      "block": 516,
+      "kind": "reference",
+      "preview": "\\bibitem{refGAE} J. Schulman, P. Moritz, S. Levine, M. I. Jordan, and P. Abbeel, ``High-dimensional continuous control using generalized advantage estimation,''"
+    }
+  ],
+  "unmarked_minor_units": [
+    {
+      "block": 189,
+      "kind": "algorithm",
+      "reason": "output-label wording only",
+      "preview": "\\begin{algorithm}[t] \\caption{Improved Simulated Annealing for P1} \\label{alg:isa} \\begin{algorithmic}[1] \\STATE \\textbf{Input:} Cell set $\\mathcal{M}$, satelli"
+    }
+  ]
+}

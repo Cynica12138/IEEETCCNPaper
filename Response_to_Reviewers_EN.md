@@ -33,8 +33,6 @@ As shown in Table R1-1, retaining the association after reversal reduces through
 
 These results indicate an acceptable performance loss under the tested demand change and show that an additional association update improves recovery.
 
-In future work, we will optimize the association-period duration and develop association schemes that adjust the update interval to traffic changes. We will also examine longer-lasting and repeated changes in spatial demand.
-
 **Selected revised manuscript text (Section III-A)**
 
 > The association remains fixed within each period, while slot-wise beam hopping and power allocation respond to local queue variations.
@@ -83,7 +81,7 @@ Thank you for this comment. We would like to clarify that centralized training i
 
 During evaluation, the trained actor parameters are fixed. Each satellite uses a local actor copy with its own observation, action mask, and recurrent hidden state. The centralized critic is not used for online scheduling, and no online inter-satellite parameter synchronization is required. We have clarified these training and execution procedures in Sections V-A and V-B and Algorithm 2.
 
-The current simulations do not model delays or packet loss in physical training-data links. Once the necessary experimental conditions are available, we will further investigate how state-collection delays, packet loss, and parameter synchronization affect critic estimation and training stability.
+The current simulations do not model delays or packet loss in physical training-data links.
 
 **Selected revised manuscript text (Section V-A-1)**
 
@@ -115,7 +113,9 @@ Fig. R1-4. Controlled pairwise diagnostic of the geometric prior: (a) interferen
 
 We have also added the ablation results in Fig. 8, comparing the full method with a variant that jointly removes the coverage-degree node feature and common-visibility attention prior. At a per-user input rate of 50 Mbps, the proposed method achieves 1.85% higher throughput and 6.49% lower RT queueing delay than this variant. This ablation evaluates the joint contribution of the two coverage priors.
 
-Overall, the physical diagnostic demonstrates the relevance of the distance prior to physical interference effects, and the ablation demonstrates the scheduling benefit of the coverage priors. These results support the usefulness of the proposed geometric and coverage priors for scheduling under the tested conditions.
+Overall, the physical diagnostic supports the relevance of the distance prior to physical interference effects, and the ablation supports the scheduling benefit of the coverage priors. These results support the usefulness of the proposed geometric and coverage priors for scheduling under the tested conditions.
+
+The coverage priors are held fixed within each association period and do not capture slot-level interference variations caused by beam pointing. Traffic and service features and the GRU hidden state still evolve across slots, but the present diagnostic and ablation do not establish physical interference tracking under agile beam pointing. We have clarified this limitation in the conclusion.
 
 **Selected revised manuscript text (Section V-A-2)**
 
@@ -123,9 +123,13 @@ Overall, the physical diagnostic demonstrates the relevance of the distance prio
 
 **Selected revised manuscript text (Section VI-B)**
 
-> A controlled pairwise diagnostic evaluates the distance prior $\omega_{ij}^n$ using the antenna and channel models over 200 independent scenarios with 300 users each, reference beam power $P_{\mathrm{tot}}/K_{\max}$, and reference bandwidth 0.5~MHz. Its mean scenario-wise Spearman correlations with the physical interference-to-signal ratio and relative rate loss are 0.546 (95\% scenario-level bootstrap CI: [0.536, 0.557]) and 0.437 (95\% scenario-level bootstrap CI: [0.426, 0.448]), respectively. These results support the use of the distance weight as a geometric prior under the tested conditions.
+> A controlled pairwise diagnostic evaluates the distance prior $\omega_{ij}^n$ using the antenna and channel models over 200 independent scenarios with 300 users each, reference beam power $P_{\mathrm{tot}}/K_{\max}$, and reference bandwidth 0.5~MHz. Its mean scenario-wise Spearman correlations with the physical interference-to-signal ratio and relative rate loss are 0.546 (95\% scenario-level bootstrap CI: [0.536, 0.557]) and 0.437 (95\% scenario-level bootstrap CI: [0.426, 0.448]), respectively. These results support the use of the distance weight as a geometric prior under the tested conditions. The coverage priors are assessed separately through scheduling ablations.
 
-Revision locations: Section V-A-2 (p. 7), geometric and coverage priors; Eq. (54) (p. 9), weighted attention; Section VI-B (pp. 11-12), physical diagnostic; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), coverage-prior ablation. Fig. R1-4 is provided in this response.
+**Selected revised manuscript text (Section VII)**
+
+> The coverage priors are static within each association period and do not capture slot-level interference variations caused by beam pointing. Incorporating low-cost dynamic interference indicators is left for future work.
+
+Revision locations: Section V-A-2 (p. 7), geometric and coverage priors; Eq. (54) (p. 9), weighted attention; Section VI-B (pp. 11-12), physical diagnostic; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), coverage-prior ablation; Section VII, limitations of static coverage priors. Fig. R1-4 is provided in this response.
 
 ### Comment 1.5
 
@@ -143,9 +147,9 @@ Response:
 
 Thank you for recommending these studies. We have added a paragraph to the Introduction discussing all four works, covering direct-to-smartphone communications, RSMA-based IoT communications, RIS-assisted joint beamforming, and secure satellite-terrestrial transmissions. They are cited as Refs. [5]-[8] in the revised manuscript. The paragraph leads into our discussion of resource scheduling under heterogeneous and time-varying traffic demands.
 
-**Selected revised manuscript text (Section I; manuscript References [5]-[8])**
+**Selected revised manuscript text (Section I, related work)**
 
-> To support ubiquitous connectivity, He et al.~[5] examined the technical routes, challenges, and key technologies of direct-to-smartphone communications for 6G non-terrestrial networks. Related advances in satellite transmission include rate-splitting multiple access (RSMA) for IoT communications in satellite and aerial-integrated networks~[6], joint beamforming in refracting reconfigurable intelligent surface (RIS)-aided satellite-terrestrial relay networks to reduce transmit power under user rate constraints~[7], and self-powered absorptive RIS for secure satellite-terrestrial transmissions~[8]. Alongside these advances in access and transmission, satellite resources must also be adapted to heterogeneous and time-varying traffic demands.
+> To support ubiquitous connectivity, He et al.~[5] examined the technical routes, challenges, and key technologies of direct-to-smartphone communications for 6G non-terrestrial networks. Related advances in satellite transmission include rate-splitting multiple access (RSMA) for IoT communications in satellite and aerial-integrated networks~[6], joint beamforming in refracting reconfigurable intelligent surface (RIS)-aided satellite-terrestrial relay networks to reduce transmit power under user rate constraints~[7], and self-powered absorptive RIS for secure satellite-terrestrial transmissions~[8]. Beyond communication resources, Cui et al.~[10] studied latency minimization in hybrid geostationary Earth orbit (GEO)--LEO satellite-assisted IoT networks through joint task offloading and communication and computing resource allocation. The joint design of beam hopping and computing offloading has also been investigated for LEO satellite networks~[11]. Alongside these advances in access and transmission, satellite resources must also be adapted to heterogeneous and time-varying traffic demands.
 
 Revision locations: Section I (p. 1), the paragraph beginning "To support ubiquitous connectivity"; manuscript References [5]-[8] (pp. 15-16).
 
@@ -159,7 +163,11 @@ Thank you for this comment. We agree that workstation timing alone is insufficie
 
 To quantify the effect of decision lag, we have added an action-delay sensitivity evaluation in Section VI-B-7. Actions generated by the fixed trained policy are applied after delays of 0, 1, or 2 slots, corresponding to 0, 2, or 4 ms. We consider per-user total input rates of 20 and 50 Mbps, with 200 test instances per condition. Averaging the relative changes for the 1- and 2-slot delays at both input rates against their corresponding zero-delay baselines gives an 8.7% decrease in network throughput and an 18.2% increase in average RT queueing delay. These results indicate a degree of tolerance to the tested decision delays and quantify the associated performance cost.
 
-Possible deployment optimizations include model compression or quantization and pipelining, where the next decision is computed during execution of the current action. We will evaluate their latency and performance trade-offs and validate end-to-end onboard execution once suitable hardware and experimental conditions are available.
+The reported timing and action-delay experiments characterize computational cost and sensitivity to decision lag under the tested conditions. Platform-specific onboard implementation and hardware validation are currently beyond the scope of this work.
+
+**Selected revised manuscript text (Section VI-B-6)**
+
+> Practical onboard real-time performance depends on the processing platform.
 
 **Selected revised manuscript text (Section VI-B-7)**
 
@@ -187,7 +195,7 @@ We have corrected the RT TTL in the simulation parameter table from 10 to 40 tim
 
 **Selected revised manuscript text (Section VI-B)**
 
-> RT queueing delay follows the queue-age definitions: current packet ages are averaged within each user's RT queue, with zero assigned to empty queues, and then over users and slots.
+> RT queueing delay follows the queue-age definitions in (23)--(25): current packet ages are averaged within each user's RT queue, with zero assigned to empty queues, and then over users and slots.
 
 Revision locations: Section II-B (p. 4), RT expiration and BULK queueing; Section III-B (p. 5), Eqs. (21)-(25); Table II (p. 11), 40-slot RT TTL; Section VI-B (p. 11), RT queue-age metric.
 
@@ -286,9 +294,9 @@ Revision locations: Section V-B (pp. 9-10), power transformation in Eq. (60), sa
 
 Response:
 
-Thank you for this comment. Our controlled physical diagnostic supports the use of the distance weight as a geometric prior related to interference. We have also introduced a coverage-overlap degree as a node feature and a common-visibility prior in GAT attention. These additions allow the actor to account for potential inter-satellite interference through coverage-overlap information.
+Thank you for this comment. We agree that the original distance-based edge weights did not explicitly represent inter-satellite interference. In the revision, we have introduced a coverage-overlap degree as a node feature and a common-visibility prior in GAT attention. The distance prior describes geometric proximity, whereas the coverage priors describe exposure to potential inter-satellite interference sources.
 
-We have added this diagnostic in Section VI-B, using the antenna and channel models over 200 independent scenarios with 300 users each, a reference beam power of $P_{\mathrm{tot}}/K_{\max}$, and a reference bandwidth of 0.5 MHz. For each cell pair, the interference-to-signal ratio and relative rate loss are averaged over the two interference directions. The mean scenario-wise Spearman correlations with the distance weight are 0.546 (95% scenario-level bootstrap CI: [0.536, 0.557]) and 0.437 (95% CI: [0.426, 0.448]), respectively. These positive correlations support its physical relevance under the tested conditions. Related geometric graph designs are also discussed in [1]-[3]. The diagnostic plot is provided in Fig. R1-4 under our response to Comment 1.4.
+
 
 For candidate cell $j$ of satellite $n$, the coverage degree is the fraction of other satellites that cover this cell:
 
@@ -319,9 +327,11 @@ $$
 {\sum_{j'\in\mathcal V_i^{\mathrm{nbr}}}\exp(e_t^{n,ij'}+\xi_1\omega_{ij'}^n+\xi_2\bar c_{ij'}^n)}.
 $$
 
-The fixed coefficients $\xi_1$ and $\xi_2$ weight the distance and common-visibility priors, respectively. The node feature describes coverage overlap at an individual cell, while the attention prior describes shared coverage of a cell pair. Together, they encode potential inter-satellite interference relationships at the node and cell-pair levels.
+The fixed coefficients $\xi_1$ and $\xi_2$ weight the distance and common-visibility priors, respectively. The node feature describes coverage overlap at an individual cell, while the attention prior describes shared coverage of a cell pair. Under full frequency reuse, other satellites covering a cell are potential interference sources. Cells with more commonly visible satellites share more potential interference sources, which motivates aggregating their features jointly. Actual interference also depends on beam activation, transmit power, and channel conditions.
 
 The NOCC computes these features from the visibility matrix and distributes them at the start of each 100-slot association period. They are held fixed within the period. The local graph fully connects the real visible candidate cells, including those associated with other satellites; the association mask restricts service selection to the observing satellite's associated cells. Virtual padding nodes are zero-filled and excluded from attention. The critic receives the five features of all cells, giving a $5M$-dimensional input. For candidate cell $m=\chi_n(j)$, its local coverage degree equals the global cell degree $(\sum_{n'}V_{n',m}-1)/(N-1)$.
+
+Separately, the controlled pairwise diagnostic in Section VI-B evaluates the distance prior using the antenna and channel models over 200 independent scenarios with 300 users each, a reference beam power of $P_{\mathrm{tot}}/K_{\max}$, and a reference bandwidth of 0.5 MHz. For each cell pair, the interference-to-signal ratio and relative rate loss are averaged over the two interference directions. The mean scenario-wise Spearman correlations with the distance weight are 0.546 (95% scenario-level bootstrap CI: [0.536, 0.557]) and 0.437 (95% CI: [0.426, 0.448]), respectively. These positive correlations support the distance prior under the tested conditions; they do not directly validate the coverage priors or slot-level interference tracking. Related geometric graph designs are also discussed in [1]-[3]. The diagnostic plot is provided in Fig. R1-4 under our response to Comment 1.4.
 
 We have also added a joint coverage-prior ablation in Section VI-B-3, with results presented in the new Fig. 8 (reproduced below in our response to Comment 2.7). This experiment sets the actor's coverage-degree feature to zero and removes the common-visibility attention term to evaluate their joint contribution. All variants are trained with five independent seeds under the same association and testing conditions. At a per-user input rate of 50 Mbps, the full method achieves 1.85% higher throughput and 6.49% lower RT queueing delay than the variant without coverage priors.
 
@@ -331,7 +341,9 @@ We have updated the input definitions, graph attributes, attention formula, Algo
 
 > where $\mathcal V_n=\{1,2,\ldots,J\}$ is the candidate-cell node set, $\mathcal E_n$ is the edge set connecting all pairs of real candidate-cell nodes, $\mathbf F_t^n$ is the node feature matrix, $\Omega_n=[\omega_{ij}^n]\in\mathbb R^{J\times J}$ is the distance-prior matrix, and $\mathbf C_n=[\bar c_{ij}^n]\in\mathbb R^{J\times J}$ is the normalized common-visibility matrix.
 
-> The local and global coverage degrees satisfy $v_j^n=v_{\mathrm{cov}}^{\chi_n(j)}$. The NOCC can compute these topology summaries from the visibility matrix and distribute them with each association update. They characterize coverage overlap and potential interference relationships.
+> The local and global coverage degrees satisfy $v_j^n=v_{\mathrm{cov}}^{\chi_n(j)}$. The NOCC can compute these topology summaries from the visibility matrix and distribute them with each association update. The distance prior describes geometric proximity, whereas the coverage summaries describe exposure to potential inter-satellite interference sources.
+
+> Both $v_j^n$ and $\bar c_{ij}^n$ lie in $[0,1]$. The normalized value $\bar c_{ij}^n$ denotes the fraction of other satellites covering both candidate cells. Under full frequency reuse, other satellites covering a cell are potential interferers. Commonly covered cells share potential interferers, motivating joint feature aggregation through attention.
 
 Revision locations: Section V-A-1 (p. 7), global features; Section V-A-2 (pp. 7-8), node features, fully connected local graph, and masks; Eq. (54) and Fig. 2 (p. 9), weighted attention; Algorithm 2 (p. 10); Table I (p. 11); Section VI-B (pp. 11-12), diagnostic; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), joint coverage-prior ablation; Section VI-B-6 (p. 15), prior-construction complexity.
 
@@ -508,12 +520,6 @@ Thank you for this suggestion. We have added error bars to the throughput and RT
 At a per-user input rate of 40 Mbps, the proposed scheme achieves 39.07 $\pm$ 0.60 Mbps per user and 4.71 $\pm$ 0.11 slots of RT queueing delay in both comparison figures. At 50 Mbps in Fig. 7, the corresponding results are 45.66 $\pm$ 0.70 Mbps per user and 7.61 $\pm$ 0.18 slots. We have updated the numerical comparisons and improvement percentages in the manuscript accordingly.
 
 We have also added ablation results in Fig. 8, where the pointwise 95% confidence intervals are calculated across five independent training-seed means. The intervals in Figs. 6 and 7 describe uncertainty in the test-case means, while those in Fig. 8 characterize variability across independent training runs. These additions make the uncertainty in the reported performance explicit. Figure 7 is reproduced below as an example; the multi-seed ablation is reproduced under Comment 2.7.
-
-![Revised manuscript Fig. 7(a)](Fig files/Fig 7(a)_ci20261012.png)
-
-![Revised manuscript Fig. 7(b)](Fig files/Fig 7(b)_ci20261012.png)
-
-Revised manuscript Fig. 7 (reproduced). Error bars show pointwise 95% confidence intervals across 200 test cases.
 
 **Selected revised manuscript text (Section VI-B; Figs. 6 and 7)**
 

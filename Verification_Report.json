@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-01",
+  "manuscript_id": "TCCN-TP-26-1155",
+  "pdfs": {
+    "Revised_Manuscript_Clean.pdf": {
+      "pages": 16,
+      "bytes": 4544759,
+      "sha256": "9c28165ac2bfe46150a362ca3d2520436c1b3241b7b7abe614a8f7142cfd0564"
+    },
+    "Revised_Manuscript_Marked_Reviewers.pdf": {
+      "pages": 17,
+      "bytes": 4863469,
+      "sha256": "0ff7b1a53e9fa781ccee31181b4c55856431e364fbb833245d649dbca0920ba3"
+    },
+    "Response_to_Reviewers_EN.pdf": {
+      "pages": 22,
+      "bytes": 2488597,
+      "sha256": "c9875e8310d9312956f52af38b7de7b8e2409ba3cae7544b00aa1935387bb55f"
+    }
+  },
+  "comments": 19,
+  "reviewer_tags": 28,
+  "selected_manuscript_excerpts": 37,
+  "response_figures": 5,
+  "response_tables": 1,
+  "manuscript_references": 44,
+  "canonical_source_sha256": "bc686742bf0646c08162b1e5a0f2c8363841d000077f376922ed1bb7ed7dffcd",
+  "checks": {
+    "canonical_source_matches": true,
+    "marked_and_clean_content_match": true,
+    "object_numbers_match": true,
+    "original_comments_preserved": true,
+    "all_excerpts_match_current_source": true,
+    "all_19_comments_covered": true,
+    "no_repeated_future_work_promises_in_response_bodies": true,
+    "no_unresolved_references_or_missing_glyph_warnings": true,
+    "all_pages_rendered_and_visually_reviewed": true,
+    "no_text_outside_page_bounds": true,
+    "relative_asset_paths": true
+  }
+}

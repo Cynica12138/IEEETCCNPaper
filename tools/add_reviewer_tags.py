@@ -23,7 +23,7 @@ ANCHORS = [
  ('The local observation is organized', 'R1-C4,R2-C5'),
  ('The critic receives the five features', 'R3-C3'),
  ('MAPPO uses the expected discounted return', 'R2-C2'),
- ('Fig. 2.', 'R2-C4,R2-C5'),
+ ('Fig. 2. Framework of the proposed MAPPO-based beam hopping', 'R2-C4,R2-C5'),
  ('For PPO updates', 'R2-C4'),
  ('Offline trajectories are collected', 'R1-C3'),
  ('All compared association schemes', 'R3-C1'),
@@ -32,12 +32,13 @@ ANCHORS = [
  ('Fig. 6.', 'R3-C1,R3-C6'),
  ('Fig. 7.', 'R2-C1,R3-C6'),
  ('3) Ablation Analysis:', 'R2-C7'),
- ('Fig. 8.', 'R1-C4,R2-C5,R2-C7,R3-C6'),
+ ('Fig. 8. Ablation results of the proposed method', 'R1-C4,R2-C5,R2-C7,R3-C6'),
  ('4) Hotspot-Reversal Sensitivity:', 'R1-C1'),
  ('5) ISA Parameter Sensitivity:', 'R1-C2'),
  ('Fig. 9.', 'R1-C2'),
  ('The actor forward-pass latency was measured', 'R1-C6,R3-C5'),
  ('7) Action-Delay Sensitivity:', 'R1-C6'),
+ ('The coverage priors are static within each association period', 'R1-C4,R2-C5'),
 ]
 
 def norm(s):

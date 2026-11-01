@@ -36,7 +36,7 @@
 
 \maketitle
 \begin{abstract}
-Low-Earth-orbit (LEO) satellite networks provide wide-area direct-to-cell coverage, but uneven traffic distribution, dynamic service demands, and inter-beam interference complicate resource scheduling. This paper investigates hierarchical load balancing and cooperative beam hopping (BH) in multi-satellite direct-to-cell LEO networks by jointly considering long-timescale cell-satellite association and short-timescale BH with power allocation. The association problem is formulated to minimize network-wide load variance, and an improved simulated annealing algorithm determines the association strategy. Given the association strategy, the joint BH and power allocation problem is formulated as a partially observable Markov decision process and addressed by multi-agent proximal policy optimization (MAPPO) under centralized training and decentralized execution (CTDE). The actor uses a graph attention network (GAT) to encode local traffic, service status, and coverage overlap, with attention guided by distance and common-visibility priors. A gated recurrent unit (GRU) models temporal dynamics, and hybrid action heads generate beam selections and power allocation ratios. Simulation results show at least 9.1\% higher throughput and 21.1\% lower real-time (RT) queueing delay than benchmark BH schemes at 50~Mbps per user.
+Low-Earth-orbit (LEO) satellite networks provide wide-area direct-to-cell coverage, but uneven traffic distribution, dynamic service demands, and inter-beam interference complicate resource scheduling. This paper investigates hierarchical load balancing and cooperative beam hopping (BH) in multi-satellite direct-to-cell LEO networks by jointly considering long-timescale cell-satellite association and short-timescale BH with power allocation. The association problem is formulated to minimize network-wide load variance, and an improved simulated annealing algorithm determines the association strategy. Given the association strategy, the joint BH and power allocation problem is formulated as a partially observable Markov decision process and addressed by multi-agent proximal policy optimization (MAPPO) under centralized training and decentralized execution (CTDE). The actor uses a graph attention network (GAT) to encode local traffic, service status, and coverage overlap, with attention guided by distance and common-visibility priors. A gated recurrent unit (GRU) models temporal dynamics, and hybrid action heads generate beam-selection decisions and power allocation ratios. Simulation results show at least 9.1\% higher throughput and 21.1\% lower real-time (RT) queueing delay than benchmark BH schemes at a per-user input rate of 50~Mbps.
 
 \end{abstract}
 
@@ -48,11 +48,9 @@ LEO satellite networks, direct-to-cell, multi-satellite beam hopping, load balan
 \label{sec:introduction}
 \IEEEPARstart{W}{ith} the rapid evolution of communication technologies and growing demand for ubiquitous connectivity, low-Earth-orbit (LEO) satellite communication systems have emerged as a key enabler for 6G integrated space-air-ground networks. In recent years, the accelerated deployment of LEO constellations represented by Starlink and OneWeb has promoted LEO satellite communications in global broadband access, maritime communications, and remote-area coverage~\cite{ref1,ref2}. By leveraging multibeam architectures, LEO satellite systems can provide wide-area coverage, construct flexible service regions through dynamic beam scheduling, and improve environmental adaptability through intelligent resource allocation strategies~\cite{ref3}. Meanwhile, the number of global Internet-of-Things devices is increasing rapidly. The International Telecommunication Union (ITU) has predicted that, by 2030, mobile communication systems will require an order-of-magnitude improvement in spectrum efficiency to support the transmission demands of ultra-dense user scenarios~\cite{ref4}.
 
-To support ubiquitous connectivity, He et al.~\cite{refD2S} examined the technical routes, challenges, and key technologies of direct-to-smartphone communications for 6G non-terrestrial networks. Related advances in satellite transmission include rate-splitting multiple access (RSMA) for IoT communications in satellite and aerial-integrated networks~\cite{refRSMA}, joint beamforming in refracting reconfigurable intelligent surface (RIS)-aided satellite-terrestrial relay networks to reduce transmit power under user rate constraints~\cite{refRefractingRIS}, and self-powered absorptive RIS for secure satellite-terrestrial transmissions~\cite{refSecureRIS}. Alongside these advances in access and transmission, satellite resources must also be adapted to heterogeneous and time-varying traffic demands.
+To support ubiquitous connectivity, He et al.~\cite{refD2S} examined the technical routes, challenges, and key technologies of direct-to-smartphone communications for 6G non-terrestrial networks. Related advances in satellite transmission include rate-splitting multiple access (RSMA) for IoT communications in satellite and aerial-integrated networks~\cite{refRSMA}, joint beamforming in refracting reconfigurable intelligent surface (RIS)-aided satellite-terrestrial relay networks to reduce transmit power under user rate constraints~\cite{refRefractingRIS}, and self-powered absorptive RIS for secure satellite-terrestrial transmissions~\cite{refSecureRIS}. Beyond communication resources, Cui et al.~\cite{refCuiLatency2023} studied latency minimization in hybrid geostationary Earth orbit (GEO)--LEO satellite-assisted IoT networks through joint task offloading and communication and computing resource allocation. The joint design of beam hopping and computing offloading has also been investigated for LEO satellite networks~\cite{refCuiOffloading2026}. Alongside these advances in access and transmission, satellite resources must also be adapted to heterogeneous and time-varying traffic demands.
 
 Conventional multibeam satellite systems typically adopt static and uniform resource allocation strategies for bandwidth, power, and other communication resources. However, such approaches fail to account for the uneven spatial distribution of user traffic caused by geographical heterogeneity, as well as the diverse quality-of-service (QoS) requirements arising from different service scenarios. Consequently, a significant mismatch often exists between resource allocation and actual service demands. Therefore, dynamic resource management in multibeam LEO satellite systems has become a promising approach to improving spectrum efficiency and service adaptability~\cite{ref5}.
-
-Cui et al.~\cite{refCuiLatency2023} studied latency minimization in hybrid geostationary Earth orbit (GEO)--LEO satellite-assisted IoT networks through joint task offloading and communication and computing resource allocation. The joint design of beam hopping and computing offloading has also been investigated for LEO satellite networks~\cite{refCuiOffloading2026}.
 
 Beam hopping (BH), based on space-time multiplexing, has attracted extensive attention because it enables on-demand coverage by dynamically adjusting beam illumination patterns across time slots. Early studies mainly focused on preplanned BH pattern design. For instance, an iterative BH scheme that optimizes beam activation patterns across time slots to maximize the signal-to-interference-plus-noise ratio (SINR) was developed in~\cite{ref6}. A cuckoo-search-based BH scheduling method was investigated in~\cite{ref7} to maximize user weights, while~\cite{ref8} proposed a demand-aware beam management scheme that dynamically adjusts beam hopping according to the spatial traffic distribution. To suppress co-channel interference (CCI) among adjacent illuminated beams, precoding techniques were incorporated into BH systems in~\cite{ref9,ref10}, where hybrid precoding and cluster-based hopping strategies were studied to mitigate intra-satellite interference. In addition,~\cite{ref11} proposed a Viterbi- and greedy-based method to optimize BH patterns by minimizing CCI among adjacent illuminated beams.
 
@@ -69,8 +67,8 @@ Although existing studies on satellite beam hopping scheduling have achieved not
 \begin{itemize}[\setlength{\topsep}{2pt}]
 \item A hierarchical multi-satellite cooperative beam hopping framework is proposed for direct-to-cell LEO satellite networks. The framework jointly considers uneven traffic distribution, dynamic service demands, and co-channel interference, and optimizes satellite resources over different timescales to improve long-term network performance while supporting decentralized online decisions.
 \item A long-timescale cell-satellite association model is formulated to minimize the network-wide load variance, and an improved simulated annealing algorithm is developed to obtain the association strategy. A greedy initialization is first performed under visibility constraints, followed by simulated-annealing-based migration and exchange operations to improve load balancing.
-\item A MAPPO-based cooperative beam hopping and power allocation algorithm is proposed under CTDE. A shared actor combines local traffic and service states with a coverage-overlap node feature. Its GAT uses distance and common-visibility priors, and a GRU models temporal traffic and service dynamics. The actor uses local candidate-cell observations and coverage information to generate discrete beam selections and continuous power allocation ratios.
-\item Simulations evaluate the proposed framework in terms of throughput, real-time (RT) queueing delay, load balancing, and computational cost. The results demonstrate its performance advantages over the benchmark schemes under the tested conditions.
+\item A MAPPO-based cooperative beam hopping and power allocation algorithm is proposed under CTDE. A shared actor combines local traffic and service states with a coverage-overlap node feature. Its GAT uses distance and common-visibility priors, and a GRU models temporal traffic and service dynamics. The actor uses local candidate-cell observations and coverage information to generate discrete beam-selection decisions and continuous power allocation ratios.
+\item Simulations evaluate the proposed framework in terms of throughput, real-time (RT) queueing delay, load balancing, and computational cost. The results demonstrate the advantages of the proposed framework over the benchmark schemes under the tested conditions.
 \end{itemize}
 }
 
@@ -312,6 +310,7 @@ The average RT queueing delay of user $u$ is defined as the current queue's mean
 \dfrac{\sum_{l=1}^{t_{\mathrm{th},\mathrm{R}}}l\nu_t^{u,l}}{Q_t^{u,\mathrm{R}}}, & Q_t^{u,\mathrm{R}}>0,\\
 0, & Q_t^{u,\mathrm{R}}=0.
 \end{cases}
+\label{eq:rt-queue-age}
 \end{equation}
 
 The system average delay at time slot $t$ is defined as
@@ -319,6 +318,7 @@ The system average delay at time slot $t$ is defined as
 \Gamma_t=
 \frac{1}{U}
 \sum_{u\in\mathcal{U}}\tau_t^{u,\mathrm{R}}.
+\label{eq:system-queue-age}
 \end{equation}
 
 The long-term average system delay is expressed as
@@ -326,6 +326,7 @@ The long-term average system delay is expressed as
 \Gamma=
 \frac{1}{N_{\mathrm{slot}}}
 \sum_{t\in\mathcal{T}}\Gamma_t.
+\label{eq:long-term-queue-age}
 \end{equation}
 
 The overall utility combines the average per-slot delivered data volume and average RT queueing delay, expressed as
@@ -460,7 +461,7 @@ where $v_j^n$ denotes the fraction of other satellites covering candidate cell $
 v_j^n=\frac{1}{N-1}\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(j)}.
 \label{eq:coverage-degree}
 \end{equation}
-The local and global coverage degrees satisfy $v_j^n=v_{\mathrm{cov}}^{\chi_n(j)}$. The NOCC can compute these topology summaries from the visibility matrix and distribute them with each association update. They characterize coverage overlap and potential interference relationships.
+The local and global coverage degrees satisfy $v_j^n=v_{\mathrm{cov}}^{\chi_n(j)}$. The NOCC can compute these topology summaries from the visibility matrix and distribute them with each association update. The distance prior describes geometric proximity, whereas the coverage summaries describe exposure to potential inter-satellite interference sources.
 
 
 The critic receives the five features of all $M$ cells, whereas each actor observes its candidate-cell features and the associated topology summaries. Each actor lacks access to other satellites' current actions and the complete physical state, resulting in partial observability.
@@ -494,7 +495,7 @@ c_{ij}^n&=\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(i)}V_{n',\chi_n(j)},\
 \end{aligned}
 \label{eq:common-visibility}
 \end{equation}
-Both $v_j^n$ and $\bar c_{ij}^n$ lie in $[0,1]$. The normalized value $\bar c_{ij}^n$ denotes the fraction of other satellites covering both candidate cells.
+Both $v_j^n$ and $\bar c_{ij}^n$ lie in $[0,1]$. The normalized value $\bar c_{ij}^n$ denotes the fraction of other satellites covering both candidate cells. Under full frequency reuse, other satellites covering a cell are potential interferers. Commonly covered cells share potential interferers, motivating joint feature aggregation through attention.
 
 Accordingly, the local observation of agent $n$ at time slot $t$ is written as
 \begin{equation}
@@ -572,7 +573,7 @@ is implicitly determined by traffic arrivals, queue evolution, beam service, dat
 \subsection{MAPPO Algorithm Design}
 \label{subsec:mappo-design}
 
-Based on the above POMDP formulation, MAPPO uses a shared actor and a centralized critic during training. Each satellite executes a local actor using its candidate-cell observation and action mask. Figure~\ref{fig:mappo-framework} illustrates the GAT--GRU backbone and hybrid action heads.
+Based on the above POMDP formulation, MAPPO uses a shared actor and a centralized critic during training. Each satellite executes a local actor using its candidate-cell observation and action mask. Fig.~\ref{fig:mappo-framework} illustrates the GAT--GRU backbone and hybrid action heads.
 
 \begin{figure*}[!t]
 \centering
@@ -852,9 +853,9 @@ All compared association schemes, including ISA, NLB, MEA, and MMTG, assign each
 
 \subsection{Result Analysis}
 \label{subsec:result-analysis}
-Per-user input rates combine RT and BULK traffic. Throughput rates are obtained by dividing delivered data volumes by the evaluation duration; per-user throughput is then averaged over users and expressed in Mbps. RT queueing delay follows the queue-age definitions: current packet ages are averaged within each user's RT queue, with zero assigned to empty queues, and then over users and slots. Error bars in Figs.~\ref{fig:association-performance} and~\ref{fig:bh-performance} are pointwise 95\% confidence intervals across 200 test-case means at each input rate.
+Per-user input rates combine RT and BULK traffic. Throughput rates are obtained by dividing delivered data volumes by the evaluation duration; per-user throughput is then averaged over users and expressed in Mbps. RT queueing delay follows the queue-age definitions in \eqref{eq:rt-queue-age}--\eqref{eq:long-term-queue-age}: current packet ages are averaged within each user's RT queue, with zero assigned to empty queues, and then over users and slots. Error bars in Figs.~\ref{fig:association-performance} and~\ref{fig:bh-performance} are pointwise 95\% confidence intervals across 200 test-case means at each input rate.
 
-A controlled pairwise diagnostic evaluates the distance prior $\omega_{ij}^n$ using the antenna and channel models over 200 independent scenarios with 300 users each, reference beam power $P_{\mathrm{tot}}/K_{\max}$, and reference bandwidth 0.5~MHz. Its mean scenario-wise Spearman correlations with the physical interference-to-signal ratio and relative rate loss are 0.546 (95\% scenario-level bootstrap CI: [0.536, 0.557]) and 0.437 (95\% scenario-level bootstrap CI: [0.426, 0.448]), respectively. These results support the use of the distance weight as a geometric prior under the tested conditions.
+A controlled pairwise diagnostic evaluates the distance prior $\omega_{ij}^n$ using the antenna and channel models over 200 independent scenarios with 300 users each, reference beam power $P_{\mathrm{tot}}/K_{\max}$, and reference bandwidth 0.5~MHz. Its mean scenario-wise Spearman correlations with the physical interference-to-signal ratio and relative rate loss are 0.546 (95\% scenario-level bootstrap CI: [0.536, 0.557]) and 0.437 (95\% scenario-level bootstrap CI: [0.426, 0.448]), respectively. These results support the use of the distance weight as a geometric prior under the tested conditions. The coverage priors are assessed separately through scheduling ablations.
 
 \subsubsection{Convergence Analysis}
 
@@ -932,7 +933,7 @@ Given the cell-satellite association strategy in Algorithm~\ref{alg:isa}, Fig.~\
 \end{figure}
 
 \subsubsection{Ablation Analysis}
-Figure~\ref{fig:ablation-performance} compares the proposed method with four ablation variants: without coverage priors, without GAT, without GRU, and with equal power allocation. In the variant without coverage priors, the actor's coverage-degree feature is set to zero, and attention uses only the learned score and the distance prior. This variant evaluates the joint contribution of the two coverage priors. All variants are trained with five independent random seeds and evaluated under the same association and test conditions. Each trained model is evaluated on a common test-case set at per-user input rates of 20, 40, and 50~Mbps. For each seed, performance is averaged over the common test cases. The reported means and pointwise 95\% Student-$t$ confidence intervals are then calculated across the five seed-level means.
+Fig.~\ref{fig:ablation-performance} compares the proposed method with four ablation variants: without coverage priors, without GAT, without GRU, and with equal power allocation. In the variant without coverage priors, the actor's coverage-degree feature is set to zero, and attention uses only the learned score and the distance prior. This variant evaluates the joint contribution of the two coverage priors. All variants are trained with five independent random seeds and evaluated under the same association and test conditions. Each trained model is evaluated on a common test-case set at per-user input rates of 20, 40, and 50~Mbps. For each seed, performance is averaged over the common test cases. The reported means and pointwise 95\% Student-$t$ confidence intervals are then calculated across the five seed-level means.
 
 The full model has the highest mean throughput and lowest mean RT queueing delay at all three tested rates. At 50~Mbps, it achieves 45.94~Mbps per user (95\% CI: [45.68, 46.20]) and 7.634~slots of RT delay (95\% CI: [7.556, 7.712]). Relative to the variant without coverage priors, throughput increases by 1.85\% and RT delay decreases by 6.49\%; relative to equal power, the improvements are 6.92\% and 17.63\%. Removing GAT or GRU causes larger degradation at this load than jointly removing the coverage priors. These results show the benefits of coverage priors, GAT, GRU, and learned power allocation under the tested conditions.
 
@@ -981,7 +982,7 @@ The group-wise mean runtimes are close (435 and 439~$\mu$s at the default settin
 \end{figure*}
 
 \subsubsection{Complexity Analysis}
-The computational cost of the framework comprises cell-satellite association on the long timescale and online MAPPO execution on the short timescale. For cell-satellite association, the greedy initialization stage requires $O(MN)$, and the annealing iteration stage requires $O(N_{\mathrm{temp}}L_{\max})$. Therefore, the overall complexity of Algorithm~\ref{alg:isa} is $O(MN+N_{\mathrm{temp}}L_{\max})$, where $N_{\mathrm{temp}}=\log_{\rho}(T_{\min}/T_{0})$, which can also be written as $O(MN+\log_{\rho}(T_{\min}/T_{0})L_{\max})$. For online MAPPO execution, each satellite uses the trained actor network to generate scheduling actions. For each satellite, the per-slot actor complexity accounts for graph attention encoding, GRU-based temporal modeling, and the hybrid action heads, and is approximated as $O(J^{2}d_{g}+Jd_{g}d_h+d_h(6J+3)+Jd_h)$, where $d_h$ denotes the hidden size of the temporal module. For each satellite, computing the common-visibility matrix from the $(N-1)\times J$ visibility submatrix of its candidate cells requires $O((N-1)J^2)$ operations per association period. The coverage degrees are obtained by summing the columns of this submatrix.
+The computational cost of the framework comprises cell-satellite association on the long timescale and online MAPPO execution on the short timescale. For cell-satellite association, the greedy initialization stage requires $O(MN)$, and the annealing iteration stage requires $O(N_{\mathrm{temp}}L_{\max})$. Therefore, the overall complexity of Algorithm~\ref{alg:isa} is $O(MN+N_{\mathrm{temp}}L_{\max})$, where $N_{\mathrm{temp}}=\log_{\rho}(T_{\min}/T_{0})$, which can also be written as $O(MN+\log_{\rho}(T_{\min}/T_{0})L_{\max})$. For online MAPPO execution, each satellite uses the trained actor network to generate scheduling actions. For each satellite, the per-slot actor complexity is dominated by graph attention encoding, GRU-based temporal modeling, and the hybrid action heads, and is approximated as $O(J^{2}d_{g}+Jd_{g}d_h+d_h(6J+3)+Jd_h)$, where $d_h$ denotes the hidden size of the temporal module. For each satellite, computing the common-visibility matrix from the $(N-1)\times J$ visibility submatrix of its candidate cells requires $O((N-1)J^2)$ operations per association period. The coverage degrees are obtained by summing the columns of this submatrix.
 
 The actor forward-pass latency was measured on a workstation with an Intel Core i7-13700K processor and an NVIDIA RTX 4060 GPU. A single-actor forward pass averaged 1.94~ms over 200 runs with batch size 1 and GPU synchronization at the timing boundaries. Timing covers computation from prepared inputs through the FC, GAT, GRU, and action-head layers. In the workstation simulation, the 16 actors are evaluated as a batch with independent observations, masks, and recurrent states. Distributed deployment assumes concurrent execution of the local actors. Practical onboard real-time performance depends on the processing platform.
 
@@ -990,7 +991,7 @@ The action-delay evaluation considers action delays of 0, 1, and 2 slots (0, 2, 
 
 \section{CONCLUSION}
 \label{sec:conclusion}
-This paper presents a hierarchical framework combining ISA-based load balancing with MAPPO-based beam hopping and power allocation. The GAT encodes local traffic, service status, and coverage overlap using distance and common-visibility priors. The GRU models temporal dynamics, and hybrid action heads generate beam selections and power allocation ratios. The physical transmission model accounts for inter-satellite interference in evaluating rates and rewards. Simulation results show higher throughput and lower RT queueing delay than the benchmark BH schemes under the tested conditions. The workstation timing and controlled action-delay tests characterize inference cost and sensitivity to decision lag; practical onboard execution requires platform-specific evaluation.
+This paper presents a hierarchical framework combining ISA-based load balancing with MAPPO-based beam hopping and power allocation. The GAT encodes local traffic, service status, and coverage overlap using distance and common-visibility priors. The GRU models temporal dynamics, and hybrid action heads generate beam-selection decisions and power allocation ratios. The physical transmission model accounts for inter-satellite interference in evaluating rates and rewards. Simulation results show higher throughput and lower RT queueing delay than the benchmark BH schemes under the tested conditions. The workstation timing and controlled action-delay tests characterize inference cost and sensitivity to decision lag; practical onboard execution requires platform-specific evaluation. The coverage priors are static within each association period and do not capture slot-level interference variations caused by beam pointing. Incorporating low-cost dynamic interference indicators is left for future work.
 
 \begin{thebibliography}{99}
 \bibliographystyle{IEEEtran}
