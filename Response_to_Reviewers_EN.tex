@@ -39,7 +39,7 @@ All revision locations below refer to the clean revised manuscript. The reviewer
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for this comment. We would like to clarify that the proposed cell-satellite association is traffic-aware and updated periodically. At the beginning of each association period, the NOCC obtains the cell traffic demands, and ISA recomputes the association using these demands. The association is held fixed only within each period, while beam hopping and power allocation are adjusted slot by slot. We have added the association period of 100 slots to Table II.
+Thank you for this comment. We would like to clarify that the proposed cell-satellite association is traffic-aware and updated periodically. At the beginning of each association period, the NOCC obtains the cell traffic demands, and ISA recomputes the association using these demands. The association is held fixed only within each period, while beam hopping and power allocation are adjusted slot by slot. We apologize for not stating this clearly in the original manuscript, where the 100-slot association period was inadvertently omitted from Table II; we have now added this parameter to the table.
 \par
 
 Demand may still change between association updates. To evaluate this effect, we have added a controlled hotspot-reversal test in Section VI-B-4 and Table III to summarize its results. Table R1-1 below provides a concise summary in this response.
@@ -65,20 +65,23 @@ After reversal (updated association) & 27.18 & 3.75\\
 As shown in Table R1-1, retaining the association after reversal reduces throughput by 7.66\% and increases RT delay by 8.45\%. After updating the association, throughput is only 0.88\% below its pre-reversal value, and RT delay is 2.18\% higher.
 \par
 
-These results indicate an acceptable performance loss under the tested demand change and show that an additional association update improves recovery.
+These results indicate an acceptable performance loss under the tested demand change and show that an additional association update largely restores the pre-reversal performance.
+\par
+
+Note that this instantaneous demand swap represents an extreme stress test designed to evaluate the performance loss before an association update takes place. In practice, spatial traffic demand typically evolves gradually, and the 100-slot association period corresponds to only 200 ms. Moreover, as discussed in our response to Comment 1.3, the NOCC requires time to collect cell traffic demands and distribute the updated association. The association period is therefore chosen to accommodate this collection and distribution latency while retaining sufficient responsiveness to traffic changes.
 \par
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section III-A, p. 5)}\par}
 
 \begin{quote}\small\color{revisionblue}
-The association remains fixed within each period, while slot-wise beam hopping and power allocation respond to local queue variations.
+The association remains fixed within each period to balance demand-collection latency and traffic adaptability, while slot-wise beam hopping and power allocation respond to local queue variations.
 \par
 \end{quote}
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section VI-B-4; Table III, p. 14)}\par}
 
 \begin{quote}\small\color{revisionblue}
-With the association fixed, reversal reduces throughput by 7.66\% and increases RT delay by 8.45\%. After updating the association, throughput and delay are within 0.88\% and 2.18\% of their pre-reversal values, respectively. The degradation reflects the limited adaptability of fixed association to changing spatial demands. Nevertheless, most of the pre-reversal performance is retained, suggesting an acceptable performance loss under the tested demand change. Updating the association further improves performance recovery.
+With the association fixed, reversal reduces throughput by 7.66\% and increases RT delay by 8.45\%. After updating the association, throughput and delay are within 0.88\% and 2.18\% of their pre-reversal values, respectively. The degradation reflects the limited adaptability of fixed association to changing spatial demands. Nevertheless, most of the pre-reversal performance is retained, suggesting an acceptable performance loss under this abrupt demand shift, while updating the association largely restores the pre-reversal performance.
 \par
 \end{quote}
 
@@ -105,7 +108,7 @@ Both groups show similar trends. Increasing the search effort generally improves
 The default setting $(\rho,L_{\max})=(0.95,100)$ yields a mean load variance of 12656 $(\mathrm{Mbps})^2$ and a mean runtime of 437 $\mu$s. Increasing $\rho$ to 0.97 reduces variance by 1.86\% but increases runtime by 61.78\%. Increasing $L_{\max}$ to 200 reduces variance by 3.76\% but increases runtime by 90.62\%.
 \par
 
-These results show that the default setting $(\rho,L_{\max})=(0.95,100)$ provides a good balance between load-balancing performance and runtime under the tested traffic conditions. We therefore retain this setting.
+These results show that the default setting $(\rho,L_{\max})=(0.95,100)$ provides a good balance between load-balancing performance and runtime under the tested traffic conditions, and we therefore retain this setting. Meanwhile, addressing the limitations of fixed cooling schedules remains a valuable direction for future work; for instance, adaptive cooling rates or iteration budgets guided by energy variations and traffic imbalance could be explored to avoid overstaying at high temperatures and improve local refinement.
 \par
 
 \par\Needspace{12\baselineskip}\begin{center}\begin{minipage}{\linewidth}\centering
@@ -128,13 +131,13 @@ The group-wise mean runtimes are close (435 and 439~$\mu$s at the default settin
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for this comment. We would like to clarify that centralized training is performed offline in a ground-based simulator. The simulator directly provides time-aligned global cell features and multi-agent trajectories to the critic, so training does not require real-time state collection over physical inter-satellite or gateway links. After each rollout, mini-batch PPO updates the shared actor and centralized critic within the simulator.
+Thank you for this comment. Following the mainstream paradigm in existing multi-satellite MARL scheduling studies [1], [2], this work adopts offline centralized training in a ground-based simulator and online decentralized execution onboard the satellites. During offline training, the simulator directly provides time-aligned global cell features and multi-agent trajectories to the centralized critic, and mini-batch PPO updates the shared actor and critic after each rollout.
 \par
 
-During evaluation, the trained actor parameters are fixed. Each satellite uses a local actor copy with its own observation, action mask, and recurrent hidden state. The centralized critic is not used for online scheduling, and no online inter-satellite parameter synchronization is required. We have clarified these training and execution procedures in Sections V-A and V-B and Algorithm 2.
+During online execution, the trained actor parameters are fixed. Each satellite independently runs a local actor copy using only its local observation, action mask, and recurrent hidden state. The centralized critic is not involved in real-time scheduling. We have clarified these training and execution procedures in Sections V-A and V-B and Algorithm 2.
 \par
 
-The current simulations do not model delays or packet loss in physical training-data links.
+In practical deployment, if operational trajectories are collected from satellites for periodic policy fine-tuning on the ground, inter-satellite and gateway links at an altitude of 515 km would introduce transmission latencies of several to tens of milliseconds. Because beam-hopping decisions are generated locally onboard and global state collection is only needed for longer-timescale tasks such as the 200 ms association update or background trajectory logging, delayed state transitions can be aligned by their slot timestamps in the replay buffer before critic updates. Similarly, since all satellites execute fixed actor copies during operation, slot-level parameter synchronization is unnecessary, and updated actor weights only need to be uploaded from gateways at a low frequency when traffic statistics change noticeably. Regarding link congestion and packet loss, occasional missing state reports can be handled by holding the most recent valid features or omitting incomplete trajectory segments, whereas severe packet loss would increase the variance of critic value estimation and slow down training convergence. As this work primarily focuses on scheduling algorithm design and simulation-based performance comparison, these practical communication effects are not yet modeled in detail; however, if you find it helpful, we would be glad to incorporate a brief discussion of these deployment considerations into the manuscript.
 \par
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section V-A-1, p. 7)}\par}
@@ -159,13 +162,10 @@ Offline trajectories are collected in the simulator, and mini-batch PPO updates 
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for this comment. We agree that beam sidelobe patterns and frequency overlap affect physical interference in addition to spatial proximity. To limit the computational overhead of graph construction, sidelobe coupling and frequency overlap are not explicitly encoded as actor inputs. We use the distance weight as a geometric prior and supplement it with visibility-based coverage information.
+Thank you for this comment. We agree that beam sidelobe patterns and frequency overlap affect physical interference in addition to spatial proximity. In our system model, these two factors are accounted for at different levels. Specifically, the beam sidelobe pattern is explicitly modeled in Eq. (6) at the beam level when calculating channel gains and inter-beam interference, whereas frequency overlap in resource-block allocation is handled at the user level by the intra-beam PF scheduler. Both effects directly determine the achieved user rates and queueing delays, and are therefore fed back to the beam-hopping policy through the reward function. Because this work centers on cell-satellite association and beam-level hopping and power allocation, intra-beam user scheduling is not our primary focus, although finer resource-block interference mitigation can be further explored with enhanced user-level allocation algorithms. To limit the computational overhead of online graph construction, sidelobe coupling and resource-block overlap are not explicitly encoded as graph edge inputs; instead, we use the distance weight $\omega_{ij}^n$ as a low-complexity geometric prior, similar to the distance criteria and local conflict graphs used in related beam-hopping studies [1]--[3].
 \par
 
-The fifth node feature is the fraction of other satellites covering the candidate cell. The common-visibility attention prior is the fraction covering both cells in a candidate pair. These features are computed from the visibility matrix and updated once per 100-slot association period. Together with the distance prior, they provide the actor with spatial and coverage information. Related beam-hopping studies also use distance criteria, spatially isolated beam patterns, and local conflict graphs for interference avoidance [1]--[3].
-\par
-
-We have added a controlled pairwise diagnostic in Section VI-B, using the antenna and channel models over 200 independent scenarios with 300 users each. The reference beam power is $P_{\mathrm{tot}}/K_{\max}$, and the reference bandwidth is 0.5 MHz. For each direction of a cell pair, victim-cell rates are calculated with and without the specified interfering-beam contribution, keeping the desired signal, channel realization, and noise fixed. The interference-to-signal ratio and relative rate loss are then averaged over the two directions.
+To validate the correlation between the static distance weight and achieved rate variations, we have added a controlled pairwise diagnostic in Section VI-B, using the antenna and channel models over 200 independent scenarios with 300 users each. The reference beam power is $P_{\mathrm{tot}}/K_{\max}$, and the single-RB reference bandwidth is $\Delta B=B_{\mathrm{tot}}/N_{\mathrm{RB}}$. For each direction of a cell pair, victim-cell rates are calculated with and without the specified interfering-beam contribution, keeping the desired signal, channel realization, and noise fixed. The interference-to-signal ratio and relative rate loss are then averaged over the two directions.
 \par
 
 The mean scenario-wise Spearman correlations with the distance weight are 0.546 (95\% scenario-level bootstrap CI: [0.536, 0.557]) for the interference-to-signal ratio and 0.437 (95\% CI: [0.426, 0.448]) for relative rate loss. We have added Fig. R1-4 to this response to present the diagnostic results.
@@ -176,13 +176,7 @@ The mean scenario-wise Spearman correlations with the distance weight are 0.546 
 \par\vspace{0.5em}{\small\raggedright Fig. R1-4. Controlled pairwise diagnostic of the geometric prior: (a) interference-to-signal ratio and (b) relative rate loss versus geometric weight. Blue dots represent cell-pair diagnostic results, and orange squares connected by lines indicate five-bin means. The annotations report the mean of scenario-wise Spearman correlations and 95\% confidence intervals obtained by scenario-level bootstrap resampling across 200 independent scenarios, each with 300 users.\par}
 \end{minipage}\end{center}
 
-We have also added the ablation results in Fig. 8, comparing the full method with a variant that jointly removes the coverage-degree node feature and common-visibility attention prior. At a per-user input rate of 50 Mbps, the proposed method achieves 1.85\% higher throughput and 6.49\% lower RT queueing delay than this variant. This ablation evaluates the joint contribution of the two coverage priors.
-\par
-
-Overall, the physical diagnostic supports the relevance of the distance prior to physical interference effects, and the ablation supports the scheduling benefit of the coverage priors. These results support the usefulness of the proposed geometric and coverage priors for scheduling under the tested conditions.
-\par
-
-The coverage priors are held fixed within each association period and do not capture slot-level interference variations caused by beam pointing. Traffic and service features and the GRU hidden state still evolve across slots, but the present diagnostic and ablation do not establish physical interference tracking under agile beam pointing. We have clarified this limitation in the conclusion.
+Overall, the physical diagnostic supports a positive correlation between the distance prior and physical interference effects. In addition, although the distance prior $\omega_{ij}^n$ itself is static, the node features, such as queue backlogs, waiting delays, and historical average throughput $\bar\zeta_t^{n,j}$, evolve across time slots in response to beam illumination and interference, so the learned GAT attention scores $e_t^{n,ij}$ and the GRU recurrent hidden states are updated every slot. The ablation results in Fig. 8 confirm that removing either GAT or GRU noticeably degrades throughput and increases RT queueing delay under high loads.
 \par
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section V-A-2, p. 7)}\par}
@@ -195,18 +189,11 @@ where $d_{ij}^n$ is the distance between the user centroids of candidate cells $
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section VI-B, pp. 11-12)}\par}
 
 \begin{quote}\small\color{revisionblue}
-A controlled pairwise diagnostic evaluates the distance prior $\omega_{ij}^n$ using the antenna and channel models over 200 independent scenarios with 300 users each, reference beam power $P_{\mathrm{tot}}/K_{\max}$, and reference bandwidth 0.5~MHz. Its mean scenario-wise Spearman correlations with the physical interference-to-signal ratio and relative rate loss are 0.546 (95\% scenario-level bootstrap CI: [0.536, 0.557]) and 0.437 (95\% scenario-level bootstrap CI: [0.426, 0.448]), respectively. These results support the use of the distance weight as a geometric prior under the tested conditions. The coverage priors are assessed separately through scheduling ablations.
+A controlled pairwise diagnostic evaluates the distance prior $\omega_{ij}^n$ using the antenna and channel models over 200 independent scenarios with 300 users each, with reference beam power $P_{\mathrm{tot}}/K_{\max}$ and single-RB reference bandwidth $\Delta B=B_{\mathrm{tot}}/N_{\mathrm{RB}}$. For each candidate cell pair, victim-cell user rates are evaluated with and without co-channel illumination from the other cell while keeping the serving signal and noise fixed. Its mean scenario-wise Spearman correlations with the resulting physical interference-to-signal ratio and relative rate loss are 0.546 (95\% scenario-level bootstrap CI: [0.536, 0.557]) and 0.437 (95\% scenario-level bootstrap CI: [0.426, 0.448]), respectively. These results support the use of the distance weight as a geometric prior under the tested conditions.
 \par
 \end{quote}
 
-\Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section VII, pp. 15-16)}\par}
-
-\begin{quote}\small\color{revisionblue}
-The coverage priors are static within each association period and do not capture slot-level interference variations caused by beam pointing. Incorporating low-cost dynamic interference indicators is left for future work.
-\par
-\end{quote}
-
-\Needspace{4\baselineskip}{\small\textbf{Revision locations:} Section V-A-2 (p. 7), geometric and coverage priors; Eq. (54) (p. 9), weighted attention; Section VI-B (pp. 11-12), physical diagnostic; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), coverage-prior ablation; Section VII, limitations of static coverage priors. Fig. R1-4 is provided in this response.\par}
+\Needspace{4\baselineskip}{\small\textbf{Revision locations:} Section V-A-2 (p. 7), geometric distance prior; Eq. (54) (p. 9), weighted attention; Section VI-B (pp. 11-12), physical diagnostic; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), GAT and GRU ablations. Fig. R1-4 is provided in this response.\par}
 
 \Needspace{12\baselineskip}\subsection*{Comment 1.5}
 
@@ -243,16 +230,16 @@ To support ubiquitous connectivity, He et al.~[5] examined the technical routes,
 Thank you for this comment. We agree that workstation timing alone is insufficient to establish onboard real-time feasibility. The reported 1.94 ms is the mean latency of a single actor forward pass, measured over 200 batch-size-1 runs on the stated workstation with GPU synchronization. Onboard inference may take longer because of processor limitations and power and radiation-hardening requirements. We have clarified the scope of the timing measurement and qualified the real-time claims in the manuscript.
 \par
 
-To quantify the effect of decision lag, we have added an action-delay sensitivity evaluation in Section VI-B-7. Actions generated by the fixed trained policy are applied after delays of 0, 1, or 2 slots, corresponding to 0, 2, or 4 ms. We consider per-user total input rates of 20 and 50 Mbps, with 200 test instances per condition. Averaging the relative changes for the 1- and 2-slot delays at both input rates against their corresponding zero-delay baselines gives an 8.7\% decrease in network throughput and an 18.2\% increase in average RT queueing delay. These results indicate a degree of tolerance to the tested decision delays and quantify the associated performance cost.
+To quantify the effect of decision lag, we have added an action-delay sensitivity evaluation in Section VI-B-7. Actions generated by the fixed trained policy are applied after delays of 0, 1, or 2 slots, corresponding to 0, 2, or 4 ms. We consider per-user total input rates of 20 and 50 Mbps, with 200 test instances per condition. Averaging the relative changes for the 1- and 2-slot delays at both input rates against their corresponding zero-delay baselines gives an 8.7\% decrease in network throughput and an 18.2\% increase in average RT queueing delay. Because this average includes the heavy-load regime at 50 Mbps and a two-slot decision lag, the percentage increase in queueing delay is relatively noticeable; nevertheless, the resulting absolute RT queueing delay remains well below the 40-slot TTL threshold, and the delayed policy still maintains a clear advantage over conventional benchmark schemes.
 \par
 
-The reported timing and action-delay experiments characterize computational cost and sensitivity to decision lag under the tested conditions. Platform-specific onboard implementation and hardware validation are not addressed in the present work.
+In addition, the 2 ms slot duration in our simulations is chosen to maintain consistent experimental conditions when comparing with benchmark methods. In practical satellite beam-hopping systems, the beam dwell time or scheduling slot duration can be flexibly adapted to hardware constraints, allowing each beam position to be held for a longer interval to leave sufficient computational margin for inference. Meanwhile, with ongoing advances in spaceborne processing technology, satellite computing capability will continue to improve, further reducing inference latency and facilitating real-time execution of the proposed scheduling framework.
 \par
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section VI-B-6, p. 15)}\par}
 
 \begin{quote}\small\color{revisionblue}
-Practical onboard real-time performance depends on the processing platform; onboard inference may be slower owing to power and radiation-hardening constraints.
+Practical onboard real-time performance depends on the processing platform; onboard inference may be slower owing to power and radiation-hardening constraints, and in practice the beam dwell time or slot duration can be adapted to provide computational margin.
 \par
 \end{quote}
 
@@ -273,7 +260,7 @@ The action-delay evaluation considers action delays of 0, 1, and 2 slots (0, 2, 
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for pointing out this inconsistency. The RT packet TTL was incorrectly stated as 10 time slots in the manuscript due to a typographical error.
+Thank you for pointing out this inconsistency. We sincerely apologize for the confusion caused by a typographical error in the original manuscript, where the RT packet TTL was inadvertently misstated as 10 time slots.
 \par
 
 The simulations actually used an RT packet TTL of 40 time slots, corresponding to 80 ms with a slot duration of 2 ms. No TTL-based expiration was imposed on BULK packets. Fig. 7(b) reports RT queueing delay as defined in Eqs. (23)--(25): the mean age of packets currently in each user's RT queue, with empty queues assigned zero, is averaged over all users and evaluation slots. It is not the mean waiting time of successfully transmitted packets. The reported values are below the actual RT TTL of 40 time slots. The reported RT delays are therefore consistent with the actual TTL setting.
@@ -355,7 +342,7 @@ Following the GAE framework~[41], discounting is used in return and advantage es
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for pointing out this inconsistency. The original constraints in P2 allowed fewer active beams and a lower total transmit power than those used by the implemented policy. We have revised these constraints to match the scheduling rule considered in this work.
+Thank you for pointing out this inconsistency. We sincerely apologize for our carelessness when formulating the constraints of P2 in the original manuscript, where inequality constraints were inadvertently written to allow fewer active beams and a lower total transmit power than those used by the implemented policy. We have now corrected these constraints to match the scheduling rule considered in this work.
 \par
 
 In each time slot, each satellite activates $K$ beams, where $K$ is the smaller of the maximum beam count $K_{\max}$ and the number of available associated cells. When $K>0$, the entire transmit-power budget is distributed among the active beams; when $K=0$, the satellite does not transmit. Under this rule, the policy selects the cells to illuminate and determines their power allocation ratios.
@@ -382,13 +369,16 @@ Constraint $C_1$ restricts illumination to associated cells. $C_2$ requires exac
 Thank you for pointing out that the hybrid-action probability calculation was insufficiently explained. We have clarified the sampled action, the executed action, and the log-probability used by PPO in Section V-B, with corresponding updates to Algorithm 2 and Fig. 2.
 \par
 
-The sampled action is $\widetilde a_t^n=(\mathbf j_t^n,\mathbf y_t^n)$, where $\mathbf j_t^n$ is the ordered cell-selection sequence and $\mathbf y_t^n$ contains the Gaussian samples for the selected cells. These samples are mapped to the executed action $a_t^n=(b_t^n,p_t^n)$ through cell selection and Softmax normalization. The sampled-action log-probability has two terms. The discrete term sums the conditional log-probabilities of the sequential selections, with each distribution normalized over the associated cells that have not yet been selected. The continuous term sums the Gaussian log-densities evaluated at the stored samples before Softmax.
+The sampled action is $\widetilde a_t^n=(\mathbf j_t^n,\mathbf y_t^n)$, where $\mathbf j_t^n=(j_1,\ldots,j_K)$ records the selected cells in the sequential order in which they are drawn during without-replacement sampling, and $\mathbf y_t^n$ contains the pre-Softmax Gaussian samples for the selected cells. Specifically, at each selection step $i\in\{1,\ldots,K\}$, the discrete head applies Softmax to the masked logits over the associated cells that have not yet been selected, and one cell $j_i$ is drawn from this categorical distribution. The sequence $\mathbf j_t^n$ therefore directly follows the step-by-step sampling order; although the ordering does not change the resulting binary beam-illumination vector $b_t^n$, recording $\mathbf j_t^n$ is necessary because the conditional probability at step $i$ depends on the cells $\mathbf j_{<i}$ excluded in previous steps. These samples are mapped to the executed action $a_t^n=(b_t^n,p_t^n)$ through cell selection and Softmax normalization.
 \par
 
-For each PPO update, the current and old policies evaluate the same stored selection sequence and Gaussian samples to form the likelihood ratio. Reevaluation uses the same stepwise masks and recurrent observation context, without resampling. Algorithm 2 specifies storage of the selection sequences, Gaussian samples, association masks, and old-policy log-probabilities. We have also clarified that the discrete and continuous entropy terms sum the stepwise masked categorical entropies and selected-cell Gaussian differential entropies, respectively, and are then averaged over the mini-batch. We have added labels in Fig. 2 for the Gaussian samples before Softmax and for the sampled actions and masks stored in the experience buffer.
+Based on the probability distributions parameterized by the actor's discrete and continuous action heads, the sampled-action log-probability $\log\pi_\theta(\widetilde a_t^n|o_t^n)$ in Eq. (62) is calculated at the stored sampled action $\widetilde a_t^n$ as the sum of two terms. The discrete term sums the conditional log-probabilities of the $K$ sequential selections, with each categorical distribution normalized over the remaining unselected associated cells, and the continuous term sums the Gaussian log-densities evaluated at the stored pre-Softmax samples $\mathbf y_t^n$ using the mean and standard deviation from the continuous head. As shown in Fig. 2, the discrete branch generates $\mathbf j_t^n$ and maps it to $b_t^n$ through the Discrete Head, Action Mask, and Sampling modules, while the continuous branch generates the pre-Softmax samples $\mathbf y_t^n$ and normalizes them into $p_t^n$ through the Continuous Head, Gaussian Sampling, and Softmax modules; the sampled action $\widetilde a_t^n$, action mask $m_t^n$, and old-policy log-probability $\log\pi_{\theta^{\mathrm{old}}}(\widetilde a_t^n|o_t^n)$ are then stored in Experience Buffer $\mathcal D$.
 \par
 
-During training, actions are sampled as described above. During testing, masked Top-$K$ selects the cells, and Softmax applied to their Gaussian means gives deterministic power allocation ratios. These descriptions specify how actions are sampled, evaluated by PPO, and executed.
+For each PPO update, the current and old policies evaluate the same stored selection sequence and Gaussian samples to form the likelihood ratio. Reevaluation uses the same stepwise masks and recurrent observation context, without resampling. Algorithm 2 specifies storage of the selection sequences, Gaussian samples, association masks, and old-policy log-probabilities. We have also clarified that the discrete and continuous entropy terms sum the stepwise masked categorical entropies and selected-cell Gaussian differential entropies, respectively, and are then averaged over the mini-batch. We have updated Fig. 2 to label the ordered selection sequence $\mathbf j_t^n$, the pre-Softmax Gaussian samples $\mathbf y_t^n$, and the sampled-action information stored in the experience buffer.
+\par
+
+During training, actions are sampled as described above. During testing, masked Top-$K$ selects the cells with the highest masked logits, which corresponds to the most probable selection sequence under the sequential categorical distribution, and Softmax applied to their Gaussian means gives deterministic power allocation ratios. These descriptions specify how actions are sampled, evaluated by PPO, and executed.
 \par
 
 \par\Needspace{12\baselineskip}\begin{center}\begin{minipage}{\linewidth}\centering
@@ -407,6 +397,9 @@ During training, actions are sampled as described above. During testing, masked 
 \end{aligned}
 \tag{62}\end{equation*}
 
+where $\pi_{\theta}^{\mathrm{con}}$ is the Gaussian density with mean $\mu_t^{n,j}$ and variance $(\sigma_t^{n,j})^2$, evaluated at the stored pre-Softmax sample $y_t^{n,j}$. Each categorical distribution is normalized over unselected associated cells, and $\log\pi_{\theta}(\widetilde a_t^n|o_t^n)$ is computed from the distributions output by the two action heads. Both sums are zero when $K=0$.
+\par
+
 PPO reevaluates the stored sequences and Gaussian samples without resampling, using the same stepwise masks and recurrent observation context.
 \par
 \end{quote}
@@ -419,55 +412,49 @@ PPO reevaluates the stored sequences and Gaussian samples without resampling, us
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for this comment. We agree that the original distance-based edge weights did not explicitly represent inter-satellite interference. In the revision, we have introduced a coverage-overlap degree as a node feature and a common-visibility prior in GAT attention. The distance prior describes geometric proximity, whereas the coverage priors describe exposure to potential inter-satellite interference sources.
+Thank you for this comment. We agree that the original distance-based edge weights mainly reflected geometric proximity and did not explicitly represent inter-satellite interference. In a multi-satellite system, directly constructing a global cross-satellite GAT or explicitly encoding slot-level inter-satellite interference would require satellites to exchange instantaneous beam decisions, transmit powers, and channel or queue states over inter-satellite links in every time slot. This would introduce substantial inter-satellite signaling overhead and high computational complexity, compromising decentralized online execution under the CTDE framework. To capture inter-satellite interference relationships with low interaction complexity, we have extended both the node features and the GAT attention priors in the revised manuscript using multi-satellite visibility information.
 \par
 
-For candidate cell $j$ of satellite $n$, the coverage degree is the fraction of other satellites that cover this cell:
+Specifically, the candidate-cell node feature vector is extended from the original four traffic and service indicators $[\bar q_t^{n,j},\bar d_t^{n,j},\bar w_t^{n,j},\bar\zeta_t^{n,j}]^\top$ to the five-dimensional vector
+\par
+
+\[
+f_t^{n,j}=[\bar q_t^{n,j},\bar d_t^{n,j},\bar w_t^{n,j},\bar\zeta_t^{n,j},v_j^n]^\top,
+\]
+
+where the newly added fifth feature $v_j^n$ is the coverage-overlap degree of candidate cell $j$ of satellite $n$, defined as the fraction of other satellites that cover this cell:
 \par
 
 \[
 v_j^n=\frac{1}{N-1}\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(j)}.
 \]
 
-The node feature vector combines traffic and service information with this coverage degree:
-\par
-
-\[
-f_t^{n,j}=[\bar q_t^{n,j},\bar d_t^{n,j},\bar w_t^{n,j},\bar\zeta_t^{n,j},v_j^n]^\top.
-\]
-
-For candidate pair $(i,j)$, the common-visibility count and its normalized value are
+Correspondingly, the centralized critic receives the five features of all cells, forming a $5M$-dimensional global input where each cell's local coverage degree equals its global coverage degree $(\sum_{n'}V_{n',m}-1)/(N-1)$. Furthermore, for each candidate cell pair $(i,j)$, we introduce the common-visibility count $c_{ij}^n$ and its normalized value $\bar c_{ij}^n$:
 \par
 
 \[
 \begin{aligned}
 c_{ij}^n&=\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(i)}V_{n',\chi_n(j)},\\
-\bar c_{ij}^n&=\frac{c_{ij}^n}{N-1}.
+\bar c_{ij}^n&=\frac{c_{ij}^n}{N-1},
 \end{aligned}
 \]
 
-The normalized value $\bar c_{ij}^n$ is the fraction of other satellites covering both cells. It complements the distance prior in attention:
+where $\bar c_{ij}^n$ represents the fraction of other satellites covering both cells $i$ and $j$. Combining $\bar c_{ij}^n$ with the distance prior $\omega_{ij}^n$ yields the updated GAT attention coefficient:
 \par
 
 \[
 \psi_t^{n,ij}=
 \frac{\exp(e_t^{n,ij}+\xi_1\omega_{ij}^n+\xi_2\bar c_{ij}^n)}
-{\sum_{j'\in\mathcal V_i^{\mathrm{nbr}}}\exp(e_t^{n,ij'}+\xi_1\omega_{ij'}^n+\xi_2\bar c_{ij'}^n)}.
+{\sum_{j'\in\mathcal V_i^{\mathrm{nbr}}}\exp(e_t^{n,ij'}+\xi_1\omega_{ij'}^n+\xi_2\bar c_{ij'}^n)},
 \]
 
-The fixed coefficients $\xi_1$ and $\xi_2$ weight the distance and common-visibility priors, respectively. The node feature describes coverage overlap at an individual cell, while the attention prior describes shared coverage of a cell pair. Under full frequency reuse, other satellites covering a cell are potential interference sources. Cells with more commonly visible satellites share more potential interference sources, which motivates aggregating their features jointly. Actual interference also depends on beam activation, transmit power, and channel conditions.
+where $\xi_1$ and $\xi_2$ weight the distance and common-visibility priors, respectively. Under full frequency reuse, other satellites covering a cell act as potential inter-satellite interference sources. Thus, the coverage degree $v_j^n$ characterizes the potential inter-satellite interference exposure of an individual cell, while the common-visibility prior $\bar c_{ij}^n$ characterizes the shared potential interferers of a cell pair, motivating their joint feature aggregation through attention. Because $v_j^n$ and $\bar c_{ij}^n$ depend only on the visibility matrix, the NOCC computes and distributes them at the start of each 100-slot association period, avoiding slot-by-slot inter-satellite state exchange. Within each satellite's local graph, all real visible candidate cells, including those associated with other satellites, are fully connected for feature aggregation, while the action mask restricts beam selection to the satellite's own associated cells.
 \par
 
-The NOCC computes these features from the visibility matrix and distributes them at the start of each 100-slot association period. They are held fixed within the period. The local graph fully connects the real visible candidate cells, including those associated with other satellites; the association mask restricts service selection to the observing satellite's associated cells. Virtual padding nodes are zero-filled and excluded from attention. The critic receives the five features of all cells, giving a $5M$-dimensional input. For candidate cell $m=\chi_n(j)$, its local coverage degree equals the global cell degree $(\sum_{n'}V_{n',m}-1)/(N-1)$.
+To evaluate the effectiveness of the newly introduced coverage degree and common-visibility prior, we have added a joint coverage-prior ablation in Section VI-B-3, with results presented in the new Fig. 8 and reproduced below in our response to Comment 2.7. This experiment sets the actor's coverage-degree feature $v_j^n$ to zero and removes the common-visibility prior $\bar c_{ij}^n$ from GAT attention, with all variants trained across five independent seeds under identical association and testing conditions. At a per-user input rate of 50 Mbps, the full method achieves 1.85\% higher throughput and 6.49\% lower RT queueing delay than the variant without coverage priors, confirming the scheduling gain brought by these inter-satellite coverage features. In addition, the controlled pairwise diagnostic in Section VI-B, shown in Fig. R1-4 under Comment 1.4 with reference beam power $P_{\mathrm{tot}}/K_{\max}$ and single-RB reference bandwidth $\Delta B=B_{\mathrm{tot}}/N_{\mathrm{RB}}$, yields mean scenario-wise Spearman correlations of 0.546 (95\% CI: [0.536, 0.557]) and 0.437 (95\% CI: [0.426, 0.448]) between the distance prior $\omega_{ij}^n$ and the physical interference-to-signal ratio and relative rate loss, respectively.
 \par
 
-Separately, the controlled pairwise diagnostic in Section VI-B evaluates the distance prior using the antenna and channel models over 200 independent scenarios with 300 users each, a reference beam power of $P_{\mathrm{tot}}/K_{\max}$, and a reference bandwidth of 0.5 MHz. For each cell pair, the interference-to-signal ratio and relative rate loss are averaged over the two interference directions. The mean scenario-wise Spearman correlations with the distance weight are 0.546 (95\% scenario-level bootstrap CI: [0.536, 0.557]) and 0.437 (95\% CI: [0.426, 0.448]), respectively. These positive correlations support the distance prior under the tested conditions; they do not directly validate the coverage priors or slot-level interference tracking. Related geometric graph designs are also discussed in [1]-[3]. The diagnostic plot is provided in Fig. R1-4 under our response to Comment 1.4.
-\par
-
-We have also added a joint coverage-prior ablation in Section VI-B-3, with results presented in the new Fig. 8 (reproduced below in our response to Comment 2.7). This experiment sets the actor's coverage-degree feature to zero and removes the common-visibility attention term to evaluate their joint contribution. All variants are trained with five independent seeds under the same association and testing conditions. At a per-user input rate of 50 Mbps, the full method achieves 1.85\% higher throughput and 6.49\% lower RT queueing delay than the variant without coverage priors.
-\par
-
-We have updated the input definitions, graph attributes, attention formula, Algorithm 2, network architecture description, and Fig. 2, and reported the diagnostic and ablation results in Section VI-B. The physical diagnostic supports the distance weight as a geometric prior, and the ablation shows the scheduling benefit of the coverage priors. Together, these results support the use of geometric and coverage information for cooperative scheduling under the tested conditions.
+We have updated the input definitions, graph attributes, attention formula, Algorithm 2, network architecture description, and Fig. 2, and reported the ablation and diagnostic results in Section VI-B. Together, these results support combining the geometric distance prior with the low-overhead coverage priors for cooperative scheduling under the tested conditions.
 \par
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section V-A-2, pp. 7-8)}\par}
@@ -699,7 +686,7 @@ We have clarified the parallel-execution assumption and timing protocol in Secti
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section VI-B-6, p. 15)}\par}
 
 \begin{quote}\small\color{revisionblue}
-The actor forward-pass latency was measured on a workstation with an Intel Core i7-13700K processor and an NVIDIA RTX 4060 GPU. A single-actor forward pass averaged 1.94~ms over 200 runs with batch size 1 and GPU synchronization at the timing boundaries. Timing covers computation from prepared inputs through the FC, GAT, GRU, and action-head layers. In the workstation simulation, the 16 actors are evaluated as a batch with independent observations, masks, and recurrent states. Distributed deployment assumes concurrent execution of the local actors. Practical onboard real-time performance depends on the processing platform; onboard inference may be slower owing to power and radiation-hardening constraints.
+The actor forward-pass latency was measured on a workstation with an Intel Core i7-13700K processor and an NVIDIA RTX 4060 GPU. A single-actor forward pass averaged 1.94~ms over 200 runs with batch size 1 and GPU synchronization at the timing boundaries. Timing covers computation from prepared inputs through the FC, GAT, GRU, and action-head layers. In the workstation simulation, the 16 actors are evaluated as a batch with independent observations, masks, and recurrent states. Distributed deployment assumes concurrent execution of the local actors. Practical onboard real-time performance depends on the processing platform; onboard inference may be slower owing to power and radiation-hardening constraints, and in practice the beam dwell time or slot duration can be adapted to provide computational margin.
 \par
 \end{quote}
 
