@@ -38,7 +38,6 @@ ANCHORS = [
  ('Fig. 9.', 'R1-C2'),
  ('The actor forward-pass latency was measured', 'R1-C6,R3-C5'),
  ('7) Action-Delay Sensitivity:', 'R1-C6'),
- ('The coverage priors are static within each association period', 'R1-C4,R2-C5'),
 ]
 
 def norm(s):

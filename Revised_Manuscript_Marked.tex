@@ -1011,8 +1011,9 @@ After reversal (updated) & 27.18 & 3.75 \\
 \label{sec:conclusion}
 \revbegin{}This paper presents a hierarchical framework combining ISA-based load balancing with MAPPO-based beam hopping and power allocation. The GAT encodes local traffic, service status, and coverage overlap using distance and common-visibility priors. The GRU models temporal dynamics, and hybrid action heads generate beam-selection decisions and power allocation ratios. The physical transmission model accounts for inter-satellite interference in evaluating rates and rewards. Simulation results show higher throughput and lower RT queueing delay than the benchmark BH schemes under the tested conditions. The workstation timing and controlled action-delay tests characterize inference cost and sensitivity to decision lag; practical onboard execution requires platform-specific evaluation.\revend{}
 
+\def\IEEEbibitemsep{-2.4pt}
 \begin{thebibliography}{99}
-\bibliographystyle{IEEEtran}
+\linespread{0.92}\selectfont
 
 \bibitem{ref1} O. Kodheli \textit{et al.}, ``Satellite communications in the new space era: A survey and future challenges,'' \textit{IEEE Commun. Surveys Tuts.}, vol. 23, no. 1, pp. 70--109, 1st Quart., 2021.
 
@@ -1030,11 +1031,11 @@ After reversal (updated) & 27.18 & 3.75 \\
 
 \revbegin{}\bibitem{refSecureRIS} Z. Lin \textit{et al.}, ``Self-powered absorptive reconfigurable intelligent surfaces for securing satellite-terrestrial integrated networks,'' \textit{China Commun.}, vol. 21, no. 9, pp. 276--291, Sep. 2024, doi: 10.23919/JCC.fa.2023-0437.202409.\revend{}
 
-\bibitem{ref5} X. Hu, S. Liu, R. Chen, W. Wang, and C. Wang, ``A deep reinforcement learning-based framework for dynamic resource allocation in multibeam satellite systems,'' \textit{IEEE Commun. Lett.}, vol. 22, no. 8, pp. 1612--1615, Aug. 2018.
-
 \revbegin{}\bibitem{refCuiLatency2023} G. Cui, P. Duan, L. Xu, and W. Wang, ``Latency optimization for hybrid GEO--LEO satellite-assisted IoT networks,'' \textit{IEEE Internet Things J.}, vol. 10, no. 7, pp. 6286--6297, Apr. 2023, doi: 10.1109/JIOT.2022.3222831.\revend{}
 
 \revbegin{}\bibitem{refCuiOffloading2026} G. Cui \textit{et al.}, ``Joint beam hopping and computing offloading design for LEO satellite networks,'' \textit{IEEE Trans. Veh. Technol.}, 2026, doi: 10.1109/TVT.2026.3705067.\revend{}
+
+\bibitem{ref5} X. Hu, S. Liu, R. Chen, W. Wang, and C. Wang, ``A deep reinforcement learning-based framework for dynamic resource allocation in multibeam satellite systems,'' \textit{IEEE Commun. Lett.}, vol. 22, no. 8, pp. 1612--1615, Aug. 2018.
 
 \bibitem{ref6} R. Alegre-Godoy, N. Alagha, and M. A. V\'azquez-Castro, ``Offered capacity optimization mechanisms for multi-beam satellite systems,'' in \textit{Proc. IEEE Int. Conf. Commun. (ICC)}, Jun. 2012, pp. 3180--3184.
 
@@ -1066,7 +1067,7 @@ After reversal (updated) & 27.18 & 3.75 \\
 
 \revbegin{}\bibitem{refCuiPrecoding2025} G. Cui, X. Xin, L. Xu, W. Wang, and X. Tang, ``Joint beam hopping and precoding for dense LEO satellite communication systems,'' \textit{IEEE Internet Things J.}, vol. 12, no. 15, pp. 32132--32147, Aug. 2025, doi: 10.1109/JIOT.2025.3575950.\revend{}
 
-\bibitem{ref20} X. Xie, K. Fan, W. Deng, N. Pappas, and Q. Zhang, ``Multi-satellite beam hopping and power allocation using deep reinforcement learning,'' arXiv:2501.02309, Jan. 2025.
+\bibitem{ref20} X. Xie, K. Fan, W. Deng, N. Pappas, and Q. Zhang, ``Multi-satellite beam hopping and power allocation using deep reinforcement learning,'' \textit{arXiv preprint arXiv:2501.02309}, Jan. 2025.
 
 \bibitem{ref21} Z. Lin, Z. Ni, L. Kuang, C. Jiang, and Z. Huang, ``Satellite-terrestrial coordinated multi-satellite beam hopping scheduling based on multiagent deep reinforcement learning,'' \textit{IEEE Trans. Wireless Commun.}, vol. 23, no. 8, pp. 10091--10103, Aug. 2024.
 
@@ -1082,9 +1083,9 @@ After reversal (updated) & 27.18 & 3.75 \\
 
 \bibitem{ref27} \textit{Study on Channel Model for Frequencies From 0.5 to 100 GHz (Release 14)}, document TR 38.901, V14.0.0, 3GPP, Mar. 2017.
 
-\bibitem{ref28} ``Study on new radio (NR) to support non-terrestrial networks,'' document TR 38.811, 3GPP, pp. 900--904, 2019.
+\bibitem{ref28} \textit{Study on New Radio (NR) to Support Non-Terrestrial Networks}, document TR 38.811, V15.2.0, 3GPP, Sep. 2019.
 
-\bibitem{ref29} \textit{Solutions for NR to Support Non-Terrestrial Networks (NTN)}, 3GPP Technical Report TR 38.821.
+\bibitem{ref29} \textit{Solutions for NR to Support Non-Terrestrial Networks (NTN)}, document TR 38.821, V16.1.0, 3GPP, May 2021.
 
 \revbegin{}\bibitem{refPFclassic} P. Viswanath, D. N. C. Tse, and R. Laroia, ``Opportunistic beamforming using dumb antennas,'' \textit{IEEE Trans. Inf. Theory}, vol. 48, no. 6, pp. 1277--1294, Jun. 2002.\revend{}
 
@@ -1092,7 +1093,7 @@ After reversal (updated) & 27.18 & 3.75 \\
 
 \bibitem{ref30} F. A. Oliehoek, M. T. J. Spaan, and N. Vlassis, ``Optimal and approximate Q-value functions for decentralized POMDPs,'' \textit{J. Artif. Intell. Res.}, vol. 32, pp. 289--353, May 2008.
 
-\bibitem{ref31} C. Yu, A. Velu, E. Vinitsky, Y. Wang, A. M. Bayen, and Y. Wu, ``The surprising effectiveness of MAPPO in cooperative multi-agent games,'' \textit{CoRR}, vol. abs/2103.01955, 2021.
+\bibitem{ref31} C. Yu, A. Velu, E. Vinitsky, Y. Wang, A. M. Bayen, and Y. Wu, ``The surprising effectiveness of MAPPO in cooperative multi-agent games,'' \textit{arXiv preprint arXiv:2103.01955}, Mar. 2021.
 
 \revbegin{}\bibitem{refGAE} J. Schulman, P. Moritz, S. Levine, M. I. Jordan, and P. Abbeel, ``High-dimensional continuous control using generalized advantage estimation,'' in \textit{Proc. Int. Conf. Learn. Represent. (ICLR)}, 2016.\revend{}
 
