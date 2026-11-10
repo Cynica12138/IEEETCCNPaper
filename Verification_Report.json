@@ -1,30 +1,40 @@
 {
-  "date": "2026-11-01",
+  "date": "2026-11-10",
   "manuscript_id": "TCCN-TP-26-1155",
   "pdfs": {
-    "Revised_Manuscript_Clean.pdf": {
-      "pages": 17,
-      "bytes": 4545184,
-      "sha256": "f0a0aa608b84fd6abcb3c2a9c4862dbbe9d773dfead75df50dad63a7d1b067c8"
-    },
-    "Revised_Manuscript_Marked_Reviewers.pdf": {
-      "pages": 17,
-      "bytes": 4863709,
-      "sha256": "45ea43668899af3843e11ca5ab5c63bd52e1eb9203bc7b25deb97cfb923e9b52"
-    },
     "Response_to_Reviewers_EN.pdf": {
       "pages": 22,
-      "bytes": 2488719,
-      "sha256": "5c76c39fabb269acd1fc2ca11e01119b5ffb53c4d1f633423811dcf8953d7d77"
+      "bytes": 2496519,
+      "sha256": "3eaa9fe817a44c94acd0c53daed8761582f5500d0914ee49ae0693ca81e8d7cc"
+    },
+    "Response_to_Reviewers_EN_Marked.pdf": {
+      "pages": 22,
+      "bytes": 2497349,
+      "sha256": "8cbd1baac32db4396b161fa728ec7807f23250ba02ebf0cfc21bd586325baeb8"
+    },
+    "Revised_Manuscript_Clean.pdf": {
+      "pages": 16,
+      "bytes": 4554679,
+      "sha256": "adb58ebe689aa43ec953bc43136d936b1cdbace110e375eff51a20c6a00265f3"
+    },
+    "Revised_Manuscript_Marked.pdf": {
+      "pages": 16,
+      "bytes": 4556098,
+      "sha256": "7fb547cce012a7845282194738fd13c56a12593a81e6336a7239f5306cf5b6a4"
+    },
+    "Revised_Manuscript_Marked_Reviewers.pdf": {
+      "pages": 16,
+      "bytes": 4873690,
+      "sha256": "c2a9a3aa988bf7e2f8b8505783a346df4059a4d98ad6946cfb587b3cb6f4ce49"
     }
   },
   "comments": 19,
-  "reviewer_tags": 28,
+  "reviewer_tags": 27,
   "selected_manuscript_excerpts": 37,
   "response_figures": 5,
   "response_tables": 1,
   "manuscript_references": 44,
-  "canonical_source_sha256": "cd8dfa3c05bd1def316d9bf30ab6982555bd46f9ff5e22db41bd29db0552fc50",
+  "canonical_source_sha256": "02409bd192648754e8422de2ec8c4be1b5ebc4c5877361b951a43d00424876f7",
   "checks": {
     "canonical_source_matches": true,
     "marked_and_clean_content_match": true,
@@ -37,5 +47,16 @@
     "all_pages_rendered_and_visually_reviewed": true,
     "no_text_outside_page_bounds": true,
     "relative_asset_paths": true
+  },
+  "figure_2": {
+    "source": "MAPPO框架1110.tif",
+    "pixel_dimensions": [
+      7845,
+      3665
+    ],
+    "export_dpi": 600,
+    "manuscript_page": 9,
+    "response_page": 12,
+    "png_matches_source_pixels": true
   }
 }

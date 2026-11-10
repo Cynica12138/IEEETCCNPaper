@@ -52,9 +52,9 @@
       "R1-C1"
     ],
     "side": "left",
-    "desired_y": 573.816357,
+    "desired_y": 592.023357,
     "height": 12,
-    "y": 573.816357
+    "y": 592.023357
   },
   {
     "page": 5,
@@ -63,9 +63,9 @@
       "R2-C2"
     ],
     "side": "right",
-    "desired_y": 592.819357,
+    "desired_y": 599.220357,
     "height": 12,
-    "y": 592.819357
+    "y": 599.220357
   },
   {
     "page": 6,
@@ -155,9 +155,9 @@
       "R2-C4"
     ],
     "side": "left",
-    "desired_y": 93.545357,
+    "desired_y": 142.586357,
     "height": 12,
-    "y": 93.545357
+    "y": 142.586357
   },
   {
     "page": 10,
@@ -166,9 +166,9 @@
       "R1-C3"
     ],
     "side": "left",
-    "desired_y": 540.153357,
+    "desired_y": 612.311357,
     "height": 12,
-    "y": 540.153357
+    "y": 612.311357
   },
   {
     "page": 11,
@@ -176,33 +176,33 @@
     "ids": [
       "R3-C1"
     ],
-    "side": "left",
-    "desired_y": 715.218357,
+    "side": "right",
+    "desired_y": 93.486357,
     "height": 12,
-    "y": 715.218357
+    "y": 93.486357
   },
   {
-    "page": 11,
+    "page": 12,
     "anchor": "A controlled pairwise diagnostic evaluates",
     "ids": [
       "R1-C4",
       "R2-C5"
     ],
-    "side": "right",
-    "desired_y": 715.218357,
+    "side": "left",
+    "desired_y": 95.257357,
     "height": 19,
-    "y": 715.218357
+    "y": 95.257357
   },
   {
-    "page": 11,
+    "page": 12,
     "anchor": "Error bars in Figs.",
     "ids": [
       "R3-C6"
     ],
-    "side": "right",
-    "desired_y": 691.244357,
+    "side": "left",
+    "desired_y": 69.639357,
     "height": 12,
-    "y": 691.244357
+    "y": 69.639357
   },
   {
     "page": 13,
@@ -229,15 +229,15 @@
     "y": 457.800272
   },
   {
-    "page": 13,
+    "page": 14,
     "anchor": "3) Ablation Analysis:",
     "ids": [
       "R2-C7"
     ],
-    "side": "right",
-    "desired_y": 631.631983,
+    "side": "left",
+    "desired_y": 368.958983,
     "height": 12,
-    "y": 631.631983
+    "y": 368.958983
   },
   {
     "page": 14,
@@ -260,9 +260,9 @@
       "R1-C1"
     ],
     "side": "left",
-    "desired_y": 548.030983,
+    "desired_y": 667.496983,
     "height": 12,
-    "y": 548.030983
+    "y": 667.496983
   },
   {
     "page": 14,
@@ -271,9 +271,9 @@
       "R1-C2"
     ],
     "side": "right",
-    "desired_y": 557.983983,
+    "desired_y": 679.451983,
     "height": 12,
-    "y": 557.983983
+    "y": 679.451983
   },
   {
     "page": 15,
@@ -293,10 +293,10 @@
       "R1-C6",
       "R3-C5"
     ],
-    "side": "left",
-    "desired_y": 679.352357,
+    "side": "right",
+    "desired_y": 406.511357,
     "height": 19,
-    "y": 679.352357
+    "y": 406.511357
   },
   {
     "page": 15,
@@ -305,8 +305,8 @@
       "R1-C6"
     ],
     "side": "right",
-    "desired_y": 423.946983,
+    "desired_y": 583.810983,
     "height": 12,
-    "y": 423.946983
+    "y": 583.810983
   }
 ]
