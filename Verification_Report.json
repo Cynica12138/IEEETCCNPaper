@@ -3,34 +3,34 @@
   "manuscript_id": "TCCN-TP-26-1155",
   "pdfs": {
     "Response_to_Reviewers_EN.pdf": {
-      "pages": 22,
-      "bytes": 2516831,
-      "sha256": "ecb1fafc4eb51ebb01e298a26b21d12741c191c1da0d74b6e96104dd3480c377"
+      "pages": 23,
+      "bytes": 2493602,
+      "sha256": "1a8ae744fc70bf0cb8541a5c0c658b02203c2ab53f29c3bd0a14b42739c55d79"
     },
     "Response_to_Reviewers_EN_Marked.pdf": {
-      "pages": 22,
-      "bytes": 2517642,
-      "sha256": "9631e1c095e3734674f51ed4bbc025ace466e905ef58dd735162083924c2adb6"
+      "pages": 23,
+      "bytes": 2495044,
+      "sha256": "1b57311fd69548ad51a664f794be42e89eb58902e7a94a137c21a4a2a40d4904"
     },
     "Revised_Manuscript_Clean.pdf": {
       "pages": 16,
-      "bytes": 4620075,
-      "sha256": "be1174f19e598d38f11b1fdc4152b53c4d06aa69bf8d183d26315509a12c3462"
+      "bytes": 4534616,
+      "sha256": "b9034cee1a4d355b6672126b77ae5116d29838facd407c7a2061c1892c27d6d2"
     },
     "Revised_Manuscript_Marked.pdf": {
       "pages": 16,
-      "bytes": 4621411,
-      "sha256": "49549def4435455b5f2db75b191586f3d2b03c56bb2583fbb414308b54dc470c"
+      "bytes": 4535971,
+      "sha256": "2296764942e1930b77c1f8e8b7492fd2485f8ccffd75a25b93500e5d8110f46c"
     },
     "Revised_Manuscript_Marked_Reviewers.pdf": {
       "pages": 16,
-      "bytes": 5962131,
-      "sha256": "1d45db4554e71f781ed5b8f2bcc68297783a4fdfeb7d4f202f97bbb3cb94a66e"
+      "bytes": 4543428,
+      "sha256": "65c20d89c6f488f43e97c806fafe7e59df47f6e5df2de909f255539a49282bef"
     }
   },
   "comments": 19,
   "reviewer_tags": 27,
-  "selected_manuscript_excerpts": 37,
+  "selected_manuscript_excerpts": 32,
   "response_figures": 5,
   "response_tables": 1,
   "manuscript_references": 44,
