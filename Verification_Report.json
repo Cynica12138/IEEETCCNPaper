@@ -1,31 +1,31 @@
 {
-  "date": "2026-11-10",
+  "date": "2026-11-14",
   "manuscript_id": "TCCN-TP-26-1155",
   "pdfs": {
     "Response_to_Reviewers_EN.pdf": {
       "pages": 22,
-      "bytes": 2487157,
-      "sha256": "9baf99257d7c3f6464cd5a558581e8a894c50cf414aa9fdbe8c814ab1a5cf579"
+      "bytes": 2516831,
+      "sha256": "ecb1fafc4eb51ebb01e298a26b21d12741c191c1da0d74b6e96104dd3480c377"
     },
     "Response_to_Reviewers_EN_Marked.pdf": {
       "pages": 22,
-      "bytes": 2487970,
-      "sha256": "e635d9669e0e7d7e286b1134f310f1335f2ece9487867dc4beb9fc1b5ed9e8c6"
+      "bytes": 2517642,
+      "sha256": "9631e1c095e3734674f51ed4bbc025ace466e905ef58dd735162083924c2adb6"
     },
     "Revised_Manuscript_Clean.pdf": {
       "pages": 16,
-      "bytes": 4554083,
-      "sha256": "9e5576558e78cd6ed8d7730bd29a5b7de91be37f6dc3010827cb3465e8d6f063"
+      "bytes": 4620075,
+      "sha256": "be1174f19e598d38f11b1fdc4152b53c4d06aa69bf8d183d26315509a12c3462"
     },
     "Revised_Manuscript_Marked.pdf": {
       "pages": 16,
-      "bytes": 4555441,
-      "sha256": "b0d6a386196132ef31ebcd00e51d07d02035067f9671c618a11239abd14374df"
+      "bytes": 4621411,
+      "sha256": "49549def4435455b5f2db75b191586f3d2b03c56bb2583fbb414308b54dc470c"
     },
     "Revised_Manuscript_Marked_Reviewers.pdf": {
       "pages": 16,
-      "bytes": 4562909,
-      "sha256": "fe96fe5fec63a8ed3f94c87927fe0105a65c83736decfabf4818cf6eb6d38436"
+      "bytes": 5962131,
+      "sha256": "1d45db4554e71f781ed5b8f2bcc68297783a4fdfeb7d4f202f97bbb3cb94a66e"
     }
   },
   "comments": 19,
@@ -49,7 +49,7 @@
     "relative_asset_paths": true
   },
   "figure_2": {
-    "source": "MAPPO\u6846\u67b61110.tif",
+    "source": "MAPPO\u6846\u67b61114.tif",
     "pixel_dimensions": [
       7845,
       3665
@@ -57,6 +57,8 @@
     "export_dpi": 600,
     "manuscript_page": 9,
     "response_page": 12,
-    "png_matches_source_pixels": true
+    "png_matches_source_pixels": true,
+    "pdfs_match_source_pixels": true,
+    "all_other_page_regions_render_identically": true
   }
 }
