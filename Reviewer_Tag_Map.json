@@ -98,9 +98,9 @@
       "R3-C3"
     ],
     "side": "left",
-    "desired_y": 558.656357,
+    "desired_y": 548.0,
     "height": 19,
-    "y": 558.656357
+    "y": 548.0
   },
   {
     "page": 7,
@@ -110,20 +110,20 @@
       "R2-C5"
     ],
     "side": "right",
-    "desired_y": 487.408357,
+    "desired_y": 397.0,
     "height": 19,
-    "y": 487.408357
+    "y": 397.0
   },
   {
-    "page": 7,
+    "page": 8,
     "anchor": "The critic receives the five features",
     "ids": [
       "R3-C3"
     ],
-    "side": "right",
-    "desired_y": 348.806357,
+    "side": "left",
+    "desired_y": 138.0,
     "height": 12,
-    "y": 348.806357
+    "y": 138.0
   },
   {
     "page": 8,
@@ -305,8 +305,8 @@
       "R1-C6"
     ],
     "side": "right",
-    "desired_y": 470.446983,
+    "desired_y": 460.4,
     "height": 12,
-    "y": 470.446983
+    "y": 460.4
   }
 ]
