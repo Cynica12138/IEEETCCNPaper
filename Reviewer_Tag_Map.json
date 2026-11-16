@@ -288,7 +288,7 @@
   },
   {
     "page": 15,
-    "anchor": "The actor forward-pass latency was measured",
+    "anchor": "After inference optimization via ONNX Runtime",
     "ids": [
       "R1-C6",
       "R3-C5"

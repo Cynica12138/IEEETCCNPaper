@@ -36,7 +36,7 @@ ANCHORS = [
  ('4) Hotspot-Reversal Sensitivity:', 'R1-C1'),
  ('5) ISA Parameter Sensitivity:', 'R1-C2'),
  ('Fig. 9.', 'R1-C2'),
- ('The actor forward-pass latency was measured', 'R1-C6,R3-C5'),
+ ('After inference optimization via ONNX Runtime', 'R1-C6,R3-C5'),
  ('7) Action-Delay Sensitivity:', 'R1-C6'),
 ]
 
