@@ -1,31 +1,31 @@
 {
-  "date": "2026-11-17",
+  "date": "2026-11-18",
   "manuscript_id": "TCCN-TP-26-1155",
   "pdfs": {
     "Response_to_Reviewers_EN.pdf": {
       "pages": 24,
-      "bytes": 2500239,
-      "sha256": "5813bd97e9040e45358628358170100a19559598686a339292bea693bc282ab7"
+      "bytes": 2500474,
+      "sha256": "b303d2e004fe88ec7b8bb36646c3a19f35a0c735337d257e0f376a7064fcf6d0"
     },
     "Response_to_Reviewers_EN_Marked.pdf": {
       "pages": 24,
-      "bytes": 2501927,
-      "sha256": "b6ad958851f7435dbe914a668b12ac861526745a2659218ade7c5a095a0bc752"
+      "bytes": 2502221,
+      "sha256": "a21ac4c5431995bf206e3cae0ec9fa4d63e8eed96b206ec7eb4229dc29c8f2e7"
     },
     "Revised_Manuscript_Clean.pdf": {
       "pages": 16,
-      "bytes": 4534771,
-      "sha256": "1a6965abf059a7a0d946b4279e0a747ef238fc784467e85f6f5cee596ba21750"
+      "bytes": 4534889,
+      "sha256": "77a4676e24a0c9a43d12fb92ed6e5e4c4a955ec204f141f694a216e1f18be0fc"
     },
     "Revised_Manuscript_Marked.pdf": {
       "pages": 16,
-      "bytes": 4536082,
-      "sha256": "9538fdbcc1e6f705ab7dbd89467d1f01029dad54eb4161841297cdc15dd725bf"
+      "bytes": 4536246,
+      "sha256": "17dfd7dfba7d0f158903ace4faf4c80dd593a433b20cfc9f315bcbe3eb98b768"
     },
     "Revised_Manuscript_Marked_Reviewers.pdf": {
       "pages": 16,
-      "bytes": 4852520,
-      "sha256": "eb889872eb4df0d04235c8c9811ff6497cda46d58bce410495e1a8f3fbc16946"
+      "bytes": 4852947,
+      "sha256": "e8a03590171a2d6104c4ea381bd7c5a14dcfc95d4998da18d9484de2399bbf72"
     }
   },
   "comments": 19,
@@ -34,7 +34,7 @@
   "response_figures": 5,
   "response_tables": 1,
   "manuscript_references": 44,
-  "canonical_source_sha256": "85af4b5e54e5691a3c0929da12c922ae6d24b1310af87c369d327b9d0b91ad5e",
+  "canonical_source_sha256": "f9ad161263c99944266967ab1beac18491d39a287b90268277856a1635f64eaa",
   "checks": {
     "canonical_source_matches": true,
     "marked_and_clean_content_match": true,
@@ -44,9 +44,10 @@
     "all_19_comments_covered": true,
     "no_repeated_future_work_promises_in_response_bodies": true,
     "no_unresolved_references_or_missing_glyph_warnings": true,
-    "all_pages_rendered_and_visually_reviewed": true,
     "no_text_outside_page_bounds": true,
-    "relative_asset_paths": true
+    "relative_asset_paths": true,
+    "all_pages_rendered": true,
+    "changed_pages_visually_reviewed": true
   },
   "figure_2": {
     "source": "MAPPO\u6846\u67b61114.tif",

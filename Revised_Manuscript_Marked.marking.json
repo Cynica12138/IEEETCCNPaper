@@ -225,7 +225,7 @@
     {
       "block": 216,
       "kind": "prose",
-      "preview": "where $v_j^n$ denotes the fraction of other satellites covering candidate cell $j$, given by"
+      "preview": "where $v_j^n$ denotes the fraction of other satellites covering candidate cell $j$ and serves as a geometric indicator of its exposure to potential inter-satell"
     },
     {
       "block": 217,
@@ -235,7 +235,7 @@
     {
       "block": 218,
       "kind": "prose",
-      "preview": "The local and global coverage degrees satisfy $v_j^n=v_{\\mathrm{cov}}^{\\chi_n(j)}$. The NOCC can compute these topology summaries from the visibility matrix and"
+      "preview": "The local and global coverage degrees satisfy $v_j^n=v_{\\mathrm{cov}}^{\\chi_n(j)}$."
     },
     {
       "block": 221,
@@ -280,7 +280,7 @@
     {
       "block": 232,
       "kind": "prose",
-      "preview": "Both $v_j^n$ and $\\bar c_{ij}^n$ lie in $[0,1]$. The normalized value $\\bar c_{ij}^n$ denotes the fraction of other satellites covering both candidate cells. Un"
+      "preview": "Both $v_j^n$ and $\\bar c_{ij}^n$ lie in $[0,1]$. The normalized common-visibility prior $\\bar c_{ij}^n$ denotes the fraction of other satellites that cover both"
     },
     {
       "block": 239,

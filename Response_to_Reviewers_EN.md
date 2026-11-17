@@ -149,7 +149,7 @@ Revision locations: Section V-A-2 (p. 7), geometric distance prior; Eq. (54) (p.
 
 Response:
 
-Thank you for recommending these studies. We have added a paragraph to the Introduction discussing all four works, covering direct-to-smartphone communications, RSMA-based IoT communications, RIS-assisted joint beamforming, and secure satellite-terrestrial transmissions. They are cited as Refs. [5]-[8] in the revised manuscript. The paragraph leads into our discussion of resource scheduling under heterogeneous and time-varying traffic demands.
+Thank you for recommending these studies. We have added a paragraph to the Introduction discussing all four works, covering direct-to-smartphone communications, RSMA-based IoT communications, RIS-assisted joint beamforming, and secure satellite-terrestrial transmissions. They are cited as Refs. [5]-[8] in the revised manuscript. The paragraph also discusses joint task offloading and resource allocation [9] and the joint design of beam hopping and computing offloading [10]. The paragraph leads into our discussion of resource scheduling under heterogeneous and time-varying traffic demands.
 
 **Selected revised manuscript text (Section I, related work)**
 
@@ -351,9 +351,9 @@ We have also highlighted this low-overhead multi-satellite visibility design in 
 
 > where $\mathcal V_n=\{1,2,\ldots,J\}$ is the candidate-cell node set, $\mathcal E_n$ is the edge set connecting all pairs of real candidate-cell nodes, $\mathbf F_t^n$ is the node feature matrix, $\Omega_n=[\omega_{ij}^n]\in\mathbb R^{J\times J}$ is the distance-prior matrix, and $\mathbf C_n=[\bar c_{ij}^n]\in\mathbb R^{J\times J}$ is the normalized common-visibility matrix.
 
-> The local and global coverage degrees satisfy $v_j^n=v_{\mathrm{cov}}^{\chi_n(j)}$. The NOCC can compute these topology summaries from the visibility matrix and distribute them with each association update.
+> The local and global coverage degrees satisfy $v_j^n=v_{\mathrm{cov}}^{\chi_n(j)}$.
 
-> Both $v_j^n$ and $\bar c_{ij}^n$ lie in $[0,1]$. The normalized value $\bar c_{ij}^n$ denotes the fraction of other satellites covering both candidate cells. Under full frequency reuse, other satellites covering a cell are potential interferers. Cells covered by the same satellites share potential interferers, which motivates aggregating their features jointly through attention. Moreover, the distance prior describes geometric proximity, whereas the coverage summaries describe exposure to potential inter-satellite interference sources.
+> Both $v_j^n$ and $\bar c_{ij}^n$ lie in $[0,1]$. The normalized common-visibility prior $\bar c_{ij}^n$ denotes the fraction of other satellites that cover both candidate cells $i$ and $j$. Together with the distance prior $\omega_{ij}^n$, it guides GAT feature aggregation using geometric proximity and shared potential interferers. The NOCC computes both coverage summaries once per association period and distributes them with the association update. This gives each actor a lightweight representation of potential inter-satellite interference without slot-level inter-satellite signaling for these summaries.
 
 Revision locations: Section I (p. 2), third contribution bullet; Section V-A-1 (p. 7), global features; Section V-A-2 (pp. 7-8), node features, fully connected local graph, and masks; Eq. (54) and Fig. 2 (p. 9), weighted attention; Algorithm 2 (p. 10); Table I (p. 11); Section VI-B (pp. 11-12), diagnostic; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), joint coverage-prior ablation; Section VI-B-6 (p. 15), prior-construction complexity.
 

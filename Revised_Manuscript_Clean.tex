@@ -36,7 +36,7 @@
 
 \maketitle
 \begin{abstract}
-Low-Earth-orbit (LEO) satellite networks provide wide-area direct-to-cell coverage, but uneven traffic distribution, dynamic service demands, and inter-beam interference complicate resource scheduling. This paper investigates hierarchical load balancing and cooperative beam hopping (BH) in multi-satellite direct-to-cell LEO networks by jointly considering long-timescale cell-satellite association and short-timescale BH with power allocation. The association problem is formulated to minimize network-wide load variance, and an improved simulated annealing algorithm determines the association strategy. Given the association strategy, the joint BH and power allocation problem is formulated as a partially observable Markov decision process and addressed by multi-agent proximal policy optimization (MAPPO) under centralized training and decentralized execution (CTDE). The actor uses a graph attention network (GAT) to encode local traffic, service status, and coverage overlap, with attention guided by distance and common-visibility priors. A gated recurrent unit (GRU) models temporal dynamics, and hybrid action heads generate beam-selection decisions and power allocation ratios. Simulation results show at least 9.1\% higher throughput and 21.1\% lower real-time (RT) queueing delay than benchmark BH schemes at a per-user input rate of 50~Mbps.
+Low-Earth-orbit (LEO) satellite networks provide wide-area direct-to-cell coverage, but uneven traffic distribution, dynamic service demands, and inter-beam interference complicate resource scheduling. This paper investigates hierarchical load balancing and cooperative beam hopping (BH) in multi-satellite direct-to-cell LEO networks by jointly considering long-timescale cell-satellite association and short-timescale BH with power allocation. The association problem is formulated to minimize network-wide load variance, and an improved simulated annealing algorithm determines the association strategy. Given the association strategy, the joint BH and power allocation problem is formulated as a partially observable Markov decision process and addressed by multi-agent proximal policy optimization (MAPPO) under centralized training and decentralized execution (CTDE). To model potential inter-satellite interference with low overhead, the actor uses a graph attention network (GAT) that encodes local traffic, service status, and coverage overlap, with attention guided by distance and common-visibility priors. A gated recurrent unit (GRU) models temporal dynamics, and hybrid action heads generate beam-selection decisions and power allocation ratios. Simulation results show at least 9.1\% higher throughput and 21.1\% lower real-time (RT) queueing delay than benchmark BH schemes at a per-user input rate of 50~Mbps.
 
 \end{abstract}
 
@@ -456,12 +456,12 @@ During decentralized execution, satellite $n$ observes up to $J$ visible candida
 \begin{equation}
 f_t^{n,j}=[\bar q_t^{n,j},\bar d_t^{n,j},\bar w_t^{n,j},\bar\zeta_t^{n,j},v_j^n]^\top,
 \end{equation}
-where $v_j^n$ denotes the fraction of other satellites covering candidate cell $j$, given by
+where $v_j^n$ denotes the fraction of other satellites covering candidate cell $j$ and serves as a geometric indicator of its exposure to potential inter-satellite interference under full frequency reuse. It is given by
 \begin{equation}
 v_j^n=\frac{1}{N-1}\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(j)}.
 \label{eq:coverage-degree}
 \end{equation}
-The local and global coverage degrees satisfy $v_j^n=v_{\mathrm{cov}}^{\chi_n(j)}$. The NOCC can compute these topology summaries from the visibility matrix and distribute them with each association update.
+The local and global coverage degrees satisfy $v_j^n=v_{\mathrm{cov}}^{\chi_n(j)}$.
 
 The node features of all candidate cells are stacked to form the node feature matrix
 \begin{equation}
@@ -493,7 +493,7 @@ c_{ij}^n&=\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(i)}V_{n',\chi_n(j)},\
 \end{aligned}
 \label{eq:common-visibility}
 \end{equation}
-Both $v_j^n$ and $\bar c_{ij}^n$ lie in $[0,1]$. The normalized value $\bar c_{ij}^n$ denotes the fraction of other satellites covering both candidate cells. Under full frequency reuse, other satellites covering a cell are potential interferers. Cells covered by the same satellites share potential interferers, which motivates aggregating their features jointly through attention. Moreover, the distance prior describes geometric proximity, whereas the coverage summaries describe exposure to potential inter-satellite interference sources.
+Both $v_j^n$ and $\bar c_{ij}^n$ lie in $[0,1]$. The normalized common-visibility prior $\bar c_{ij}^n$ denotes the fraction of other satellites that cover both candidate cells $i$ and $j$. Together with the distance prior $\omega_{ij}^n$, it guides GAT feature aggregation using geometric proximity and shared potential interferers. The NOCC computes both coverage summaries once per association period and distributes them with the association update. This gives each actor a lightweight representation of potential inter-satellite interference without slot-level inter-satellite signaling for these summaries.
 
 Accordingly, the local observation of agent $n$ at time slot $t$ is written as
 \begin{equation}
