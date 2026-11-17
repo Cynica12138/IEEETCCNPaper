@@ -4,28 +4,28 @@
   "pdfs": {
     "Response_to_Reviewers_EN.pdf": {
       "pages": 24,
-      "bytes": 2500474,
-      "sha256": "b303d2e004fe88ec7b8bb36646c3a19f35a0c735337d257e0f376a7064fcf6d0"
+      "bytes": 2500927,
+      "sha256": "64e0d450176f3e3a1e3b5950b8d579f8d322cfe6ac4517bfbba621610fe810ff"
     },
     "Response_to_Reviewers_EN_Marked.pdf": {
       "pages": 24,
-      "bytes": 2502221,
-      "sha256": "a21ac4c5431995bf206e3cae0ec9fa4d63e8eed96b206ec7eb4229dc29c8f2e7"
+      "bytes": 2502642,
+      "sha256": "c5aeeb24a2b87e2b4c6659c0470c65f1605e0440c14013f457f7c70331e86c42"
     },
     "Revised_Manuscript_Clean.pdf": {
       "pages": 16,
       "bytes": 4534889,
-      "sha256": "77a4676e24a0c9a43d12fb92ed6e5e4c4a955ec204f141f694a216e1f18be0fc"
+      "sha256": "b0d0a9e406c8a7aa45bee7f0b1109809964540762089c6800e8299071ac67ce9"
     },
     "Revised_Manuscript_Marked.pdf": {
       "pages": 16,
       "bytes": 4536246,
-      "sha256": "17dfd7dfba7d0f158903ace4faf4c80dd593a433b20cfc9f315bcbe3eb98b768"
+      "sha256": "8ff177bff2a1feee8899feae313652c1db83a138fd8d088113e8e23471c91f75"
     },
     "Revised_Manuscript_Marked_Reviewers.pdf": {
       "pages": 16,
       "bytes": 4852947,
-      "sha256": "e8a03590171a2d6104c4ea381bd7c5a14dcfc95d4998da18d9484de2399bbf72"
+      "sha256": "b97e482fd5e321c3e91417a86a943fe35d218c3e1303eb95bad75fba7adabdeb"
     }
   },
   "comments": 19,
@@ -50,7 +50,7 @@
     "changed_pages_visually_reviewed": true
   },
   "figure_2": {
-    "source": "MAPPO\u6846\u67b61114.tif",
+    "source": "MAPPO框架1114.tif",
     "pixel_dimensions": [
       7845,
       3665
