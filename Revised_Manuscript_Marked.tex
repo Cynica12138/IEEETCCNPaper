@@ -75,7 +75,7 @@ Deep reinforcement learning (DRL) has emerged as an effective decision-making to
 \item A hierarchical multi-satellite cooperative beam hopping framework is proposed for direct-to-cell LEO satellite networks. The framework jointly considers uneven traffic distribution, dynamic service demands, and co-channel interference, and optimizes satellite resources over different timescales to improve long-term network performance while supporting decentralized online decisions.
 \item A long-timescale cell-satellite association model is formulated to minimize the network-wide load variance, and an improved simulated annealing algorithm is developed to obtain the association strategy. A greedy initialization is first performed under visibility constraints, followed by simulated-annealing-based migration and exchange operations to improve load balancing.
 \item A multi-agent proximal policy optimization (MAPPO)-based cooperative beam hopping and power allocation algorithm is proposed under centralized training and decentralized execution (CTDE). To capture inter-satellite interference without slot-level inter-satellite signaling overhead or high computational complexity, multi-satellite visibility is embedded into a coverage-overlap node feature and a common-visibility graph attention network (GAT) prior, while a gated recurrent unit (GRU) models temporal dynamics to generate beam-selection and power-allocation decisions from local observations.
-\item Simulations evaluate the proposed framework in terms of throughput, real-time (RT) queueing delay, load balancing, and computational cost. The results demonstrate the advantages of the proposed framework over the benchmark schemes under the tested conditions.
+\item We evaluate the proposed framework in a simulated LEO network with 16 satellites and 144 ground cells. The evaluation covers throughput, real-time (RT) queueing delay, load balancing, and computational cost. The results show that the proposed framework outperforms the benchmark schemes under the tested conditions.
 \end{itemize}\revend{}
 }
 
@@ -157,7 +157,7 @@ where $\vartheta_{n,k,u}$ denotes the off-axis angle between the $k$-th beam of 
 
 For the user terminal receive antenna, the 3GPP NTN handheld UE antenna model is adopted, and the receive antenna is approximated as an omnidirectional antenna element with an element gain of 0~dBi~\cite{ref29}. Since 0~dBi corresponds to a linear gain of 1, the receive antenna gain is set to $G_R^{n,u}=1$.
 
-\revbegin{}Let $P_{\mathrm{tot}}$, $B_u(t)$, and $P_t^{n,k}$ denote the total transmit power per satellite, the bandwidth assigned to user $u$ at slot $t$, and the power allocated by satellite $n$ to beam $k$, respectively, with zero power for inactive beams. Assuming a uniform power spectral density over the system bandwidth, $P_t^{n,k,u}$ denotes the transmit power of beam $k$ of satellite $n$ over the frequency resources occupied by user $u$ for both serving and interfering beams.\revend{}
+\revbegin{}Let $P_{\mathrm{tot}}$, $B_u(t)$, and $P_t^{n,k}$ denote the total transmit power per satellite, the bandwidth assigned to user $u$ at slot $t$, and the power allocated by satellite $n$ to beam $k$, respectively, with zero power for inactive beams. Assuming each beam distributes its allocated power $P_t^{n,k}$ uniformly across the system bandwidth $B_{\mathrm{tot}}$, the power of beam $k$ on satellite $n$ over the bandwidth occupied by user $u$ is $P_t^{n,k,u}=P_t^{n,k}B_u(t)/B_{\mathrm{tot}}$ for both serving and interfering beams.\revend{}
 
 \revbegin{}User-level resource allocation uses proportional-fair (PF) scheduling~\cite{refPFclassic,refPFrb}. Each illuminated beam divides $B_{\mathrm{tot}}$ into $N_{\mathrm{RB}}$ equal-bandwidth resource blocks (RBs), with $\Delta B=B_{\mathrm{tot}}/N_{\mathrm{RB}}$. Each RB is assigned to the user with the highest ratio of estimated RB rate to historical average throughput among users with a nonempty RT or bulk (BULK) queue. A positive lower bound is applied to the denominator to avoid division by zero. Historical throughput is the mean successfully transmitted data rate over the preceding 50~slots, including zero-throughput slots. The user's allocated bandwidth is $B_u(t)=n_u(t)\Delta B$, where $n_u(t)$ is its assigned RB count; users assigned no RBs receive zero service.\revend{}
 
@@ -234,7 +234,7 @@ A_t^{u,c},
 \end{equation}
 where $x^+=\max\{x,0\}$, $Q_t^{u,\mathrm{R}}$ and $Q_t^{u,\mathrm{B}}$ denote the queue backlogs of the real-time and bulk data services of user $u$ at the beginning of time slot $t$, respectively, $A_t^{u,\mathrm{R}}$ and $A_t^{u,\mathrm{B}}$ denote the packet arrivals, $S_t^{u,\mathrm{R}}$ and $S_t^{u,\mathrm{B}}$ denote the successfully transmitted packets, and $D_t^{u,\mathrm{R}}$ and $D_t^{u,\mathrm{B}}$ denote the packets discarded due to excessive waiting time.
 
-\revbegin{}RT packets have a time-to-live (TTL) of $t_{\mathrm{th},\mathrm{R}}$ slots, whereas BULK packets are not subject to TTL-based expiration, so $D_t^{u,\mathrm{B}}=0$. Service is applied to packets present at the beginning of slot $t$. After service, the remaining RT packets in the maximum-age bin are discarded; $D_t^{u,\mathrm{R}}$ therefore counts only unserved expired packets. Surviving RT packets advance by one age bin, and arrivals $A_t^{u,c}$ are appended to the queues for slot $t+1$, with new RT packets entering age bin 1. These aging and expiration steps also apply when the user's cell is not illuminated. Before reaching the user, a packet experiences onboard queueing delay, transmission delay, and propagation delay.\revend{}
+\revbegin{}RT packets have a time-to-live (TTL) of $t_{\mathrm{th},\mathrm{R}}$ slots, which bounds their maximum onboard waiting time, whereas BULK packets are not subject to expiration ($D_t^{u,\mathrm{B}}=0$). In slot $t$, service is limited to packets already queued at the start of the slot; any unserved RT packets reaching the $t_{\mathrm{th},\mathrm{R}}$-slot limit are then discarded, so $D_t^{u,\mathrm{R}}$ counts only unserved expired packets. Surviving RT packets increase in waiting time by one slot, and new arrivals $A_t^{u,c}$ enter the queues at the end of the slot for scheduling in slot $t+1$, with newly arrived RT packets assigned an initial waiting time of one slot. These aging and expiration steps also apply when the user's cell is not illuminated.\revend{}
 
 Based on the achievable transmission rate in \eqref{eq:rate}, the number of packets served for user $u$ in time slot $t$ is given by
 \begin{equation}
@@ -246,7 +246,7 @@ Q_t^{u,\mathrm{R}}+Q_t^{u,\mathrm{B}},
 x_t^{n,m}\frac{R_t^{u}T_{\mathrm{slot}}}{L_p}
 \right\},
 \end{equation}
-\revbegin{}where user $u$ lies in cell $m$ associated with satellite $n$, $R_t^u$ is its allocated rate, $T_{\mathrm{slot}}$ is the slot duration, and $L_p$ is the packet size. Departures satisfy $S_t^{u,\mathrm{R}}+S_t^{u,\mathrm{B}}=S_t^u$: RT packets are served first in FIFO order, then BULK packets use the remaining capacity. Every user has an RT queue, so delay is averaged over all $U$ users.\revend{}
+\revbegin{}where user $u$ lies in cell $m$ associated with satellite $n$, $R_t^u$ is its allocated rate, $T_{\mathrm{slot}}$ is the slot duration, and $L_p$ is the packet size. Departures satisfy $S_t^{u,\mathrm{R}}+S_t^{u,\mathrm{B}}=S_t^u$: RT packets are served first in FIFO order, then BULK packets use the remaining capacity.\revend{}
 
 
 \section{PROBLEM FORMULATION}
@@ -255,7 +255,7 @@ In this section, a hierarchical two-timescale optimization framework is adopted.
 
 \subsection{Cell-Satellite Association}
 \label{subsec:cell-satellite-association}
-\revbegin{}Due to the spatial and temporal non-uniformity of ground traffic, the cell-satellite association stage aims to balance the forward-link traffic load among satellites. The objective is to minimize the variance of satellite loads over the entire network. Before each association period, the NOCC obtains the traffic demands of all cells and determines the total network load. For a given traffic-demand snapshot, the average satellite load and the number of satellites are fixed, so minimizing the load variance is equivalent to minimizing the sum of squared satellite loads. Accordingly, the cell-satellite association problem is formulated as \revend{}
+\revbegin{}Due to the spatial and temporal non-uniformity of ground traffic, the cell-satellite association stage aims to balance the forward-link traffic load among satellites. The objective is to minimize the variance of satellite loads over the entire network. Before each association period, the NOCC obtains the traffic demands of all cells and determines the total network load. For a given traffic-demand snapshot, the average satellite load and the number of satellites are fixed; therefore, minimizing the load variance is equivalent to minimizing the sum of squared satellite loads. Accordingly, the cell-satellite association problem is formulated as \revend{}
 \begin{equation}
 \label{prob:p1}
 \begin{aligned}
@@ -273,10 +273,10 @@ In this section, a hierarchical two-timescale optimization framework is adopted.
 & C_4:z_{n,m}\in\{0,1\},\quad \forall n\in\mathcal{N},\forall m\in\mathcal{M},
 \end{aligned}
 \end{equation}
-\revbegin{}where $T_m$ denotes the aggregate statistical traffic demand of users in cell $m$ for the current association period. The visibility indicator $V_{n,m}\in\{0,1\}$ is determined by satellite position, coverage region, and the minimum elevation-angle requirement, and describes the coverage relationship between satellite $n$ and cell $m$. The binary variable $z_{n,m}\in\{0,1\}$ specifies the association. Constraint $C_1$ ensures that each ground cell is associated with only one satellite. This association prevents multiple satellites from simultaneously serving the same cell within an association period, thereby reducing redundant illumination and alleviating the impact of inter-satellite interference in overlapping coverage regions. Constraint $C_2$ restricts the association to visible satellites, $C_3$ ensures that no satellite is associated with more than $J$ cells, and $C_4$ defines the binary nature of the association variable. The solution to this problem is presented in Section~\ref{sec:association-solution}.\revend{}
+\revbegin{}where $T_m$ denotes the aggregate statistical traffic demand of users in cell $m$ for the current association period. The visibility indicator $V_{n,m}\in\{0,1\}$ is determined by satellite position, coverage region, and the minimum elevation-angle requirement, and describes the coverage relationship between satellite $n$ and cell $m$. The binary decision variable $z_{n,m}\in\{0,1\}$ specifies the association. Constraint $C_1$ ensures that each ground cell is associated with only one satellite. This association prevents multiple satellites from simultaneously serving the same cell within an association period, thereby reducing redundant illumination and alleviating the impact of inter-satellite interference in overlapping coverage regions. Constraint $C_2$ restricts the association to visible satellites, $C_3$ ensures that no satellite is associated with more than $J$ cells, and $C_4$ defines the binary nature of the association variable. The solution to this problem is presented in Section~\ref{sec:association-solution}.\revend{}
 
 
-\revbegin{}The association remains fixed within each period to balance demand-collection latency and traffic adaptability, while slot-wise beam hopping and power allocation respond to local queue variations.\revend{}
+\revbegin{}It should be noted that Problem~\hyperref[prob:p1]{P1} is solved periodically at the start of each association period. The association remains fixed within each period to balance demand-collection latency and traffic adaptability, while slot-wise beam hopping and power allocation handle shorter-timescale queue fluctuations.\revend{}
 
 \subsection{Beam Hopping and Power Allocation}
 \label{subsec:beam-hopping-formulation}
@@ -299,7 +299,7 @@ The slot set is defined as
 \sum_{t\in\mathcal{T}}\zeta_t.
 \end{equation}
 
-\revbegin{}To characterize the RT queue of user $u$, packets are grouped into age bins. The number of packets in age bin $l$ at the beginning of slot $t$ is denoted by $\nu_t^{u,l}$. The age bins range from 1 to $t_{\mathrm{th},\mathrm{R}}$; packets in the maximum-age bin remain eligible for service in slot $t$, but any unserved remainder is discarded before the next-slot age update. The queueing state of real-time traffic is represented as\revend{}
+\revbegin{}To quantify the RT queueing delay, the packets in user $u$'s RT queue at the start of slot $t$ are grouped by their waiting time $l\in\{1,2,\ldots,t_{\mathrm{th},\mathrm{R}}\}$, with $\nu_t^{u,l}$ denoting the number of packets that have waited for $l$ slots. The RT queueing state is represented as\revend{}
 \begin{equation}
 \{\nu_t^{u,1},\nu_t^{u,2},\ldots,\nu_t^{u,t_{\mathrm{th},\mathrm{R}}}\}.
 \end{equation}
@@ -448,21 +448,21 @@ where $\mathcal{N}$ denotes the set of agents, $\mathcal{S}$ denotes the global 
 
 \subsubsection{State}
 
-\revbegin{}During offline centralized training, the ground-based simulator provides time-aligned global cell features to the centralized critic. The underlying environment state $\mathsf{s}_t$ includes network-wide traffic, channels, and scheduling history. The critic input summarizes traffic, service status, and coverage overlap across the network. At time slot $t$, the feature vector of cell $m$ is defined as\revend{}
+\revbegin{}During offline centralized training, the simulator provides time-aligned global cell features to the centralized critic, whereas each actor relies solely on its local observation in both training and execution. While the underlying environment state $\mathsf{s}_t$ captures network-wide traffic, channels, and scheduling history, the global state vector fed to the critic summarizes traffic, service status, and coverage overlap across the network. At time slot $t$, the feature vector of cell $m$ is defined as\revend{}
 \begin{equation}\color{revisionblue}
 g_t^m=[\bar q_t^m,\bar d_t^m,\bar w_t^m,\bar\zeta_t^m,v_{\mathrm{cov}}^m],
 \end{equation}
-\revbegin{}where the first four entries denote normalized queue length, average queueing delay, head-of-line waiting time, and historical average throughput, respectively. The coverage-overlap degree $v_{\mathrm{cov}}^m=(\sum_{n'\in\mathcal N}V_{n',m}-1)/(N-1)$ quantifies the coverage of cell $m$ by satellites other than its serving satellite. These topology features are updated at the start of each association period.\revend{}
+\revbegin{}where the first four entries denote normalized queue length, average queueing delay, head-of-line waiting time, and historical average throughput, respectively. The coverage-overlap degree $v_{\mathrm{cov}}^m=(\sum_{n'\in\mathcal N}V_{n',m}-1)/(N-1)$ quantifies the coverage of cell $m$ by satellites other than its serving satellite, serving as a geometry-based indicator of potential inter-satellite interference exposure. These topology features are updated at the start of each association period.\revend{}
 
-\revbegin{}By concatenating the features of all cells in a fixed order, the global critic input is obtained as\revend{}
+\revbegin{}By concatenating the features of all cells in a fixed order, the global state vector $s_t$ for the critic is obtained as\revend{}
 \begin{equation}\color{revisionblue}
 s_t=[g_t^1,g_t^2,\ldots,g_t^M]\in\mathbb{R}^{5M},
 \end{equation}
-\revbegin{}where $M$ is the total number of cells. The representation $s_t$ is used by the centralized critic to evaluate traffic, service status, and coverage overlap across the network.\revend{}
+\revbegin{}where $M$ is the total number of cells, and $s_t$ provides network-wide context for centralized value estimation.\revend{}
 
 \subsubsection{Observation}
 
-\revbegin{}During decentralized execution, satellite $n$ observes up to $J$ visible candidate cells, which may include cells associated with other satellites. Let $m=\chi_n(j)$ map candidate node $j$ to its ground cell. The node feature vector is\revend{}
+\revbegin{}In both centralized training and decentralized execution, satellite $n$ observes up to $J$ visible candidate cells, which serve as the nodes in its local graph and may include cells associated with other satellites. Let $\chi_n(j)\in\mathcal M$ map candidate-cell node $j$ to its global ground-cell index. The node feature vector is\revend{}
 \begin{equation}\color{revisionblue}
 f_t^{n,j}=[\bar q_t^{n,j},\bar d_t^{n,j},\bar w_t^{n,j},\bar\zeta_t^{n,j},v_j^n]^\top,
 \end{equation}
@@ -496,12 +496,9 @@ v_j^n=\frac{1}{N-1}\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(j)}.
 \end{equation}
 \revbegin{}where $d_{ij}^n$ is the distance between the user centroids of candidate cells $i$ and $j$ in the local graph of satellite $n$, $d_{\mathrm{th}}$ is a distance threshold, and $\eta$ is a smoothing factor. A larger $\omega_{ij}^n$ indicates greater geometric proximity.\revend{}
 
-\revbegin{}For candidate cells $i$ and $j$, the common-visibility count and its normalized value are defined as\revend{}
+\revbegin{}For candidate cells $i$ and $j$, the normalized common-visibility prior is defined as\revend{}
 \begin{equation}\color{revisionblue}
-\begin{aligned}
-c_{ij}^n&=\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(i)}V_{n',\chi_n(j)},\\
-\bar c_{ij}^n&=\frac{c_{ij}^n}{N-1}.
-\end{aligned}
+\bar c_{ij}^n=\frac{1}{N-1}\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(i)}V_{n',\chi_n(j)}.
 \label{eq:common-visibility}
 \end{equation}
 \revbegin{}Both $v_j^n$ and $\bar c_{ij}^n$ lie in $[0,1]$. The normalized common-visibility prior $\bar c_{ij}^n$ denotes the fraction of other satellites that cover both candidate cells $i$ and $j$. Together with the distance prior $\omega_{ij}^n$, it guides GAT feature aggregation using geometric proximity and shared potential interferers. The NOCC computes both coverage summaries once per association period and distributes them with the association update. This gives each actor a lightweight representation of potential inter-satellite interference without slot-level inter-satellite signaling for these summaries.\revend{}
@@ -573,7 +570,7 @@ Since the objective is network-wide cooperative optimization, all agents share t
 \mathcal{J}(\pi)=\mathbb{E}_{\pi}\left[\sum_{t=1}^{N_{\mathrm{slot}}}\gamma^{t-1}\mathcal{R}_t\right].
 \label{eq:discounted-surrogate}
 \end{equation}
-\revbegin{}Following the generalized advantage estimation (GAE) framework~\cite{refGAE}, discounting is used in return and advantage estimation to balance bias and variance. For $\gamma<1$, the discounted training criterion differs from the undiscounted objective in P2.\revend{}
+\revbegin{}Although the discounted training criterion with $\gamma<1$ differs from the undiscounted objective in P2, discounting is used within the generalized advantage estimation (GAE) framework~\cite{refGAE} to balance bias and variance, thereby reducing policy-gradient variance and stabilizing training.\revend{}
 
 \revbegin{}The state transition probability\revend{}
 \begin{equation}\color{revisionblue}
@@ -632,7 +629,7 @@ The graph-enhanced features of all candidate cells are then stacked in a fixed o
 \in\mathbb{R}^{J\times d_g}.
 \label{eq:mappo-spatial-obs}
 \end{equation}
-\revbegin{}The spatially enhanced observation matrix $\hat{\mathbf O}_t^n$ is flattened and projected through a fully connected layer before being passed to the GRU. The GRU captures temporal dependencies in traffic and service states, and its output is fed to the beam-selection and power-allocation heads.\revend{}
+\revbegin{}The spatially enhanced observation matrix $\hat{\mathbf O}_t^n$ is flattened and projected through a fully connected layer before being passed to the GRU. The GRU then processes these projected features to capture temporal dependencies in traffic and service states, and feeds its output to the beam-selection and power-allocation heads.\revend{}
 
 \revbegin{}On top of the actor backbone, hybrid action heads are designed for joint beam hopping and power allocation. The discrete branch outputs preference scores for all candidate cells and applies the action mask to suppress infeasible cells. During training, exactly $K$ cells are sampled sequentially without replacement from the masked categorical distributions, where at each step the masked logits are renormalized over the remaining unselected cells so that the sequence order follows the sampling order. During testing, the $K$ cells with the highest masked logits are selected deterministically. No cell is selected when $K=0$. The continuous branch outputs Gaussian parameters for power allocation as\revend{}
 \begin{equation}

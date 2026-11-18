@@ -37,7 +37,7 @@ Note that this instantaneous demand swap represents an extreme stress test desig
 
 **Selected revised manuscript text (Section III-A)**
 
-> The association remains fixed within each period to balance demand-collection latency and traffic adaptability, while slot-wise beam hopping and power allocation respond to local queue variations.
+> It should be noted that Problem~P1 is solved periodically at the start of each association period. The association remains fixed within each period to balance demand-collection latency and traffic adaptability, while slot-wise beam hopping and power allocation handle shorter-timescale queue fluctuations.
 
 **Selected revised manuscript text (Section VI-B-4; Table III)**
 
@@ -83,13 +83,13 @@ Thank you for this comment. Following the mainstream paradigm in existing multi-
 
 During online execution, the trained actor parameters are fixed. Each satellite independently runs a local actor copy using only its local observation, action mask, and recurrent hidden state. The centralized critic is not involved in real-time scheduling. We have clarified these training and execution procedures in Sections V-A and V-B and Algorithm 2.
 
-In practical deployment, if operational trajectories are collected from satellites for periodic policy fine-tuning on the ground, propagation latency can be calculated directly from our simulated 515 km, 16-satellite geometry. Specifically, under the $40^\circ$ minimum elevation constraint at an altitude of 515 km, the gateway slant range is 515.00--762.58 km (one-way propagation latency of 1.72--2.54 ms), while the 120 pairwise inter-satellite distances across the 16 satellites span 119.48--1382.94 km with a median of 723.48 km (0.40--4.61 ms per hop; median 2.41 ms). Consequently, direct gateway transmission incurs 1.72--2.54 ms, and relaying through 1--3 typical median inter-satellite link hops to a gateway-connected satellite yields 4.13--9.78 ms (i.e., roughly 2--10 ms overall). Importantly, long-timescale load balancing and short-timescale beam hopping have separate communication needs. For long-timescale load balancing, the NOCC collects cell traffic statistics every 100 slots (200 ms) to update cell-satellite associations without involving the MARL critic. For short-timescale beam hopping, each satellite generates beam decisions locally onboard using its fixed actor copy without slot-level global state aggregation or parameter synchronization; when periodic offline policy fine-tuning is performed in the background, collected state transitions are timestamp-aligned in the replay buffer before critic updates, and updated actor weights are uploaded from gateways only at a low frequency when traffic statistics change noticeably. Regarding link congestion and packet loss, the data volume required for critic training is small: with $M=144$ cells and $N=16$ satellites, the full critic input $s_t\in\mathbb{R}^{5M}$ plus reward $\mathcal{R}_t$ amounts to 721 floats (2884 bytes in 32-bit precision per slot), and excluding the 200 ms topology feature $v_{\mathrm{cov}}^m$ leaves only four dynamic features per cell (2304 bytes network-wide, or 144 bytes per satellite per slot on average, i.e., 18.0 KiB per 128-slot rollout). Given this small payload, and because critic updates are performed offline over collected rollouts rather than requiring per-slot synchronous delivery while a retransmission round trip takes only about 3.4--19.6 ms, random packet losses can be readily mitigated via lightweight retransmission without significantly aggravating link congestion. Only when severe congestion causes unrecovered retransmission timeouts does the trainer fall back to holding the most recent valid features or omitting incomplete trajectory segments. In such extreme cases, unrecovered packet loss would increase critic value-estimation variance and slow training convergence. Following mainstream simulation-based studies [1]--[5], these practical communication imperfections are not yet modeled in detail in our simulations. Due to space limitations, the above engineering analysis is provided here as a clarification rather than added to the revised manuscript, though we would be glad to incorporate a concise summary into the manuscript if the reviewer considers it necessary.
+In practical deployment, if operational trajectories are collected from satellites for periodic policy fine-tuning on the ground, propagation latency can be calculated directly from our simulated 515 km, 16-satellite geometry. Specifically, under the $40^\circ$ minimum elevation constraint at an altitude of 515 km, the gateway slant range is 515.00--762.58 km (one-way propagation latency of 1.72--2.54 ms), while the 120 pairwise inter-satellite distances across the 16 satellites span 119.48--1382.94 km with a median of 723.48 km (0.40--4.61 ms per hop; median 2.41 ms). Consequently, direct gateway transmission incurs 1.72--2.54 ms, and relaying through 1--3 typical median inter-satellite link hops to a gateway-connected satellite yields 4.13--9.78 ms (i.e., roughly 2--10 ms overall). Importantly, long-timescale load balancing and short-timescale beam hopping have separate communication needs. For long-timescale load balancing, the NOCC collects cell traffic statistics every 100 slots (200 ms) to update cell-satellite associations without involving the MARL critic. For short-timescale beam hopping, each satellite generates beam decisions locally onboard using its fixed actor copy without slot-level global state aggregation or parameter synchronization; when periodic offline policy fine-tuning is performed in the background, collected state transitions are timestamp-aligned in the replay buffer before critic updates, and updated actor weights are uploaded from gateways only at a low frequency when traffic statistics change noticeably. Regarding link congestion and packet loss, the data volume required for critic training is small: with $M=144$ cells and $N=16$ satellites, the full critic state vector $s_t\in\mathbb{R}^{5M}$ plus reward $\mathcal{R}_t$ amounts to 721 floats (2884 bytes in 32-bit precision per slot), and excluding the 200 ms topology feature $v_{\mathrm{cov}}^m$ leaves only four dynamic features per cell (2304 bytes network-wide, or 144 bytes per satellite per slot on average, i.e., 18.0 KiB per 128-slot rollout). Given this small payload, and because critic updates are performed offline over collected rollouts rather than requiring per-slot synchronous delivery while a retransmission round trip takes only about 3.4--19.6 ms, random packet losses can be readily mitigated via lightweight retransmission without significantly aggravating link congestion. Only when severe congestion causes unrecovered retransmission timeouts does the trainer fall back to holding the most recent valid features or omitting incomplete trajectory segments. In such extreme cases, unrecovered packet loss would increase critic value-estimation variance and slow training convergence. Following mainstream simulation-based studies [1]--[5], these practical communication imperfections are not yet modeled in detail in our simulations. Due to space limitations, the above engineering analysis is provided here as a clarification rather than added to the revised manuscript, though we would be glad to incorporate a concise summary into the manuscript if the reviewer considers it necessary.
 
 We sincerely thank the reviewer again for pointing out this important research direction, and we will conduct an in-depth investigation of robust MARL training under imperfect inter-satellite and gateway links, including random state-data loss and link delays, in our future work.
 
 **Selected revised manuscript text (Section V-A-1)**
 
-> During offline centralized training, the ground-based simulator provides time-aligned global cell features to the centralized critic. The underlying environment state $\mathsf{s}_t$ includes network-wide traffic, channels, and scheduling history. The critic input summarizes traffic, service status, and coverage overlap across the network.
+> During offline centralized training, the simulator provides time-aligned global cell features to the centralized critic, whereas each actor relies solely on its local observation in both training and execution. While the underlying environment state $\mathsf{s}_t$ captures network-wide traffic, channels, and scheduling history, the global state vector fed to the critic summarizes traffic, service status, and coverage overlap across the network.
 
 **Selected revised manuscript text (Section V-B)**
 
@@ -195,13 +195,13 @@ We have corrected the RT TTL in the simulation parameter table from 10 to 40 tim
 
 **Selected revised manuscript text (Section II-B; RT TTL in Table II)**
 
-> RT packets have a time-to-live (TTL) of $t_{\mathrm{th},\mathrm{R}}$ slots, whereas BULK packets are not subject to TTL-based expiration, so $D_t^{u,\mathrm{B}}=0$.
+> RT packets have a time-to-live (TTL) of $t_{\mathrm{th},\mathrm{R}}$ slots, which bounds their maximum onboard waiting time, whereas BULK packets are not subject to expiration ($D_t^{u,\mathrm{B}}=0$).
 
 **Selected revised manuscript text (Section VI-B)**
 
 > RT queueing delay follows the queue-age definitions in (23)--(25): current packet ages are averaged within each user's RT queue, with zero assigned to empty queues, and then over users and slots.
 
-Revision locations: Section II-B (p. 4), RT expiration and BULK queueing; Section III-B (p. 5), Eqs. (21)-(25); Table II (p. 11), 40-slot RT TTL; Section VI-B (p. 11), RT queue-age metric.
+Revision locations: Section II-B (p. 4), RT expiration and BULK queueing; Section III-B (p. 5), Eqs. (21)-(25); Table II (p. 11), 40-slot RT TTL; Section VI-B (p. 12), RT queue-age metric.
 
 ### Comment 2.2
 
@@ -238,7 +238,7 @@ These revisions align the temporal scaling of the utility and the slot-wise rewa
 
 > MAPPO uses the expected discounted return as a surrogate objective for approximately optimizing the undiscounted utility in P2.
 
-> Following the GAE framework~[41], discounting is used in return and advantage estimation to balance bias and variance. For $\gamma<1$, the discounted training criterion differs from the undiscounted objective in P2.
+> Although the discounted training criterion with $\gamma<1$ differs from the undiscounted objective in P2, discounting is used within the GAE framework~[41] to balance bias and variance, thereby reducing policy-gradient variance and stabilizing training.
 
 Revision locations: Section III-B (p. 5), delivered-data definitions in Eqs. (18) and (20) and utility in Eq. (26); Section V-A-4 (p. 8), reward in Eq. (48), utility-reward identity, and discounted surrogate in Eq. (50); Section VI-B (p. 11), throughput-rate conversion; manuscript Reference [41] (p. 16), GAE.
 
@@ -320,16 +320,13 @@ $$
 v_j^n=\frac{1}{N-1}\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(j)}.
 $$
 
-Correspondingly, the centralized critic receives the five features of all cells, forming a $5M$-dimensional global input where each cell's local coverage degree equals its global coverage degree $(\sum_{n'}V_{n',m}-1)/(N-1)$. Furthermore, for each candidate cell pair $(i,j)$, we introduce the common-visibility count $c_{ij}^n$ and its normalized value $\bar c_{ij}^n$:
+Correspondingly, the centralized critic receives the five features of all cells, forming a $5M$-dimensional global state vector where each cell's local coverage degree equals its global coverage degree $(\sum_{n'}V_{n',m}-1)/(N-1)$. Furthermore, for each candidate cell pair $(i,j)$, we introduce the normalized common-visibility prior $\bar c_{ij}^n$:
 
 $$
-\begin{aligned}
-c_{ij}^n&=\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(i)}V_{n',\chi_n(j)},\\
-\bar c_{ij}^n&=\frac{c_{ij}^n}{N-1}.
-\end{aligned}
+\bar c_{ij}^n=\frac{1}{N-1}\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(i)}V_{n',\chi_n(j)}.
 $$
 
-where $\bar c_{ij}^n$ is the ratio of the common-visibility count $c_{ij}^n$ (the number of other satellites covering both cells $i$ and $j$) to the total number of other satellites $(N-1)$. Combining $\bar c_{ij}^n$ with the distance prior $\omega_{ij}^n$ yields the updated GAT attention coefficient:
+where $\bar c_{ij}^n$ is the fraction of other satellites covering both cells $i$ and $j$. Combining $\bar c_{ij}^n$ with the distance prior $\omega_{ij}^n$ yields the updated GAT attention coefficient:
 
 $$
 \psi_t^{n,ij}=
@@ -355,7 +352,7 @@ We have also highlighted this low-overhead multi-satellite visibility design in 
 
 > Both $v_j^n$ and $\bar c_{ij}^n$ lie in $[0,1]$. The normalized common-visibility prior $\bar c_{ij}^n$ denotes the fraction of other satellites that cover both candidate cells $i$ and $j$. Together with the distance prior $\omega_{ij}^n$, it guides GAT feature aggregation using geometric proximity and shared potential interferers. The NOCC computes both coverage summaries once per association period and distributes them with the association update. This gives each actor a lightweight representation of potential inter-satellite interference without slot-level inter-satellite signaling for these summaries.
 
-Revision locations: Section I (p. 2), third contribution bullet; Section V-A-1 (p. 7), global features; Section V-A-2 (pp. 7-8), node features, fully connected local graph, and masks; Eq. (54) and Fig. 2 (p. 9), weighted attention; Algorithm 2 (p. 10); Table I (p. 11); Section VI-B (pp. 11-12), diagnostic; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), joint coverage-prior ablation; Section VI-B-6 (p. 15), prior-construction complexity.
+Revision locations: Section I (pp. 2-3), third contribution bullet; Section V-A-1 (p. 7), global features; Section V-A-2 (pp. 7-8), node features, fully connected local graph, and masks; Eq. (54) and Fig. 2 (p. 9), weighted attention; Algorithm 2 (p. 10); Table I (p. 11); Section VI-B (pp. 11-12), diagnostic; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), joint coverage-prior ablation; Section VI-B-6 (p. 15), prior-construction complexity.
 
 ### Comment 2.6
 
@@ -369,7 +366,7 @@ User bandwidth is determined by proportional-fair (PF) scheduling, following Vis
 
 Each user's RT and BULK queues share its allocated service capacity. RT packets are served first in first-in-first-out (FIFO) order, and BULK packets use the remaining capacity.
 
-Within each slot, packets present at the start of the slot are served first. Any RT packets left in the maximum-age bin are then discarded. The ages of the other remaining RT packets increase by one slot, and new arrivals are added to the next-slot queues, with new RT packets entering age bin 1. Aging and expiration also apply to users in non-illuminated cells. The RT TTL is $t_{\mathrm{th},\mathrm{R}}=40$ slots, as specified in Table II. BULK packets are not subject to TTL-based expiration.
+Within each slot, only packets present at the start of the slot are served first. Any unserved RT packets reaching the $t_{\mathrm{th},\mathrm{R}}$-slot limit are then discarded. The waiting times of remaining RT packets increase by one slot, and new arrivals are added to the next-slot queues, with new RT packets starting with a waiting time of one slot. Aging and expiration also apply to users in non-illuminated cells. The RT TTL is $t_{\mathrm{th},\mathrm{R}}=40$ slots, as specified in Table II. BULK packets are not subject to TTL-based expiration.
 
 Section VI-A and Table II also specify the traffic-rate settings: RT arrival rates are 2-10 Mbps and BULK arrival rates are 8-40 Mbps. Their sum equals the total per-user input rate evaluated in each test, with the RT-to-BULK ratio allowed to vary across settings.
 
@@ -383,7 +380,7 @@ These additions specify how user bandwidth determines service capacity and how t
 
 > RT packets are served first in FIFO order, then BULK packets use the remaining capacity.
 
-> Service is applied to packets present at the beginning of slot $t$. After service, the remaining RT packets in the maximum-age bin are discarded; $D_t^{u,\mathrm{R}}$ therefore counts only unserved expired packets. Surviving RT packets advance by one age bin, and arrivals $A_t^{u,c}$ are appended to the queues for slot $t+1$, with new RT packets entering age bin 1.
+> In slot $t$, service is limited to packets already queued at the start of the slot; any unserved RT packets reaching the $t_{\mathrm{th},\mathrm{R}}$-slot limit are then discarded, so $D_t^{u,\mathrm{R}}$ counts only unserved expired packets. Surviving RT packets increase in waiting time by one slot, and new arrivals $A_t^{u,c}$ enter the queues at the end of the slot for scheduling in slot $t+1$, with newly arrived RT packets assigned an initial waiting time of one slot.
 
 Revision locations: Section II-A (p. 4), PF/RB allocation; Section II-B (p. 4), RT-first service, packet aging, and expiration; Section III-B (p. 5), queue-age definitions; Section VI-A (pp. 10-11) and Table II (p. 11), RB count, traffic rates, and RT TTL.
 
@@ -467,13 +464,13 @@ Revision locations: Section II-A (p. 3), $K$ and $K_{\max}$; Section III-B (p. 6
 
 Response:
 
-Thank you for this suggestion. We have clarified the relationship between the global critic input and each actor's local observation in Sections V-A-1 and V-A-2, with the input dimensions specified in Table I.
+Thank you for this suggestion. We have clarified the relationship between the global state vector for the critic and each actor's local observation in Sections V-A-1 and V-A-2, with the input dimensions specified in Table I.
 
-The critic input $s_t$ concatenates five features for all $M$ cells: normalized queue length, average queueing delay, head-of-line waiting time, historical throughput, and coverage-overlap degree. Its dimension is $5M$. The underlying physical state $\mathsf{s}_t$ also includes channel conditions and scheduling history; the critic input summarizes network-wide traffic, service status, and coverage overlap.
+The global state vector $s_t$ for the critic concatenates five features for all $M$ cells: normalized queue length, average queueing delay, head-of-line waiting time, historical throughput, and coverage-overlap degree. Its dimension is $5M$. The underlying physical state $\mathsf{s}_t$ also includes channel conditions and scheduling history; this global state vector summarizes network-wide traffic, service status, and coverage overlap.
 
-Each actor observes the corresponding five features $f_t^{n,j}=[\bar q_t^{n,j},\bar d_t^{n,j},\bar w_t^{n,j},\bar\zeta_t^{n,j},v_j^n]^\top$ of its visible candidate cells $j\in\{1,\ldots,J\}$, where $v_j^n=v_{\mathrm{cov}}^{\chi_n(j)}=\frac{1}{N-1}\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(j)}$ is the ratio of the number of other satellites covering candidate cell $j$ to the total number of other satellites $(N-1)$. The real candidate cells form a fully connected local graph, with the distance prior $\omega_{ij}^n$ and the normalized common-visibility prior $\bar c_{ij}^n=c_{ij}^n/(N-1)$ used in GAT attention. Candidates associated with other satellites participate in graph aggregation to reflect potential inter-satellite interference coupling, while the association mask $m_t^n$ restricts service selection to the actor's own associated cells.
+Each actor observes the corresponding five features $f_t^{n,j}=[\bar q_t^{n,j},\bar d_t^{n,j},\bar w_t^{n,j},\bar\zeta_t^{n,j},v_j^n]^\top$ of its visible candidate cells $j\in\{1,\ldots,J\}$, where $v_j^n=v_{\mathrm{cov}}^{\chi_n(j)}=\frac{1}{N-1}\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(j)}$ is the ratio of the number of other satellites covering candidate cell $j$ to the total number of other satellites $(N-1)$. The real candidate cells form a fully connected local graph, with the distance prior $\omega_{ij}^n$ and the normalized common-visibility prior $\bar c_{ij}^n=\frac{1}{N-1}\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(i)}V_{n',\chi_n(j)}$ used in GAT attention. Candidates associated with other satellites participate in graph aggregation to reflect potential inter-satellite interference coupling, while the association mask $m_t^n$ restricts service selection to the actor's own associated cells.
 
-To avoid the heavy inter-satellite signaling overhead of exchanging slot-level states and beam actions across satellites, the coverage summaries $v_j^n$ and $\bar c_{ij}^n$ are computed by the NOCC from the visibility matrix at the start of each 100-slot association period and distributed with the association update. During online execution, each actor has access only to its local candidate-cell features and period-level topology summaries, and lacks access to other satellites' instantaneous actions and the complete network-wide physical state. These limits on local information give rise to partial observability.
+To avoid the heavy inter-satellite signaling overhead of exchanging slot-level states and beam actions across satellites, the coverage summaries $v_j^n$ and $\bar c_{ij}^n$ are computed by the NOCC from the visibility matrix at the start of each 100-slot association period and distributed with the association update. In both training and online execution, each actor has access only to its local candidate-cell features and period-level topology summaries, and lacks access to other satellites' instantaneous actions and the complete network-wide physical state. These limits on local information give rise to partial observability.
 
 **Selected revised manuscript text (Section V-A-1)**
 
@@ -485,7 +482,7 @@ To avoid the heavy inter-satellite signaling overhead of exchanging slot-level s
 
 > The critic receives the five features of all $M$ cells, whereas each actor observes its candidate-cell features and the associated topology summaries. Each actor lacks access to other satellites' current actions and the complete physical state, resulting in partial observability.
 
-Revision locations: Sections V-A-1 and V-A-2 (pp. 7-8), global critic input, local candidate-cell graph, and partial observability; Table I (p. 11), $5M$ critic input.
+Revision locations: Sections V-A-1 and V-A-2 (pp. 7-8), global state vector for the critic, local candidate-cell graph, and partial observability; Table I (p. 11), $5M$ critic state vector.
 
 ### Comment 3.4
 
@@ -547,7 +544,7 @@ We have also added multi-seed ablation results in Section VI-B-3 and Fig. 8 (rep
 
 > All variants are trained with five independent random seeds and evaluated under the same association and test conditions. Each trained model is evaluated on a common test-case set at per-user input rates of 20, 40, and 50~Mbps. For each seed, performance is averaged over the common test cases. The reported means and pointwise 95\% Student-$t$ confidence intervals are then calculated across the five seed-level means.
 
-Revision locations: Section VI-B (p. 11), test-case confidence intervals; Section VI-B-2(b)-(d) (pp. 12-13) and Figs. 6-7 (p. 13), means and error bars; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), intervals across training-seed means.
+Revision locations: Section VI-B (p. 12), test-case confidence intervals; Section VI-B-2(b)-(d) (pp. 12-13) and Figs. 6-7 (p. 13), means and error bars; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), intervals across training-seed means.
 
 ## References cited in these responses
 

@@ -41,7 +41,7 @@ All revision locations below refer to the clean revised manuscript. The reviewer
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for this comment. We would like to clarify that the proposed cell-satellite association is traffic-aware and updated periodically. At the beginning of each association period, the NOCC obtains the cell traffic demands, and ISA recomputes the association using these demands. The association is held fixed only within each period, while beam hopping and power allocation are adjusted slot by slot. \qrev{We apologize for not stating this clearly in the original manuscript, where the 100-slot association period was inadvertently omitted from Table II; we have now added this parameter to the table.}
+Thank you for this comment. We would like to clarify that the proposed cell-satellite association is traffic-aware and updated periodically. At the beginning of each association period, the NOCC obtains the cell traffic demands, and ISA recomputes the association using these demands. The association is held fixed only within each period, while beam hopping and power allocation are adjusted slot by slot. We apologize for not stating this clearly in the original manuscript, where the 100-slot association period was inadvertently omitted from Table II; we have now added this parameter to the table.
 \par
 
 Demand may still change between association updates. To evaluate this effect, we have added a controlled hotspot-reversal test in Section VI-B-4 and Table III to summarize its results. Table R1-1 below provides a concise summary in this response.
@@ -67,23 +67,23 @@ After reversal (updated association) & 27.18 & 3.75\\
 As shown in Table R1-1, retaining the association after reversal reduces throughput by 7.66\% and increases RT delay by 8.45\%. After updating the association, throughput is only 0.88\% below its pre-reversal value, and RT delay is 2.18\% higher.
 \par
 
-These results indicate an acceptable performance loss under the tested demand change and show that an additional association update \qrev{can largely restore} the pre-reversal performance.
+These results indicate an acceptable performance loss under the tested demand change and show that an additional association update can largely restore the pre-reversal performance.
 \par
 
-\qrev{Note that this instantaneous demand swap represents an extreme stress test designed to evaluate the performance loss before an association update takes place. In practice, spatial traffic demand typically evolves gradually, and the 100-slot association period corresponds to only 200 ms. Moreover, as discussed in our response to Comment 1.3, the NOCC requires time to collect cell traffic demands and distribute the updated association. The association period is therefore chosen to accommodate this collection and distribution latency while retaining sufficient responsiveness to traffic changes.}
+Note that this instantaneous demand swap represents an extreme stress test designed to evaluate the performance loss before an association update takes place. In practice, spatial traffic demand typically evolves gradually, and the 100-slot association period corresponds to only 200 ms. Moreover, as discussed in our response to Comment 1.3, the NOCC requires time to collect cell traffic demands and distribute the updated association. The association period is therefore chosen to accommodate this collection and distribution latency while retaining sufficient responsiveness to traffic changes.
 \par
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section III-A, p. 5)}\par}
 
 \begin{quote}\small\color{revisionblue}
-The association remains fixed within each period \qrev{to balance demand-collection latency and traffic adaptability}, while slot-wise beam hopping and power allocation respond to local queue variations.
+\qrev{It should be noted that Problem~P1 is solved periodically at the start of each association period.} The association remains fixed within each period to balance demand-collection latency and traffic adaptability, while slot-wise beam hopping and power allocation \qrev{handle shorter-timescale queue fluctuations}.
 \par
 \end{quote}
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section VI-B-4; Table III, p. 14)}\par}
 
 \begin{quote}\small\color{revisionblue}
-With the association fixed, reversal reduces throughput by 7.66\% and increases RT delay by 8.45\%. After updating the association, throughput and delay are within 0.88\% and 2.18\% of their pre-reversal values, respectively. The degradation reflects the limited adaptability of fixed association to changing spatial demands. Nevertheless, most of the pre-reversal performance is retained, suggesting an acceptable performance loss under this abrupt demand shift, while updating the association \qrev{can largely restore} the pre-reversal performance.
+With the association fixed, reversal reduces throughput by 7.66\% and increases RT delay by 8.45\%. After updating the association, throughput and delay are within 0.88\% and 2.18\% of their pre-reversal values, respectively. The degradation reflects the limited adaptability of fixed association to changing spatial demands. Nevertheless, most of the pre-reversal performance is retained, suggesting an acceptable performance loss under this abrupt demand shift, while updating the association can largely restore the pre-reversal performance.
 \par
 \end{quote}
 
@@ -98,7 +98,7 @@ With the association fixed, reversal reduces throughput by 7.66\% and increases 
 Thank you for this suggestion. We have added an ISA parameter sensitivity study in Section VI-B-5, with results presented in the new Fig. 9. The study examines how the cooling coefficient and the number of iterations per temperature affect load balancing and runtime under different traffic-demand distributions.
 \par
 
-The study uses 200 test cases with randomized traffic demands. We rank them by the coefficient of variation \qrev{(defined as the ratio of the standard deviation to the mean of the input cell demands $T_m$, which characterizes spatial demand fluctuation across cells)} and divide them into low- and high-imbalance groups, with 100 cases in each group.
+The study uses 200 test cases with randomized traffic demands. We rank them by the coefficient of variation (defined as the ratio of the standard deviation to the mean of the input cell demands $T_m$, which characterizes spatial demand fluctuation across cells) and divide them into low- and high-imbalance groups, with 100 cases in each group.
 \par
 
 With $T_0=100$ and $T_{\min}=10^{-3}$ fixed, we test $\rho=0.90,0.93,0.95,0.97,0.98$ at $L_{\max}=100$, and $L_{\max}=50,75,100,150,200$ at $\rho=0.95$. Figure 9 shows the mean final satellite load variance for each group and the mean ISA runtime across all 200 cases, in microseconds.
@@ -110,7 +110,7 @@ Both groups show similar trends. Increasing the search effort generally improves
 The default setting $(\rho,L_{\max})=(0.95,100)$ yields a mean load variance of 12656 $(\mathrm{Mbps})^2$ and a mean runtime of 437 $\mu$s. Increasing $\rho$ to 0.97 reduces variance by 1.86\% but increases runtime by 61.78\%. Increasing $L_{\max}$ to 200 reduces variance by 3.76\% but increases runtime by 90.62\%.
 \par
 
-These results show that the default setting $(\rho,L_{\max})=(0.95,100)$ provides a good balance between load-balancing performance and runtime under the tested traffic conditions\qrev{, and we therefore retain this setting. Meanwhile, addressing the limitations of fixed cooling schedules remains a valuable direction for future work; for instance, adaptive cooling rates or iteration budgets guided by energy variations and traffic imbalance could be explored to avoid overstaying at high temperatures and improve local refinement}.
+These results show that the default setting $(\rho,L_{\max})=(0.95,100)$ provides a good balance between load-balancing performance and runtime under the tested traffic conditions, and we therefore retain this setting. Meanwhile, addressing the limitations of fixed cooling schedules remains a valuable direction for future work; for instance, adaptive cooling rates or iteration budgets guided by energy variations and traffic imbalance could be explored to avoid overstaying at high temperatures and improve local refinement.
 \par
 
 \par\Needspace{12\baselineskip}\begin{center}\begin{minipage}{\linewidth}\centering
@@ -133,22 +133,22 @@ The group-wise mean runtimes are close (435 and 439~$\mu$s at the default settin
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for this comment. \qrev{Following the mainstream paradigm in existing multi-satellite MARL scheduling studies [1]--[5], this work adopts} offline centralized training in a ground-based simulator and online decentralized execution onboard the satellites. During offline training, the simulator directly provides time-aligned global cell features and multi-agent trajectories to the centralized critic, and mini-batch PPO updates the shared actor and critic after each rollout.
+Thank you for this comment. Following the mainstream paradigm in existing multi-satellite MARL scheduling studies [1]--[5], this work adopts offline centralized training in a ground-based simulator and online decentralized execution onboard the satellites. During offline training, the simulator directly provides time-aligned global cell features and multi-agent trajectories to the centralized critic, and mini-batch PPO updates the shared actor and critic after each rollout.
 \par
 
 During online execution, the trained actor parameters are fixed. Each satellite independently runs a local actor copy using only its local observation, action mask, and recurrent hidden state. The centralized critic is not involved in real-time scheduling. We have clarified these training and execution procedures in Sections V-A and V-B and Algorithm 2.
 \par
 
-\qrev{In practical deployment, if operational trajectories are collected from satellites for periodic policy fine-tuning on the ground, propagation latency can be calculated directly from our simulated 515 km, 16-satellite geometry. Specifically, under the $40^\circ$ minimum elevation constraint at an altitude of 515 km, the gateway slant range is 515.00--762.58 km (one-way propagation latency of 1.72--2.54 ms), while the 120 pairwise inter-satellite distances across the 16 satellites span 119.48--1382.94 km with a median of 723.48 km (0.40--4.61 ms per hop; median 2.41 ms). Consequently, direct gateway transmission incurs 1.72--2.54 ms, and relaying through 1--3 typical median inter-satellite link hops to a gateway-connected satellite yields 4.13--9.78 ms (i.e., roughly 2--10 ms overall). Importantly, long-timescale load balancing and short-timescale beam hopping have separate communication needs. For long-timescale load balancing, the NOCC collects cell traffic statistics every 100 slots (200 ms) to update cell-satellite associations without involving the MARL critic. For short-timescale beam hopping, each satellite generates beam decisions locally onboard using its fixed actor copy without slot-level global state aggregation or parameter synchronization; when periodic offline policy fine-tuning is performed in the background, collected state transitions are timestamp-aligned in the replay buffer before critic updates, and updated actor weights are uploaded from gateways only at a low frequency when traffic statistics change noticeably. Regarding link congestion and packet loss, the data volume required for critic training is small: with $M=144$ cells and $N=16$ satellites, the full critic input $s_t\in\mathbb{R}^{5M}$ plus reward $\mathcal{R}_t$ amounts to 721 floats (2884 bytes in 32-bit precision per slot), and excluding the 200 ms topology feature $v_{\mathrm{cov}}^m$ leaves only four dynamic features per cell (2304 bytes network-wide, or 144 bytes per satellite per slot on average, i.e., 18.0 KiB per 128-slot rollout). Given this small payload, and because critic updates are performed offline over collected rollouts rather than requiring per-slot synchronous delivery while a retransmission round trip takes only about 3.4--19.6 ms, random packet losses can be readily mitigated via lightweight retransmission without significantly aggravating link congestion. Only when severe congestion causes unrecovered retransmission timeouts does the trainer fall back to holding the most recent valid features or omitting incomplete trajectory segments. In such extreme cases, unrecovered packet loss would increase critic value-estimation variance and slow training convergence. Following mainstream simulation-based studies [1]--[5], these practical communication imperfections are not yet modeled in detail in our simulations. Due to space limitations, the above engineering analysis is provided here as a clarification rather than added to the revised manuscript, though we would be glad to incorporate a concise summary into the manuscript if the reviewer considers it necessary.}
+In practical deployment, if operational trajectories are collected from satellites for periodic policy fine-tuning on the ground, propagation latency can be calculated directly from our simulated 515 km, 16-satellite geometry. Specifically, under the $40^\circ$ minimum elevation constraint at an altitude of 515 km, the gateway slant range is 515.00--762.58 km (one-way propagation latency of 1.72--2.54 ms), while the 120 pairwise inter-satellite distances across the 16 satellites span 119.48--1382.94 km with a median of 723.48 km (0.40--4.61 ms per hop; median 2.41 ms). Consequently, direct gateway transmission incurs 1.72--2.54 ms, and relaying through 1--3 typical median inter-satellite link hops to a gateway-connected satellite yields 4.13--9.78 ms (i.e., roughly 2--10 ms overall). Importantly, long-timescale load balancing and short-timescale beam hopping have separate communication needs. For long-timescale load balancing, the NOCC collects cell traffic statistics every 100 slots (200 ms) to update cell-satellite associations without involving the MARL critic. For short-timescale beam hopping, each satellite generates beam decisions locally onboard using its fixed actor copy without slot-level global state aggregation or parameter synchronization; when periodic offline policy fine-tuning is performed in the background, collected state transitions are timestamp-aligned in the replay buffer before critic updates, and updated actor weights are uploaded from gateways only at a low frequency when traffic statistics change noticeably. Regarding link congestion and packet loss, the data volume required for critic training is small: with $M=144$ cells and $N=16$ satellites, the full \qrev{critic state vector} $s_t\in\mathbb{R}^{5M}$ plus reward $\mathcal{R}_t$ amounts to 721 floats (2884 bytes in 32-bit precision per slot), and excluding the 200 ms topology feature $v_{\mathrm{cov}}^m$ leaves only four dynamic features per cell (2304 bytes network-wide, or 144 bytes per satellite per slot on average, i.e., 18.0 KiB per 128-slot rollout). Given this small payload, and because critic updates are performed offline over collected rollouts rather than requiring per-slot synchronous delivery while a retransmission round trip takes only about 3.4--19.6 ms, random packet losses can be readily mitigated via lightweight retransmission without \qrev{significantly aggravating link congestion}. \qrev{Only when severe congestion causes unrecovered retransmission timeouts does the trainer fall back to holding the most recent valid features or omitting incomplete trajectory segments. In such extreme cases, unrecovered packet loss would increase critic value-estimation variance and slow training convergence. Following mainstream simulation-based studies [1]--[5], these practical communication imperfections are not yet modeled in detail in our simulations. Due to space limitations, the above engineering analysis is provided here as a clarification rather than added to the revised manuscript, though we would be glad to incorporate a concise summary into the manuscript if the reviewer considers it necessary.}
 \par
 
-\qrev{We sincerely thank the reviewer again for pointing out this important research direction, and we will conduct an in-depth investigation of robust MARL training under imperfect inter-satellite and gateway links, including random state-data loss and link delays, in our future work.}
+We sincerely thank the reviewer again for pointing out this important research direction, and we will conduct an in-depth investigation of robust MARL training under imperfect inter-satellite and gateway links, including random state-data loss and link delays, in our future work.
 \par
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section V-A-1, p. 7)}\par}
 
 \begin{quote}\small\color{revisionblue}
-During offline centralized training, the ground-based simulator provides time-aligned global cell features to the centralized critic. The underlying environment state $\mathsf{s}_t$ includes network-wide traffic, channels, and scheduling history. The critic input summarizes traffic, service status, and coverage overlap across the network.
+During offline centralized training, \qrev{the simulator provides time-aligned global cell features to the centralized critic, whereas each actor relies solely on its local observation in both training and execution. While the underlying environment state $\mathsf{s}_t$ captures network-wide traffic, channels, and scheduling history, the global state vector fed to the critic summarizes traffic, service status, and coverage overlap across the network.}
 \par
 \end{quote}
 
@@ -167,10 +167,10 @@ Offline trajectories are collected in the simulator, and mini-batch PPO updates 
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for this comment. We agree that beam sidelobe patterns and frequency overlap affect physical interference in addition to spatial proximity. \qrev{In our system model, these two factors are accounted for at different levels. Specifically, the beam sidelobe pattern is explicitly modeled in Eq. (6) at the beam level when calculating channel gains and inter-beam interference, whereas frequency overlap in resource-block allocation is handled at the user level by the intra-beam PF scheduler. Both effects directly determine the achieved user rates and queueing delays, and are therefore fed back to the beam-hopping policy through the reward function. Because this work centers on cell-satellite association and beam-level hopping and power allocation, intra-beam user scheduling is simplified via PF allocation; furthermore, interference caused by frequency overlap can be more effectively suppressed through enhanced user-level resource-block allocation algorithms. To limit the computational overhead of online graph construction, sidelobe coupling and resource-block overlap are not explicitly encoded as graph edge inputs; instead, we use the distance weight $\omega_{ij}^n$ as a low-complexity geometric prior, similar to the distance criteria and local conflict graphs used in related beam-hopping studies [1], [2], [6].}
+Thank you for this comment. We agree that beam sidelobe patterns and frequency overlap affect physical interference in addition to spatial proximity. In our system model, these two factors are accounted for at different levels. Specifically, the beam sidelobe pattern is explicitly modeled in Eq. (6) at the beam level when calculating channel gains and inter-beam interference, whereas frequency overlap in resource-block allocation is handled at the user level by the intra-beam PF scheduler. Both effects directly determine the achieved user rates and queueing delays, and are therefore fed back to the beam-hopping policy through the reward function. Because this work centers on cell-satellite association and beam-level hopping and power allocation, intra-beam user scheduling is simplified via PF allocation; furthermore, interference caused by frequency overlap can be more effectively suppressed through enhanced user-level resource-block allocation algorithms. To limit the computational overhead of online graph construction, sidelobe coupling and resource-block overlap are not explicitly encoded as graph edge inputs; instead, we use the distance weight $\omega_{ij}^n$ as a low-complexity geometric prior, similar to the distance criteria and local conflict graphs used in related beam-hopping studies [1], [2], [6].
 \par
 
-To validate \qrev{the correlation between the static distance weight and achieved rate variations}, we have added a controlled pairwise diagnostic in Section VI-B, using the antenna and channel models over 200 independent scenarios with 300 users each. The reference beam power is $P_{\mathrm{tot}}/K_{\max}$, and the single-RB reference bandwidth is $\Delta B=B_{\mathrm{tot}}/N_{\mathrm{RB}}$. For each direction of a cell pair, victim-cell rates are calculated with and without the specified interfering-beam contribution, keeping the desired signal, channel realization, and noise fixed. The interference-to-signal ratio and relative rate loss are then averaged over the two directions.
+To validate the correlation between the static distance weight and achieved rate variations, we have added a controlled pairwise diagnostic in Section VI-B, using the antenna and channel models over 200 independent scenarios with 300 users each. The reference beam power is $P_{\mathrm{tot}}/K_{\max}$, and the single-RB reference bandwidth is $\Delta B=B_{\mathrm{tot}}/N_{\mathrm{RB}}$. For each direction of a cell pair, victim-cell rates are calculated with and without the specified interfering-beam contribution, keeping the desired signal, channel realization, and noise fixed. The interference-to-signal ratio and relative rate loss are then averaged over the two directions.
 \par
 
 The mean scenario-wise Spearman correlations with the distance weight are 0.546 (95\% scenario-level bootstrap CI: [0.536, 0.557]) for the interference-to-signal ratio and 0.437 (95\% CI: [0.426, 0.448]) for relative rate loss. We have added Fig. R1-4 to this response to present the diagnostic results.
@@ -181,7 +181,7 @@ The mean scenario-wise Spearman correlations with the distance weight are 0.546 
 \par\vspace{0.5em}{\small\raggedright Fig. R1-4. Controlled pairwise diagnostic of the geometric prior: (a) interference-to-signal ratio and (b) relative rate loss versus geometric weight. Blue dots represent cell-pair diagnostic results, and orange squares connected by lines indicate five-bin means. The annotations report the mean of scenario-wise Spearman correlations and 95\% confidence intervals obtained by scenario-level bootstrap resampling across 200 independent scenarios, each with 300 users.\par}
 \end{minipage}\end{center}
 
-Overall, the physical diagnostic supports \qrev{a positive correlation between the distance prior and physical interference effects. In addition, although the distance prior $\omega_{ij}^n$ itself is static, the node features, such as queue backlogs, waiting delays, and historical average throughput $\bar\zeta_t^{n,j}$, evolve across time slots in response to beam illumination and interference, so the learned GAT attention scores $e_t^{n,ij}$ and the GRU recurrent hidden states are updated every slot. The ablation results in Fig. 8 confirm that removing either GAT or GRU noticeably degrades throughput and increases RT queueing delay under high loads.}
+Overall, the physical diagnostic supports a positive correlation between the distance prior and physical interference effects. In addition, although the distance prior $\omega_{ij}^n$ itself is static, the node features, such as queue backlogs, waiting delays, and historical average throughput $\bar\zeta_t^{n,j}$, evolve across time slots in response to beam illumination and interference, so the learned GAT attention scores $e_t^{n,ij}$ and the GRU recurrent hidden states are updated every slot. The ablation results in Fig. 8 confirm that removing either GAT or GRU noticeably degrades throughput and increases RT queueing delay under high loads.
 \par
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section V-A-2, p. 7)}\par}
@@ -220,7 +220,7 @@ Thank you for recommending these studies. We have added a paragraph to the Intro
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section I, related work, p. 1)}\par}
 
 \begin{quote}\small\color{revisionblue}
-To support ubiquitous connectivity, He et al.~[5] \qrev{provided a comprehensive roadmap of} technical routes, challenges, and key technologies \qrev{for} direct-to-smartphone communications in 6G non-terrestrial networks. Related advances in satellite transmission include rate-splitting multiple access (RSMA) for IoT communications in satellite and aerial-integrated networks~[6], joint beamforming in refracting reconfigurable intelligent surface (RIS)-aided satellite-terrestrial relay networks to reduce transmit power under user rate constraints~[7], and self-powered absorptive RIS for secure satellite-terrestrial transmissions~[8]. Beyond communication resources, Cui et al.~[9] \qrev{demonstrated notable latency reductions} in hybrid geostationary Earth orbit (GEO)--LEO satellite-assisted IoT networks through joint task offloading and communication and computing resource allocation\qrev{, while~[10] effectively integrated beam hopping with computing offloading to lower task-processing latency in multi-satellite LEO systems}. Alongside these advances, satellite resources must also be adapted to heterogeneous and time-varying traffic demands.
+To support ubiquitous connectivity, He et al.~[5] provided a comprehensive roadmap of technical routes, challenges, and key technologies for direct-to-smartphone communications in 6G non-terrestrial networks. Related advances in satellite transmission include rate-splitting multiple access (RSMA) for IoT communications in satellite and aerial-integrated networks~[6], joint beamforming in refracting reconfigurable intelligent surface (RIS)-aided satellite-terrestrial relay networks to reduce transmit power under user rate constraints~[7], and self-powered absorptive RIS for secure satellite-terrestrial transmissions~[8]. Beyond communication resources, Cui et al.~[9] demonstrated notable latency reductions in hybrid geostationary Earth orbit (GEO)--LEO satellite-assisted IoT networks through joint task offloading and communication and computing resource allocation, while~[10] effectively integrated beam hopping with computing offloading to lower task-processing latency in multi-satellite LEO systems. Alongside these advances, satellite resources must also be adapted to heterogeneous and time-varying traffic demands.
 \par
 \end{quote}
 
@@ -232,19 +232,19 @@ To support ubiquitous connectivity, He et al.~[5] \qrev{provided a comprehensive
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for this comment. We agree that workstation-measured timing alone is insufficient to establish onboard real-time feasibility. \qrev{Motivated by the reviewer's insightful suggestion, we performed inference optimization by exporting the trained policy to ONNX Runtime with single-step GRU execution, and conducted timing benchmarks on Kylin Linux using a Phytium D2000/8 processor (ARM64, 8 cores/8 threads, up to 2.30 GHz) on a single CPU thread. All 16 satellites share the same actor weights and execute batched single-step GRU inference to output per-satellite beam selection and continuous power allocation. Following a 30-slot warm-up, averaging over 300 time slots from observation readiness to action output gives a mean per-slot inference latency of 0.854 ms for all 16 satellites. This mean latency is well below the 2 ms slot duration, leaving a clear computational margin even when evaluating all 16 satellites together in a single-thread batch. Moreover, in decentralized onboard deployment, each satellite only executes its own local actor rather than a 16-satellite batch. Even so, spaceborne processors under strict power and radiation-hardening constraints may operate at lower clock rates, and the beam dwell time or slot duration can be adjusted if needed; we have accordingly clarified the timing protocol and qualified the real-time claims in Section VI-B-6.}
+Thank you for this comment. We agree that workstation-measured timing alone is insufficient to establish onboard real-time feasibility. Motivated by the reviewer's insightful suggestion, we performed inference optimization by exporting the trained policy to ONNX Runtime with single-step GRU execution, and conducted timing benchmarks on Kylin Linux using a Phytium D2000/8 processor (ARM64, 8 cores/8 threads, up to 2.30 GHz) on a single CPU thread. All 16 satellites share the same actor weights and execute batched single-step GRU inference to output per-satellite beam selection and continuous power allocation. Following a 30-slot warm-up, averaging over 300 time slots from observation readiness to action output gives a mean per-slot inference latency of 0.854 ms for all 16 satellites. This mean latency is well below the 2 ms slot duration, leaving a clear computational margin even when evaluating all 16 satellites together in a single-thread batch. Moreover, in decentralized onboard deployment, each satellite only executes its own local actor rather than a 16-satellite batch. Even so, spaceborne processors under strict power and radiation-hardening constraints may operate at lower clock rates, and the beam dwell time or slot duration can be adjusted if needed; we have accordingly clarified the timing protocol and qualified the real-time claims in Section VI-B-6.
 \par
 
-To quantify the effect of decision lag, we have added an action-delay sensitivity evaluation in Section VI-B-7. Actions generated by the fixed trained policy are applied after delays of 0, 1, or 2 slots, corresponding to 0, 2, or 4 ms. We consider per-user total input rates of 20 and 50 Mbps, with 200 test instances per condition. Averaging the relative changes for the 1- and 2-slot delays at both input rates against their corresponding zero-delay baselines gives an 8.7\% decrease in network throughput and an 18.2\% increase in average RT queueing delay. \qrev{Because this average includes the heavy-load regime at 50 Mbps and a two-slot decision lag, the percentage increase in queueing delay is relatively noticeable; nevertheless, the resulting absolute RT queueing delay remains well below the 40-slot TTL threshold, and the delayed policy still maintains a clear advantage over conventional benchmark schemes.}
+To quantify the effect of decision lag, we have added an action-delay sensitivity evaluation in Section VI-B-7. Actions generated by the fixed trained policy are applied after delays of 0, 1, or 2 slots, corresponding to 0, 2, or 4 ms. We consider per-user total input rates of 20 and 50 Mbps, with 200 test instances per condition. Averaging the relative changes for the 1- and 2-slot delays at both input rates against their corresponding zero-delay baselines gives an 8.7\% decrease in network throughput and an 18.2\% increase in average RT queueing delay. Because this average includes the heavy-load regime at 50 Mbps and a two-slot decision lag, the percentage increase in queueing delay is relatively noticeable; nevertheless, the resulting absolute RT queueing delay remains well below the 40-slot TTL threshold, and the delayed policy still maintains a clear advantage over conventional benchmark schemes.
 \par
 
-\qrev{In addition, the 2 ms slot duration in our simulations is chosen to maintain consistent experimental conditions when comparing with benchmark methods. In practical satellite beam-hopping systems, the beam dwell time or scheduling slot duration can be flexibly adapted to hardware constraints, allowing each beam position to be held for a longer interval to leave sufficient computational margin for inference. Meanwhile, with ongoing advances in spaceborne processing technology, satellite computing capability will continue to improve, further reducing inference latency and facilitating real-time execution of the proposed scheduling framework.}
+In addition, the 2 ms slot duration in our simulations is chosen to maintain consistent experimental conditions when comparing with benchmark methods. In practical satellite beam-hopping systems, the beam dwell time or scheduling slot duration can be flexibly adapted to hardware constraints, allowing each beam position to be held for a longer interval to leave sufficient computational margin for inference. Meanwhile, with ongoing advances in spaceborne processing technology, satellite computing capability will continue to improve, further reducing inference latency and facilitating real-time execution of the proposed scheduling framework.
 \par
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section VI-B-6, p. 15)}\par}
 
 \begin{quote}\small\color{revisionblue}
-\qrev{After inference optimization via ONNX Runtime export and single-step GRU execution, policy inference latency was measured on Kylin Linux on a Phytium D2000/8 CPU (ARM64, 8 cores/8 threads, up to 2.30~GHz) with a single thread. All 16 satellites share the trained actor weights and perform batched single-step GRU inference to output beam selection and continuous power allocation. Averaged over 300~slots after a 30-slot warm-up from observation readiness to action output, per-slot latency for all 16 satellites is 0.854~ms, well below the 2~ms slot duration with clear computational margin. Under concurrent onboard deployment, each satellite runs only its local actor; however, radiation-hardened processors may use lower clock frequencies, and dwell or slot duration can be adapted in practice.}
+After inference optimization via ONNX Runtime export and single-step GRU execution, policy inference latency was measured on Kylin Linux on a Phytium D2000/8 CPU (ARM64, 8 cores/8 threads, up to 2.30~GHz) with a single thread. All 16 satellites share the trained actor weights and perform batched single-step GRU inference to output beam selection and continuous power allocation. Averaged over 300~slots after a 30-slot warm-up from observation readiness to action output, per-slot latency for all 16 satellites is 0.854~ms, well below the 2~ms slot duration with clear computational margin. Under concurrent onboard deployment, each satellite runs only its local actor; however, radiation-hardened processors may use lower clock frequencies, and dwell or slot duration can be adapted in practice.
 \par
 \end{quote}
 
@@ -255,7 +255,7 @@ The action-delay evaluation considers action delays of 0, 1, and 2~slots (0, 2, 
 \par
 \end{quote}
 
-\Needspace{4\baselineskip}{\small\textbf{Revision locations:} Section V-A (pp. 6-7), distributed actor execution; Section VI-B-6 (p. 15), \qrev{inference timing}; Section VI-B-7 (p. 15), action-delay sensitivity.\par}
+\Needspace{4\baselineskip}{\small\textbf{Revision locations:} Section V-A (pp. 6-7), distributed actor execution; Section VI-B-6 (p. 15), inference timing; Section VI-B-7 (p. 15), action-delay sensitivity.\par}
 
 \clearpage\section*{Reviewer 2}
 
@@ -265,7 +265,7 @@ The action-delay evaluation considers action delays of 0, 1, and 2~slots (0, 2, 
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for pointing out this inconsistency. \qrev{We sincerely apologize for the confusion caused by a typographical error in the original manuscript, where the RT packet TTL was inadvertently misstated as 10 time slots.}
+Thank you for pointing out this inconsistency. We sincerely apologize for the confusion caused by a typographical error in the original manuscript, where the RT packet TTL was inadvertently misstated as 10 time slots.
 \par
 
 The simulations actually used an RT packet TTL of 40 time slots, corresponding to 80 ms with a slot duration of 2 ms. No TTL-based expiration was imposed on BULK packets. Fig. 7(b) reports RT queueing delay as defined in Eqs. (23)--(25): the mean age of packets currently in each user's RT queue, with empty queues assigned zero, is averaged over all users and evaluation slots. It is not the mean waiting time of successfully transmitted packets. The reported values are below the actual RT TTL of 40 time slots. The reported RT delays are therefore consistent with the actual TTL setting.
@@ -277,18 +277,18 @@ We have corrected the RT TTL in the simulation parameter table from 10 to 40 tim
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section II-B; RT TTL in Table II, p. 4)}\par}
 
 \begin{quote}\small\color{revisionblue}
-RT packets have a time-to-live (TTL) of $t_{\mathrm{th},\mathrm{R}}$ slots, whereas BULK packets are not subject to TTL-based expiration, so $D_t^{u,\mathrm{B}}=0$.
+RT packets have a time-to-live (TTL) of $t_{\mathrm{th},\mathrm{R}}$ slots\qrev{, which bounds their maximum onboard waiting time}, whereas BULK packets are not subject to \qrev{expiration ($D_t^{u,\mathrm{B}}=0$)}.
 \par
 \end{quote}
 
-\Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section VI-B, p. 11)}\par}
+\Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section VI-B, p. \qrev{12})}\par}
 
 \begin{quote}\small\color{revisionblue}
 RT queueing delay follows the queue-age definitions in (23)--(25): current packet ages are averaged within each user's RT queue, with zero assigned to empty queues, and then over users and slots.
 \par
 \end{quote}
 
-\Needspace{4\baselineskip}{\small\textbf{Revision locations:} Section II-B (p. 4), RT expiration and BULK queueing; Section III-B (p. 5), Eqs. (21)-(25); Table II (p. 11), 40-slot RT TTL; Section VI-B (p. 11), RT queue-age metric.\par}
+\Needspace{4\baselineskip}{\small\textbf{Revision locations:} Section II-B (p. 4), RT expiration and BULK queueing; Section III-B (p. 5), Eqs. (21)-(25); Table II (p. 11), 40-slot RT TTL; Section VI-B (p. \qrev{12}), RT queue-age metric.\par}
 
 \Needspace{12\baselineskip}\subsection*{Comment 2.2}
 
@@ -335,7 +335,7 @@ The instantaneous reward is the slot-wise utility in P2, with $\Upsilon=N_{\math
 MAPPO uses the expected discounted return as a surrogate objective for approximately optimizing the undiscounted utility in P2.
 \par
 
-Following the GAE framework~[41], discounting is used in return and advantage estimation to balance bias and variance. For $\gamma<1$, the discounted training criterion differs from the undiscounted objective in P2.
+\qrev{Although the discounted training criterion with $\gamma<1$ differs from the undiscounted objective in P2, discounting is used within the GAE framework~[41] to balance bias and variance, thereby reducing policy-gradient variance and stabilizing training.}
 \par
 \end{quote}
 
@@ -347,7 +347,7 @@ Following the GAE framework~[41], discounting is used in return and advantage es
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for pointing out this inconsistency. \qrev{We sincerely apologize for our carelessness when formulating the constraints of P2 in the original manuscript, where inequality constraints were inadvertently written to allow fewer active beams and a lower total transmit power than those used by the implemented policy. We have now corrected these constraints to match the scheduling rule considered in this work.}
+Thank you for pointing out this inconsistency. We sincerely apologize for our carelessness when formulating the constraints of P2 in the original manuscript, where inequality constraints were inadvertently written to allow fewer active beams and a lower total transmit power than those used by the implemented policy. We have now corrected these constraints to match the scheduling rule considered in this work.
 \par
 
 In each time slot, each satellite activates $K$ beams, where $K$ is the smaller of the maximum beam count $K_{\max}$ and the number of available associated cells. When $K>0$, the entire transmit-power budget is distributed among the active beams; when $K=0$, the satellite does not transmit. Under this rule, the policy selects the cells to illuminate and determines their power allocation ratios.
@@ -374,16 +374,16 @@ Constraint $C_1$ restricts illumination to associated cells. $C_2$ requires exac
 Thank you for pointing out that the hybrid-action probability calculation was insufficiently explained. We have clarified the sampled action, the executed action, and the log-probability used by PPO in Section V-B, with corresponding updates to Algorithm 2 and Fig. 2.
 \par
 
-The sampled action is $\widetilde a_t^n=(\mathbf j_t^n,\mathbf y_t^n)$, where $\mathbf j_t^n=(j_1,\ldots,j_K)$ \qrev{records the selected cells in the sequential order in which they are drawn during without-replacement sampling}, and $\mathbf y_t^n$ contains the pre-Softmax Gaussian samples for the selected cells. \qrev{Specifically, at each selection step $i\in\{1,\ldots,K\}$, the discrete head applies Softmax to the masked logits over the associated cells that have not yet been selected, and one cell $j_i$ is drawn from this categorical distribution. The sequence $\mathbf j_t^n$ therefore directly follows the step-by-step sampling order; although the ordering does not change the resulting binary beam-illumination vector $b_t^n$, recording $\mathbf j_t^n$ is necessary because the conditional probability at step $i$ depends on the cells $\mathbf j_{<i}$ excluded in previous steps.} These samples are mapped to the executed action $a_t^n=(b_t^n,p_t^n)$ through cell selection and Softmax normalization.
+The sampled action is $\widetilde a_t^n=(\mathbf j_t^n,\mathbf y_t^n)$, where $\mathbf j_t^n=(j_1,\ldots,j_K)$ records the selected cells in the sequential order in which they are drawn during without-replacement sampling, and $\mathbf y_t^n$ contains the pre-Softmax Gaussian samples for the selected cells. Specifically, at each selection step $i\in\{1,\ldots,K\}$, the discrete head applies Softmax to the masked logits over the associated cells that have not yet been selected, and one cell $j_i$ is drawn from this categorical distribution. The sequence $\mathbf j_t^n$ therefore directly follows the step-by-step sampling order; although the ordering does not change the resulting binary beam-illumination vector $b_t^n$, recording $\mathbf j_t^n$ is necessary because the conditional probability at step $i$ depends on the cells $\mathbf j_{<i}$ excluded in previous steps. These samples are mapped to the executed action $a_t^n=(b_t^n,p_t^n)$ through cell selection and Softmax normalization.
 \par
 
-\qrev{Based on the probability distributions parameterized by the actor's discrete and continuous action heads, the} sampled-action log-probability $\log\pi_\theta(\widetilde a_t^n|o_t^n)$ in Eq. (62) is calculated \qrev{at the stored sampled action $\widetilde a_t^n$} as the sum of two terms. The discrete term sums the conditional log-probabilities of the $K$ sequential selections, with each categorical distribution normalized over the remaining unselected associated cells, and the continuous term sums the Gaussian log-densities evaluated at the stored pre-Softmax samples $\mathbf y_t^n$ using the mean and standard deviation from the continuous head. \qrev{As shown in Fig. 2, the discrete branch generates $\mathbf j_t^n$ and maps it to $b_t^n$ through the Discrete Head, Action Mask, and Sampling modules, while the continuous branch generates the pre-Softmax samples $\mathbf y_t^n$ and normalizes them into $p_t^n$ through the Continuous Head, Gaussian Sampling, and Softmax modules; the sampled action $\widetilde a_t^n$, action mask $m_t^n$, and old-policy log-probability $\log\pi_{\theta^{\mathrm{old}}}(\widetilde a_t^n|o_t^n)$ are then stored in Experience Buffer $\mathcal D$.}
+Based on the probability distributions parameterized by the actor's discrete and continuous action heads, the sampled-action log-probability $\log\pi_\theta(\widetilde a_t^n|o_t^n)$ in Eq. (62) is calculated at the stored sampled action $\widetilde a_t^n$ as the sum of two terms. The discrete term sums the conditional log-probabilities of the $K$ sequential selections, with each categorical distribution normalized over the remaining unselected associated cells, and the continuous term sums the Gaussian log-densities evaluated at the stored pre-Softmax samples $\mathbf y_t^n$ using the mean and standard deviation from the continuous head. As shown in Fig. 2, the discrete branch generates $\mathbf j_t^n$ and maps it to $b_t^n$ through the Discrete Head, Action Mask, and Sampling modules, while the continuous branch generates the pre-Softmax samples $\mathbf y_t^n$ and normalizes them into $p_t^n$ through the Continuous Head, Gaussian Sampling, and Softmax modules; the sampled action $\widetilde a_t^n$, action mask $m_t^n$, and old-policy log-probability $\log\pi_{\theta^{\mathrm{old}}}(\widetilde a_t^n|o_t^n)$ are then stored in Experience Buffer $\mathcal D$.
 \par
 
-For each PPO update, the current and old policies evaluate the same stored selection sequence and Gaussian samples to form the likelihood ratio. Reevaluation uses the same stepwise masks and recurrent observation context, without resampling. Algorithm 2 specifies storage of the selection sequences, Gaussian samples, association masks, and old-policy log-probabilities. We have also clarified that the discrete and continuous entropy terms sum the stepwise masked categorical entropies and selected-cell Gaussian differential entropies, respectively, and are then averaged over the mini-batch. We have updated Fig. 2 to label \qrev{the ordered selection sequence $\mathbf j_t^n$,} the pre-Softmax Gaussian samples \qrev{$\mathbf y_t^n$,} and the sampled-action information stored in the experience buffer.
+For each PPO update, the current and old policies evaluate the same stored selection sequence and Gaussian samples to form the likelihood ratio. Reevaluation uses the same stepwise masks and recurrent observation context, without resampling. Algorithm 2 specifies storage of the selection sequences, Gaussian samples, association masks, and old-policy log-probabilities. We have also clarified that the discrete and continuous entropy terms sum the stepwise masked categorical entropies and selected-cell Gaussian differential entropies, respectively, and are then averaged over the mini-batch. We have updated Fig. 2 to label the ordered selection sequence $\mathbf j_t^n$, the pre-Softmax Gaussian samples $\mathbf y_t^n$, and the sampled-action information stored in the experience buffer.
 \par
 
-During training, actions are sampled as described above. During testing, masked Top-$K$ selects the cells with the highest masked logits\qrev{, which corresponds to the most probable selection sequence under the sequential categorical distribution,} and Softmax applied to their Gaussian means gives deterministic power allocation ratios. These descriptions specify how actions are sampled, evaluated by PPO, and executed.
+During training, actions are sampled as described above. During testing, masked Top-$K$ selects the cells with the highest masked logits, which corresponds to the most probable selection sequence under the sequential categorical distribution, and Softmax applied to their Gaussian means gives deterministic power allocation ratios. These descriptions specify how actions are sampled, evaluated by PPO, and executed.
 \par
 
 \par\Needspace{12\baselineskip}\begin{center}\begin{minipage}{\linewidth}\centering
@@ -402,7 +402,7 @@ During training, actions are sampled as described above. During testing, masked 
 \end{aligned}
 \tag{62}\end{equation*}
 
-where $\pi_{\theta}^{\mathrm{con}}$ is the Gaussian density with mean $\mu_t^{n,j}$ and variance $(\sigma_t^{n,j})^2$, evaluated at the stored pre-Softmax sample $y_t^{n,j}$. Each categorical distribution is normalized over unselected associated cells\qrev{, and $\log\pi_{\theta}(\widetilde a_t^n|o_t^n)$ is computed from the distributions output by the two action heads}. Both sums are zero when $K=0$.
+where $\pi_{\theta}^{\mathrm{con}}$ is the Gaussian density with mean $\mu_t^{n,j}$ and variance $(\sigma_t^{n,j})^2$, evaluated at the stored pre-Softmax sample $y_t^{n,j}$. Each categorical distribution is normalized over unselected associated cells, and $\log\pi_{\theta}(\widetilde a_t^n|o_t^n)$ is computed from the distributions output by the two action heads. Both sums are zero when $K=0$.
 \par
 
 PPO reevaluates the stored sequences and Gaussian samples without resampling, using the same stepwise masks and recurrent observation context.
@@ -417,13 +417,13 @@ PPO reevaluates the stored sequences and Gaussian samples without resampling, us
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for this comment. \qrev{We agree that the original distance-based edge weights mainly reflected geometric proximity and did not explicitly represent inter-satellite interference, which was a limitation of our initial design. Guided by the reviewer's constructive feedback, we have supplemented the original graph representation with multi-satellite visibility features and attention priors to model potential inter-satellite interference without incurring additional state-related communication overhead, and re-conducted the training and ablation experiments in the revised manuscript; across five training seeds at a per-user input rate of 50 Mbps, adding these inter-satellite coverage extensions improves throughput by 1.85\% and reduces average RT queueing delay by 6.49\% compared with relying solely on the distance prior. Detailed explanations are provided below.}
+Thank you for this comment. We agree that the original distance-based edge weights mainly reflected geometric proximity and did not explicitly represent inter-satellite interference, which was a limitation of our initial design. Guided by the reviewer's constructive feedback, we have supplemented the original graph representation with multi-satellite visibility features and attention priors \qrev{to model potential inter-satellite interference without incurring additional state-related communication overhead,} and re-conducted the training and ablation experiments in the revised manuscript; across five training seeds at a per-user input rate of 50 Mbps, adding these inter-satellite coverage extensions improves throughput by 1.85\% and reduces average RT queueing delay by 6.49\% compared with relying solely on the distance prior. \qrev{Detailed explanations are provided below.}
 \par
 
-\qrev{In a multi-satellite system, directly constructing a global cross-satellite GAT or explicitly encoding slot-level inter-satellite interference would require satellites to exchange instantaneous beam decisions, transmit powers, and channel or queue states over inter-satellite links in every time slot. This would introduce substantial inter-satellite signaling overhead and high computational complexity, compromising decentralized online execution under the CTDE framework. To capture inter-satellite interference relationships with low interaction complexity, we have extended both the node features and the GAT attention priors in the revised manuscript using multi-satellite visibility information.}
+In a multi-satellite system, directly constructing a global cross-satellite GAT or explicitly encoding slot-level inter-satellite interference would require satellites to exchange instantaneous beam decisions, transmit powers, and channel or queue states over inter-satellite links in every time slot. This would introduce substantial inter-satellite signaling overhead and high computational complexity, compromising decentralized online execution under the CTDE framework. To capture inter-satellite interference relationships with low interaction complexity, we have extended both the node features and the GAT attention priors in the revised manuscript using multi-satellite visibility information.
 \par
 
-\qrev{Specifically, the candidate-cell node feature vector is extended from the original four traffic and service indicators $[\bar q_t^{n,j},\bar d_t^{n,j},\bar w_t^{n,j},\bar\zeta_t^{n,j}]^\top$ to the five-dimensional vector
+Specifically, the candidate-cell node feature vector is extended from the original four traffic and service indicators $[\bar q_t^{n,j},\bar d_t^{n,j},\bar w_t^{n,j},\bar\zeta_t^{n,j}]^\top$ to the five-dimensional vector
 \par
 
 \[
@@ -437,17 +437,14 @@ where the newly added fifth feature $v_j^n$ is the coverage-overlap degree of ca
 v_j^n=\frac{1}{N-1}\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(j)}.
 \]
 
-Correspondingly, the centralized critic receives the five features of all cells, forming a $5M$-dimensional global input where each cell's local coverage degree equals its global coverage degree $(\sum_{n'}V_{n',m}-1)/(N-1)$. Furthermore, for each candidate cell pair $(i,j)$, we introduce the common-visibility count $c_{ij}^n$ and its normalized value $\bar c_{ij}^n$:
+Correspondingly, the centralized critic receives the five features of all cells, forming a $5M$-dimensional \qrev{global state vector} where each cell's local coverage degree equals its global coverage degree $(\sum_{n'}V_{n',m}-1)/(N-1)$. Furthermore, for each candidate cell pair $(i,j)$, we introduce \qrev{the normalized common-visibility prior $\bar c_{ij}^n$}:
 \par
 
 \[
-\begin{aligned}
-c_{ij}^n&=\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(i)}V_{n',\chi_n(j)},\\
-\bar c_{ij}^n&=\frac{c_{ij}^n}{N-1},
-\end{aligned}
+\qrev{\bar c_{ij}^n=\frac{1}{N-1}\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(i)}V_{n',\chi_n(j)},}
 \]
 
-where $\bar c_{ij}^n$ is the ratio of the common-visibility count $c_{ij}^n$ (the number of other satellites covering both cells $i$ and $j$) to the total number of other satellites $(N-1)$. Combining $\bar c_{ij}^n$ with the distance prior $\omega_{ij}^n$ yields the updated GAT attention coefficient:
+where $\bar c_{ij}^n$ is \qrev{the fraction of other satellites covering both cells $i$ and $j$}. Combining $\bar c_{ij}^n$ with the distance prior $\omega_{ij}^n$ yields the updated GAT attention coefficient:
 \par
 
 \[
@@ -456,13 +453,13 @@ where $\bar c_{ij}^n$ is the ratio of the common-visibility count $c_{ij}^n$ (th
 {\sum_{j'\in\mathcal V_i^{\mathrm{nbr}}}\exp(e_t^{n,ij'}+\xi_1\omega_{ij'}^n+\xi_2\bar c_{ij'}^n)},
 \]
 
-where $\xi_1$ and $\xi_2$ weight the distance and common-visibility priors, respectively. Under full frequency reuse, other satellites covering a cell act as potential inter-satellite interference sources. Thus, the coverage degree $v_j^n$ characterizes the potential inter-satellite interference exposure of an individual cell, while the common-visibility prior $\bar c_{ij}^n$ characterizes the shared potential interferers of a cell pair, motivating their joint feature aggregation through attention. Because $v_j^n$ and $\bar c_{ij}^n$ depend only on the visibility matrix, the NOCC computes and distributes them at the start of each 100-slot association period, avoiding slot-by-slot inter-satellite state exchange. Within each satellite's local graph, all real visible candidate cells, including those associated with other satellites, are fully connected for feature aggregation, while the action mask restricts beam selection to the satellite's own associated cells.}
+where $\xi_1$ and $\xi_2$ weight the distance and common-visibility priors, respectively. Under full frequency reuse, other satellites covering a cell act as potential inter-satellite interference sources. Thus, the coverage degree $v_j^n$ characterizes the potential inter-satellite interference exposure of an individual cell, while the common-visibility prior $\bar c_{ij}^n$ characterizes the shared potential interferers of a cell pair, motivating their joint feature aggregation through attention. Because $v_j^n$ and $\bar c_{ij}^n$ depend only on the visibility matrix, the NOCC computes and distributes them at the start of each 100-slot association period, avoiding slot-by-slot inter-satellite state exchange. Within each satellite's local graph, all real visible candidate cells, including those associated with other satellites, are fully connected for feature aggregation, while the action mask restricts beam selection to the satellite's own associated cells.
 \par
 
-\qrev{To evaluate the effectiveness of the newly introduced coverage degree and common-visibility prior, we have added a joint coverage-prior ablation in Section VI-B-3, with results presented in the new Fig. 8 and reproduced below in our response to Comment 2.7. This experiment sets the actor's coverage-degree feature $v_j^n$ to zero and removes the common-visibility prior $\bar c_{ij}^n$ from GAT attention, with all variants trained across five independent seeds under identical association and testing conditions. At a per-user input rate of 50 Mbps, the full method achieves 1.85\% higher throughput and 6.49\% lower RT queueing delay than the variant without coverage priors, confirming the scheduling gain brought by these inter-satellite coverage features. In addition, the controlled pairwise diagnostic in Section VI-B, shown in Fig. R1-4 under Comment 1.4 with reference beam power $P_{\mathrm{tot}}/K_{\max}$ and single-RB reference bandwidth $\Delta B=B_{\mathrm{tot}}/N_{\mathrm{RB}}$, yields mean scenario-wise Spearman correlations of 0.546 (95\% CI: [0.536, 0.557]) and 0.437 (95\% CI: [0.426, 0.448]) between the distance prior $\omega_{ij}^n$ and the physical interference-to-signal ratio and relative rate loss, respectively.}
+To evaluate the effectiveness of the newly introduced coverage degree and common-visibility prior, we have added a joint coverage-prior ablation in Section VI-B-3, with results presented in the new Fig. 8 and reproduced below in our response to Comment 2.7. This experiment sets the actor's coverage-degree feature $v_j^n$ to zero and removes the common-visibility prior $\bar c_{ij}^n$ from GAT attention, with all variants trained across five independent seeds under identical association and testing conditions. At a per-user input rate of 50 Mbps, the full method achieves 1.85\% higher throughput and 6.49\% lower RT queueing delay than the variant without coverage priors, confirming the scheduling gain brought by these inter-satellite coverage features. In addition, the controlled pairwise diagnostic in Section VI-B, shown in Fig. R1-4 under Comment 1.4 with reference beam power $P_{\mathrm{tot}}/K_{\max}$ and single-RB reference bandwidth $\Delta B=B_{\mathrm{tot}}/N_{\mathrm{RB}}$, yields mean scenario-wise Spearman correlations of 0.546 (95\% CI: [0.536, 0.557]) and 0.437 (95\% CI: [0.426, 0.448]) between the distance prior $\omega_{ij}^n$ and the physical interference-to-signal ratio and relative rate loss, respectively.
 \par
 
-\qrev{We have also highlighted this low-overhead multi-satellite visibility design in the third contribution bullet of Section I,} updated the input definitions, graph attributes, attention formula, Algorithm 2, network architecture description, and Fig. 2, and reported the ablation and diagnostic results in Section VI-B. Together, these results support combining the geometric distance prior with the low-overhead coverage priors for cooperative scheduling under the tested conditions.
+We have also highlighted this low-overhead multi-satellite visibility design in the third contribution bullet of Section I, updated the input definitions, graph attributes, attention formula, Algorithm 2, network architecture description, and Fig. 2, and reported the ablation and diagnostic results in Section VI-B. Together, these results support combining the geometric distance prior with the low-overhead coverage priors for cooperative scheduling under the tested conditions.
 \par
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section V-A-2, pp. 7-8)}\par}
@@ -478,7 +475,7 @@ Both $v_j^n$ and $\bar c_{ij}^n$ lie in $[0,1]$. \qrev{The normalized common-vis
 \par
 \end{quote}
 
-\Needspace{4\baselineskip}{\small\textbf{Revision locations:} \qrev{Section I (p. 2), third contribution bullet;} Section V-A-1 (p. 7), global features; Section V-A-2 (pp. 7-8), node features, fully connected local graph, and masks; Eq. (54) and Fig. 2 (p. 9), weighted attention; Algorithm 2 (p. 10); Table I (p. 11); Section VI-B (pp. 11-12), diagnostic; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), joint coverage-prior ablation; Section VI-B-6 (p. 15), prior-construction complexity.\par}
+\Needspace{4\baselineskip}{\small\textbf{Revision locations:} Section I (\qrev{pp. 2-3}), third contribution bullet; Section V-A-1 (p. 7), global features; Section V-A-2 (pp. 7-8), node features, fully connected local graph, and masks; Eq. (54) and Fig. 2 (p. 9), weighted attention; Algorithm 2 (p. 10); Table I (p. 11); Section VI-B (pp. 11-12), diagnostic; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), joint coverage-prior ablation; Section VI-B-6 (p. 15), prior-construction complexity.\par}
 
 \Needspace{12\baselineskip}\subsection*{Comment 2.6}
 
@@ -495,7 +492,7 @@ User bandwidth is determined by proportional-fair (PF) scheduling, following Vis
 Each user's RT and BULK queues share its allocated service capacity. RT packets are served first in first-in-first-out (FIFO) order, and BULK packets use the remaining capacity.
 \par
 
-Within each slot, packets present at the start of the slot are served first. Any RT packets left in the maximum-age bin are then discarded. The ages of the other remaining RT packets increase by one slot, and new arrivals are added to the next-slot queues, with new RT packets entering age bin 1. Aging and expiration also apply to users in non-illuminated cells. The RT TTL is $t_{\mathrm{th},\mathrm{R}}=40$ slots, as specified in Table II. BULK packets are not subject to TTL-based expiration.
+Within each slot, \qrev{only} packets present at the start of the slot are served first. \qrev{Any unserved RT packets reaching the $t_{\mathrm{th},\mathrm{R}}$-slot limit} are then discarded. \qrev{The waiting times of remaining} RT packets increase by one slot, and new arrivals are added to the next-slot queues, with new RT packets \qrev{starting with a waiting time of one slot}. Aging and expiration also apply to users in non-illuminated cells. The RT TTL is $t_{\mathrm{th},\mathrm{R}}=40$ slots, as specified in Table II. BULK packets are not subject to TTL-based expiration.
 \par
 
 Section VI-A and Table II also specify the traffic-rate settings: RT arrival rates are 2-10 Mbps and BULK arrival rates are 8-40 Mbps. Their sum equals the total per-user input rate evaluated in each test, with the RT-to-BULK ratio allowed to vary across settings.
@@ -517,7 +514,7 @@ User-level resource allocation uses proportional-fair (PF) scheduling~[37, 38]. 
 RT packets are served first in FIFO order, then BULK packets use the remaining capacity.
 \par
 
-Service is applied to packets present at the beginning of slot $t$. After service, the remaining RT packets in the maximum-age bin are discarded; $D_t^{u,\mathrm{R}}$ therefore counts only unserved expired packets. Surviving RT packets advance by one age bin, and arrivals $A_t^{u,c}$ are appended to the queues for slot $t+1$, with new RT packets entering age bin 1.
+\qrev{In slot $t$, service is limited to packets already queued at the start of the slot; any unserved RT packets reaching the $t_{\mathrm{th},\mathrm{R}}$-slot limit are then discarded, so $D_t^{u,\mathrm{R}}$ counts only unserved expired packets. Surviving RT packets increase in waiting time by one slot, and new arrivals $A_t^{u,c}$ enter the queues at the end of the slot for scheduling in slot $t+1$, with newly arrived RT packets assigned an initial waiting time of one slot.}
 \par
 \end{quote}
 
@@ -563,7 +560,7 @@ All variants are trained with five independent random seeds and evaluated under 
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for pointing out this inconsistency. \qrev{We sincerely apologize for the imprecise description of the NLB baseline in the original manuscript.} We have corrected the NLB description in Section VI-A and clarified the common constraints used in the association comparison.
+Thank you for pointing out this inconsistency. We sincerely apologize for the imprecise description of the NLB baseline in the original manuscript. We have corrected the NLB description in Section VI-A and clarified the common constraints used in the association comparison.
 \par
 
 NLB randomly generates a feasible association without traffic-load information. Each cell is assigned to exactly one visible satellite, and each satellite is assigned at most $J$ cells. The association is fixed within each association period.
@@ -590,13 +587,13 @@ A feasible association is randomly generated without traffic-load information, a
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for pointing out this ambiguity. \qrev{We sincerely apologize for our carelessness in the original manuscript, where the notation $K$ was used for both the maximum number of simultaneously active beams and the actual number of beams activated in a time slot, leaving Eq. (41) and the text description inconsistent. We have now corrected this notation and} clarified that $K_{\max}$ denotes the maximum number of simultaneously active beams, while $K$ denotes the actual number activated in a given slot. For each satellite, $K$ is the smaller of $K_{\max}$ and the number of available associated cells, and the policy selects exactly $K$ cells.
+Thank you for pointing out this ambiguity. We sincerely apologize for our carelessness in the original manuscript, where the notation $K$ was used for both the maximum number of simultaneously active beams and the actual number of beams activated in a time slot, leaving Eq. (41) and the text description inconsistent. We have now corrected this notation and clarified that $K_{\max}$ denotes the maximum number of simultaneously active beams, while $K$ denotes the actual number activated in a given slot. For each satellite, $K$ is the smaller of $K_{\max}$ and the number of available associated cells, and the policy selects exactly $K$ cells.
 \par
 
 Accordingly, $\sum_{j=1}^{J}b_t^{n,j}=K$ specifies the actual beam count, and $K\le K_{\max}$ specifies the beam limit. In the simulations, $K_{\max}=4$: four beams are activated when at least four associated cells are available; otherwise, all available associated cells are selected. The policy determines which cells to illuminate and how to distribute power among their beams.
 \par
 
-\qrev{In addition, we have revised constraints $C_2$ and $C_4$ of Problem P2 in Eq. (27) so that the optimization formulation matches the implemented action space: $C_2$ requires exactly $K$ illuminated cells, and $C_4$ requires the power allocation ratios to sum to one when $K>0$ ($\sum_{j=1}^{J}p_t^{n,j}=1$, distributing the entire transmit-power budget among active beams) and to zero when $K=0$.} We have made the \qrev{beam-count and power-allocation} definitions consistent throughout the system description, P2 constraints, action definition, training and testing procedures, Algorithm 2, and simulation configuration.
+In addition, we have revised constraints $C_2$ and $C_4$ of Problem P2 in Eq. (27) so that the optimization formulation matches the implemented action space: $C_2$ requires exactly $K$ illuminated cells, and $C_4$ requires the power allocation ratios to sum to one when $K>0$ ($\sum_{j=1}^{J}p_t^{n,j}=1$, distributing the entire transmit-power budget among active beams) and to zero when $K=0$. We have made the beam-count and power-allocation definitions consistent throughout the system description, P2 constraints, action definition, training and testing procedures, Algorithm 2, and simulation configuration.
 \par
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section II-A, p. 3)}\par}
@@ -609,7 +606,7 @@ Each satellite can cover at most $J$ cells and activate at most $K_{\max}$ beams
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section III-B; P2, p. 6)}\par}
 
 \begin{quote}\small\color{revisionblue}
-\qrev{Constraint $C_1$ restricts illumination to associated cells. $C_2$ requires exactly $K$ active beams, while $C_3$ defines the binary illumination decisions. $C_4$ allocates the entire transmit-power budget among active beams when $K>0$, with zero transmit power when $K=0$. $C_5$ assigns power only to illuminated cells.}
+Constraint $C_1$ restricts illumination to associated cells. $C_2$ requires exactly $K$ active beams, while $C_3$ defines the binary illumination decisions. $C_4$ allocates the entire transmit-power budget among active beams when $K>0$, with zero transmit power when $K=0$. $C_5$ assigns power only to illuminated cells.
 \par
 \end{quote}
 
@@ -629,16 +626,16 @@ Each satellite can cover at most $J$ cells and activate at most $K_{\max}$ beams
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for this suggestion. We have clarified the relationship between the global critic input and each actor's local observation in Sections V-A-1 and V-A-2, with the input dimensions specified in Table I.
+Thank you for this suggestion. We have clarified the relationship between the \qrev{global state vector for the critic} and each actor's local observation in Sections V-A-1 and V-A-2, with the input dimensions specified in Table I.
 \par
 
-The critic input $s_t$ concatenates five features for all $M$ cells: normalized queue length, average queueing delay, head-of-line waiting time, historical throughput, and coverage-overlap degree. Its dimension is $5M$. The underlying physical state $\mathsf{s}_t$ also includes channel conditions and scheduling history; the critic input summarizes network-wide traffic, service status, and coverage overlap.
+The \qrev{global state vector $s_t$ for the critic} concatenates five features for all $M$ cells: normalized queue length, average queueing delay, head-of-line waiting time, historical throughput, and coverage-overlap degree. Its dimension is $5M$. The underlying physical state $\mathsf{s}_t$ also includes channel conditions and scheduling history; \qrev{this global state vector} summarizes network-wide traffic, service status, and coverage overlap.
 \par
 
-Each actor observes the corresponding five features \qrev{$f_t^{n,j}=[\bar q_t^{n,j},\bar d_t^{n,j},\bar w_t^{n,j},\bar\zeta_t^{n,j},v_j^n]^\top$} of its visible candidate cells \qrev{$j\in\{1,\ldots,J\}$, where $v_j^n=v_{\mathrm{cov}}^{\chi_n(j)}=\frac{1}{N-1}\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(j)}$ is the ratio of the number of other satellites covering candidate cell $j$ to the total number of other satellites $(N-1)$}. The real candidate cells form a fully connected local graph, with \qrev{the distance prior $\omega_{ij}^n$ and the normalized common-visibility prior $\bar c_{ij}^n=c_{ij}^n/(N-1)$} used in \qrev{GAT} attention. \qrev{Candidates associated with other satellites participate in graph aggregation to reflect potential inter-satellite interference coupling, while the association mask $m_t^n$ restricts service selection to the actor's own associated cells.}
+Each actor observes the corresponding five features $f_t^{n,j}=[\bar q_t^{n,j},\bar d_t^{n,j},\bar w_t^{n,j},\bar\zeta_t^{n,j},v_j^n]^\top$ of its visible candidate cells $j\in\{1,\ldots,J\}$, where $v_j^n=v_{\mathrm{cov}}^{\chi_n(j)}=\frac{1}{N-1}\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(j)}$ is the ratio of the number of other satellites covering candidate cell $j$ to the total number of other satellites $(N-1)$. The real candidate cells form a fully connected local graph, with the distance prior $\omega_{ij}^n$ and the normalized common-visibility prior \qrev{$\bar c_{ij}^n=\frac{1}{N-1}\sum_{n'\in\mathcal N\setminus\{n\}}V_{n',\chi_n(i)}V_{n',\chi_n(j)}$} used in GAT attention. Candidates associated with other satellites participate in graph aggregation to reflect potential inter-satellite interference coupling, while the association mask $m_t^n$ restricts service selection to the actor's own associated cells.
 \par
 
-\qrev{To avoid the heavy inter-satellite signaling overhead of exchanging slot-level states and beam actions across satellites, the coverage summaries $v_j^n$ and $\bar c_{ij}^n$ are computed by the NOCC from the visibility matrix at the start of each 100-slot association period and distributed with the association update. During online execution, each actor has access only to its local candidate-cell features and period-level topology summaries, and lacks access to other satellites' instantaneous actions and the complete network-wide physical state.} These limits on local information give rise to partial observability.
+To avoid the heavy inter-satellite signaling overhead of exchanging slot-level states and beam actions across satellites, the coverage summaries $v_j^n$ and $\bar c_{ij}^n$ are computed by the NOCC from the visibility matrix at the start of each 100-slot association period and distributed with the association update. \qrev{In both training and online execution}, each actor has access only to its local candidate-cell features and period-level topology summaries, and lacks access to other satellites' instantaneous actions and the complete network-wide physical state. These limits on local information give rise to partial observability.
 \par
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section V-A-1, p. 7, Eq. (32))}\par}
@@ -649,14 +646,14 @@ s_t=[g_t^1,g_t^2,\ldots,g_t^M]\in\mathbb{R}^{5M},
 \tag{32}\end{equation*}
 \end{quote}
 
-\Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section V-A-2, p. 7)}\par}
+\Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section V-A-2, p. \qrev{8})}\par}
 
 \begin{quote}\small\color{revisionblue}
 The critic receives the five features of all $M$ cells, whereas each actor observes its candidate-cell features and the associated topology summaries. Each actor lacks access to other satellites' current actions and the complete physical state, resulting in partial observability.
 \par
 \end{quote}
 
-\Needspace{4\baselineskip}{\small\textbf{Revision locations:} Sections V-A-1 and V-A-2 (pp. 7-8), global critic input, local candidate-cell graph, and partial observability; Table I (p. 11), $5M$ critic input.\par}
+\Needspace{4\baselineskip}{\small\textbf{Revision locations:} Sections V-A-1 and V-A-2 (pp. 7-8), \qrev{global state vector for the critic}, local candidate-cell graph, and partial observability; Table I (p. 11), $5M$ \qrev{critic state vector}.\par}
 
 \Needspace{12\baselineskip}\subsection*{Comment 3.4}
 
@@ -689,30 +686,30 @@ Consequently, the search process shifts from global exploration to local refinem
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for this comment. \qrev{Under decentralized execution, the satellite actors are assumed to run in parallel on their respective local platforms, where each satellite holds a copy of the shared trained actor parameters and maintains its own local observation, action mask, and recurrent hidden state.}
+Thank you for this comment. Under decentralized execution, the satellite actors are assumed to run in parallel on their respective local platforms, where each satellite holds a copy of the shared trained actor parameters and maintains its own local observation, action mask, and recurrent hidden state.
 \par
 
-\qrev{Prompted by the reviewer's constructive comment, we further performed inference optimization by exporting the trained policy to ONNX Runtime with single-step GRU execution, and evaluated the multi-slot timing protocol in Section VI-B-6 on Kylin Linux using a Phytium D2000/8 processor (ARM64, 8 cores/8 threads, up to 2.30 GHz) on a single CPU thread. All 16 satellites share the same actor weights and perform batched single-step GRU inference to generate per-satellite beam selection and continuous power allocation. Averaged over 300 time slots following a 30-slot warm-up and measured from observation readiness to action output, the mean per-slot inference latency for all 16 satellites on a single CPU thread is 0.854 ms, well below the 2 ms slot duration with a clear computational margin. Under parallel onboard execution, each satellite processes only its own local actor rather than a 16-satellite batch, resulting in even lower per-satellite latency.}
+Prompted by the reviewer's constructive comment, we further performed inference optimization by exporting the trained policy to ONNX Runtime with single-step GRU execution, and evaluated the multi-slot timing protocol in Section VI-B-6 on Kylin Linux using a Phytium D2000/8 processor (ARM64, 8 cores/8 threads, up to 2.30 GHz) on a single CPU thread. All 16 satellites share the same actor weights and perform batched single-step GRU inference to generate per-satellite beam selection and continuous power allocation. Averaged over 300 time slots following a 30-slot warm-up and measured from observation readiness to action output, the mean per-slot inference latency for all 16 satellites on a single CPU thread is 0.854 ms, well below the 2 ms slot duration with a clear computational margin. Under parallel onboard execution, each satellite processes only its own local actor rather than a 16-satellite batch, resulting in even lower per-satellite latency.
 \par
 
-We have clarified the parallel-execution assumption and timing protocol in Section V-A and Section VI-B-6. Practical onboard \qrev{real-time performance} depends on the processing platform and communication conditions\qrev{, and onboard inference may take longer because of processor limitations as well as power and radiation-hardening requirements. In practical satellite beam-hopping systems, the beam dwell time or scheduling slot duration can be flexibly adapted to hardware constraints to leave sufficient computational margin for onboard inference. Furthermore, to quantify the impact of decision lag across slot boundaries, we have added an action-delay sensitivity evaluation in Section VI-B-7, where actions generated by the fixed trained policy are applied after delays of 0, 1, or 2 slots (0, 2, or 4 ms) at per-user input rates of 20 and 50 Mbps across 200 test instances per condition. Averaging the relative changes for the 1- and 2-slot delays across both input rates against their zero-delay baselines yields an 8.7\% decrease in network throughput and an 18.2\% increase in average RT queueing delay, while the absolute RT queueing delay remains well below the 40-slot TTL threshold}.
+We have clarified the parallel-execution assumption and timing protocol in Section V-A and Section VI-B-6. Practical onboard real-time performance depends on the processing platform and communication conditions, and onboard inference may take longer because of processor limitations as well as power and radiation-hardening requirements. In practical satellite beam-hopping systems, the beam dwell time or scheduling slot duration can be flexibly adapted to hardware constraints to leave sufficient computational margin for onboard inference. Furthermore, to quantify the impact of decision lag across slot boundaries, we have added an action-delay sensitivity evaluation in Section VI-B-7, where actions generated by the fixed trained policy are applied after delays of 0, 1, or 2 slots (0, 2, or 4 ms) at per-user input rates of 20 and 50 Mbps across 200 test instances per condition. Averaging the relative changes for the 1- and 2-slot delays across both input rates against their zero-delay baselines yields an 8.7\% decrease in network throughput and an 18.2\% increase in average RT queueing delay, while the absolute RT queueing delay remains well below the 40-slot TTL threshold.
 \par
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section VI-B-6, p. 15)}\par}
 
 \begin{quote}\small\color{revisionblue}
-\qrev{After inference optimization via ONNX Runtime export and single-step GRU execution, policy inference latency was measured on Kylin Linux on a Phytium D2000/8 CPU (ARM64, 8 cores/8 threads, up to 2.30~GHz) with a single thread. All 16 satellites share the trained actor weights and perform batched single-step GRU inference to output beam selection and continuous power allocation. Averaged over 300~slots after a 30-slot warm-up from observation readiness to action output, per-slot latency for all 16 satellites is 0.854~ms, well below the 2~ms slot duration with clear computational margin. Under concurrent onboard deployment, each satellite runs only its local actor; however, radiation-hardened processors may use lower clock frequencies, and dwell or slot duration can be adapted in practice.}
+After inference optimization via ONNX Runtime export and single-step GRU execution, policy inference latency was measured on Kylin Linux on a Phytium D2000/8 CPU (ARM64, 8 cores/8 threads, up to 2.30~GHz) with a single thread. All 16 satellites share the trained actor weights and perform batched single-step GRU inference to output beam selection and continuous power allocation. Averaged over 300~slots after a 30-slot warm-up from observation readiness to action output, per-slot latency for all 16 satellites is 0.854~ms, well below the 2~ms slot duration with clear computational margin. Under concurrent onboard deployment, each satellite runs only its local actor; however, radiation-hardened processors may use lower clock frequencies, and dwell or slot duration can be adapted in practice.
 \par
 \end{quote}
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section VI-B-7, p. 15)}\par}
 
 \begin{quote}\small\color{revisionblue}
-\qrev{The action-delay evaluation considers action delays of 0, 1, and 2~slots (0, 2, and 4~ms) at per-user total input rates of 20 and 50~Mbps, with 200 test instances per condition. Actions are generated by the fixed trained policy and applied after the specified delay. At each input rate, relative changes for the 1- and 2-slot delays are computed against the corresponding zero-delay baseline. Equal-weight averaging of these four relative changes yields an 8.7\% decrease in network throughput and an 18.2\% increase in average RT queueing delay. These results quantify the performance sensitivity to decision delays in the tested scenarios.}
+The action-delay evaluation considers action delays of 0, 1, and 2~slots (0, 2, and 4~ms) at per-user total input rates of 20 and 50~Mbps, with 200 test instances per condition. Actions are generated by the fixed trained policy and applied after the specified delay. At each input rate, relative changes for the 1- and 2-slot delays are computed against the corresponding zero-delay baseline. Equal-weight averaging of these four relative changes yields an 8.7\% decrease in network throughput and an 18.2\% increase in average RT queueing delay. These results quantify the performance sensitivity to decision delays in the tested scenarios.
 \par
 \end{quote}
 
-\Needspace{4\baselineskip}{\small\textbf{Revision locations:} Section V-A (pp. 6-7), independent actor copies and concurrent execution; Section VI-B-6 (p. 15), \qrev{ONNX Runtime single-thread timing (0.854 ms for 16 satellites over 300 slots)} and deployment assumptions\qrev{; Section VI-B-7 (p. 15), action-delay sensitivity}.\par}
+\Needspace{4\baselineskip}{\small\textbf{Revision locations:} Section V-A (pp. 6-7), independent actor copies and concurrent execution; Section VI-B-6 (p. 15), ONNX Runtime single-thread timing (0.854 ms for 16 satellites over 300 slots) and deployment assumptions; Section VI-B-7 (p. 15), action-delay sensitivity.\par}
 
 \Needspace{12\baselineskip}\subsection*{Comment 3.6}
 
@@ -726,7 +723,7 @@ Thank you for this suggestion. We have added error bars to the throughput and RT
 At a per-user input rate of 40 Mbps, the proposed scheme achieves 39.07 $\pm$ 0.60 Mbps per user and 4.71 $\pm$ 0.11 slots of RT queueing delay in both comparison figures. At 50 Mbps in Fig. 7, the corresponding results are 45.66 $\pm$ 0.70 Mbps per user and 7.61 $\pm$ 0.18 slots. We have updated the numerical comparisons and improvement percentages in the manuscript accordingly.
 \par
 
-We have also added \qrev{multi-seed} ablation results in \qrev{Section VI-B-3 and} Fig. 8 \qrev{(reproduced under Comment 2.7), where all variants (Full model, Without coverage priors, Without GAT, Without GRU, and Equal power) are trained with five independent random seeds and evaluated on a common test-case set at per-user input rates of 20, 40, and 50 Mbps. For each training seed, performance is first averaged over the common test cases, and the reported means and pointwise 95\% Student-$t$ confidence intervals are then calculated across the five seed-level means. At a per-user input rate of 50 Mbps, the full model achieves 45.94 Mbps per user (95\% CI: [45.68, 46.20]) and 7.634 slots of RT queueing delay (95\% CI: [7.556, 7.712]), outperforming the variant without coverage priors by 1.85\% in throughput and 6.49\% in RT delay, and outperforming equal power by 6.92\% in throughput and 17.63\% in RT delay}. The intervals in Figs. 6 and 7 describe uncertainty in the test-case means, while those in Fig. 8 characterize variability across independent training runs. These additions make the \qrev{statistical variability of the} reported performance \qrev{gains} explicit. Figure 7 is reproduced below as an example.
+We have also added multi-seed ablation results in Section VI-B-3 and Fig. 8 (reproduced under Comment 2.7), where all variants (Full model, Without coverage priors, Without GAT, Without GRU, and Equal power) are trained with five independent random seeds and evaluated on a common test-case set at per-user input rates of 20, 40, and 50 Mbps. For each training seed, performance is first averaged over the common test cases, and the reported means and pointwise 95\% Student-$t$ confidence intervals are then calculated across the five seed-level means. At a per-user input rate of 50 Mbps, the full model achieves 45.94 Mbps per user (95\% CI: [45.68, 46.20]) and 7.634 slots of RT queueing delay (95\% CI: [7.556, 7.712]), outperforming the variant without coverage priors by 1.85\% in throughput and 6.49\% in RT delay, and outperforming equal power by 6.92\% in throughput and 17.63\% in RT delay. The intervals in Figs. 6 and 7 describe uncertainty in the test-case means, while those in Fig. 8 characterize variability across independent training runs. These additions make the statistical variability of the reported performance gains explicit. Figure 7 is reproduced below as an example.
 \par
 
 \Needspace{13\baselineskip}\begin{center}\begin{minipage}{\linewidth}\centering
@@ -734,21 +731,21 @@ We have also added \qrev{multi-seed} ablation results in \qrev{Section VI-B-3 an
 \includegraphics[width=0.49\linewidth]{\detokenize{Fig files/Fig 7(b)_ci20261012.png}}\par\vspace{0.5em}
 {\small\raggedright Revised manuscript Fig. 7 (reproduced). Throughput per user and average RT queueing delay for different beam hopping schemes. Error bars indicate pointwise 95\% confidence intervals of the means across 200 test cases.\par}\end{minipage}\end{center}
 
-\Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section VI-B; Figs. 6 and 7, p. 11)}\par}
+\Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section VI-B; Figs. 6 and 7, p. \qrev{12})}\par}
 
 \begin{quote}\small\color{revisionblue}
-Error bars in Figs.~6 and~7 are pointwise 95\% confidence intervals \qrev{(CIs)} across 200 test-case means at each input rate.
+Error bars in Figs.~6 and~7 are pointwise 95\% confidence intervals (CIs) across 200 test-case means at each input rate.
 \par
 \end{quote}
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section VI-B-3, pp. 13-14)}\par}
 
 \begin{quote}\small\color{revisionblue}
-\qrev{All variants are trained with five independent random seeds and evaluated under the same association and test conditions. Each trained model is evaluated on a common test-case set at per-user input rates of 20, 40, and 50~Mbps. For each seed, performance is averaged over the common test cases. The reported means and pointwise 95\% Student-$t$ confidence intervals are then calculated across the five seed-level means.}
+All variants are trained with five independent random seeds and evaluated under the same association and test conditions. Each trained model is evaluated on a common test-case set at per-user input rates of 20, 40, and 50~Mbps. For each seed, performance is averaged over the common test cases. The reported means and pointwise 95\% Student-$t$ confidence intervals are then calculated across the five seed-level means.
 \par
 \end{quote}
 
-\Needspace{4\baselineskip}{\small\textbf{Revision locations:} Section VI-B (p. 11), test-case confidence intervals; Section VI-B-2(b)-(d) (pp. 12-13) and Figs. 6-7 (p. 13), means and error bars; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), intervals across training-seed means.\par}
+\Needspace{4\baselineskip}{\small\textbf{Revision locations:} Section VI-B (p. \qrev{12}), test-case confidence intervals; Section VI-B-2(b)-(d) (pp. 12-13) and Figs. 6-7 (p. 13), means and error bars; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), intervals across training-seed means.\par}
 
 \Needspace{15\baselineskip}\section*{References cited in these responses}
 
@@ -758,11 +755,11 @@ References [1]--[6] below are specific to this response and are numbered indepen
 
 \Needspace{6\baselineskip}{\small [2] Z. Lin, Z. Ni, L. Kuang, C. Jiang, and Z. Huang, "Satellite-Terrestrial Coordinated Multi-Satellite Beam Hopping Scheduling Based on Multi-Agent Deep Reinforcement Learning," \emph{IEEE Trans. Wireless Commun.}, vol. 23, no. 8, pp. 10091--10103, Aug. 2024, doi: \href{https://doi.org/10.1109/TWC.2024.3368689}{10.1109/TWC.2024.3368689}.\par}
 
-\Needspace{6\baselineskip}{\small \qrev{[3] M. Meng, B. Hu, S. Chen, and S. Kang, "Dynamic Beam Pattern Based on Cooperation Multi-Agent VDN-D3QN for LEO Satellite Communication System," \emph{IEEE Trans. Green Commun. Netw.}, vol. 9, no. 2, pp. 725--738, June 2025, doi: \href{https://doi.org/10.1109/TGCN.2024.3457242}{10.1109/TGCN.2024.3457242}.}\par}
+\Needspace{6\baselineskip}{\small [3] M. Meng, B. Hu, S. Chen, and S. Kang, "Dynamic Beam Pattern Based on Cooperation Multi-Agent VDN-D3QN for LEO Satellite Communication System," \emph{IEEE Trans. Green Commun. Netw.}, vol. 9, no. 2, pp. 725--738, June 2025, doi: \href{https://doi.org/10.1109/TGCN.2024.3457242}{10.1109/TGCN.2024.3457242}.\par}
 
-\Needspace{6\baselineskip}{\small \qrev{[4] R. Wen, J. Jin, Z. Lin, and L. Kuang, "Attention-Based Cooperative Beam Hopping Scheduling via Multi-Agent Communication in NGSO Satellite Networks," \emph{IEEE Trans. Wireless Commun.}, vol. 25, pp. 17709--17723, 2026, doi: \href{https://doi.org/10.1109/TWC.2026.3692991}{10.1109/TWC.2026.3692991}.}\par}
+\Needspace{6\baselineskip}{\small [4] R. Wen, J. Jin, Z. Lin, and L. Kuang, "Attention-Based Cooperative Beam Hopping Scheduling via Multi-Agent Communication in NGSO Satellite Networks," \emph{IEEE Trans. Wireless Commun.}, vol. 25, pp. 17709--17723, 2026, doi: \href{https://doi.org/10.1109/TWC.2026.3692991}{10.1109/TWC.2026.3692991}.\par}
 
-\Needspace{6\baselineskip}{\small \qrev{[5] N. Chen, A. Xiao, S. Wu, F. Ding, C. Jiang, and W. Zhang, "Collaborative Beam Hopping of Load Balancing and Interference Avoidance for Multi-GEO Satellite Systems Using QMIX," \emph{IEEE Trans. Wireless Commun.}, vol. 25, pp. 19131--19147, 2026, doi: \href{https://doi.org/10.1109/TWC.2026.3706742}{10.1109/TWC.2026.3706742}.}\par}
+\Needspace{6\baselineskip}{\small [5] N. Chen, A. Xiao, S. Wu, F. Ding, C. Jiang, and W. Zhang, "Collaborative Beam Hopping of Load Balancing and Interference Avoidance for Multi-GEO Satellite Systems Using QMIX," \emph{IEEE Trans. Wireless Commun.}, vol. 25, pp. 19131--19147, 2026, doi: \href{https://doi.org/10.1109/TWC.2026.3706742}{10.1109/TWC.2026.3706742}.\par}
 
 \Needspace{6\baselineskip}{\small [6] Z. Lin, L. Kuang, B. Liu, C. Jiang, and J. Jin, "A Low-Complexity Return-Link Beam-Hopping Scheduling for NGSO Mega-Constellations With Dynamic Topology and Uneven Traffic," \emph{IEEE Internet Things J.}, vol. 12, no. 11, pp. 16695--16710, June 2025, doi: \href{https://doi.org/10.1109/JIOT.2025.3532928}{10.1109/JIOT.2025.3532928}.\par}
 

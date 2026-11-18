@@ -100,7 +100,7 @@
     {
       "block": 111,
       "kind": "prose",
-      "preview": "RT packets have a time-to-live (TTL) of $t_{\\mathrm{th},\\mathrm{R}}$ slots, whereas BULK packets are not subject to TTL-based expiration, so $D_t^{u,\\mathrm{B}}"
+      "preview": "RT packets have a time-to-live (TTL) of $t_{\\mathrm{th},\\mathrm{R}}$ slots, which bounds their maximum onboard waiting time, whereas BULK packets are "
     },
     {
       "block": 115,
@@ -120,7 +120,7 @@
     {
       "block": 129,
       "kind": "prose",
-      "preview": "The association remains fixed within each period, while slot-wise beam hopping and power allocation respond to local queue variations."
+      "preview": "It should be noted that Problem~\\hyperref[prob:p1]{P1} is solved periodically at the start of each association period. The association remains fixed w"
     },
     {
       "block": 135,
@@ -140,7 +140,7 @@
     {
       "block": 144,
       "kind": "prose",
-      "preview": "To characterize the RT queue of user $u$, packets are grouped into age bins. The number of packets in age bin $l$ at the beginning of slot $t$ is denoted by $\\n"
+      "preview": "To quantify the RT queueing delay, the packets in user $u$'s RT queue at the start of slot $t$ are grouped by their waiting time $l\\in\\{1,2,\\ldots,t_{"
     },
     {
       "block": 150,
@@ -185,7 +185,7 @@
     {
       "block": 204,
       "kind": "prose",
-      "preview": "During offline centralized training, the ground-based simulator provides time-aligned global cell features to the centralized critic. The underlying environment"
+      "preview": "During offline centralized training, the simulator provides time-aligned global cell features to the centralized critic, whereas each actor relies sol"
     },
     {
       "block": 205,
@@ -215,7 +215,7 @@
     {
       "block": 214,
       "kind": "prose",
-      "preview": "During decentralized execution, satellite $n$ observes up to $J$ visible candidate cells, which may include cells associated with other satellites. Let $m=\\chi_"
+      "preview": "In both centralized training and decentralized execution, satellite $n$ observes up to $J$ visible candidate cells, which serve as the nodes in its local grap"
     },
     {
       "block": 215,
@@ -275,7 +275,7 @@
     {
       "block": 231,
       "kind": "equation",
-      "preview": "\\begin{equation} \\begin{aligned} c_{ij}^n&=\\sum_{n'\\in\\mathcal N\\setminus\\{n\\}}V_{n',\\chi_n(i)}V_{n',\\chi_n(j)},\\\\ \\bar c_{ij}^n&=\\frac{c_{ij}^n}{N-1}. \\end{ali"
+      "preview": "\\begin{equation} \\bar c_{ij}^n=\\frac{1}{N-1}\\sum_{n'\\in\\mathcal N\\setminus\\{n\\}}V_{n',\\chi_n(i)}V_{n',\\chi_n(j)}. \\label{eq:common-visibility} \\end{eq"
     },
     {
       "block": 232,
@@ -315,7 +315,7 @@
     {
       "block": 272,
       "kind": "prose",
-      "preview": "Following the GAE framework~\\cite{refGAE}, discounting is used in return and advantage estimation to balance bias and variance. For $\\gamma<1$, the discounted t"
+      "preview": "Although the discounted training criterion with $\\gamma<1$ differs from the undiscounted objective in P2, discounting is used within the generalized advantag"
     },
     {
       "block": 274,
