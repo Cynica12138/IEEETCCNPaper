@@ -4,28 +4,28 @@
   "pdfs": {
     "Response_to_Reviewers_EN.pdf": {
       "pages": 24,
-      "bytes": 2836006,
-      "sha256": "60cd6f29cf3b571313b7586556271e585510bed3c4798e2108a17adb83830eed"
+      "bytes": 2583494,
+      "sha256": "243ff4adc4031739effbae8f647d36b8c9b2596d9fae6c9eb2a0e9a067704dc1"
     },
     "Response_to_Reviewers_EN_Marked.pdf": {
       "pages": 24,
-      "bytes": 2838797,
-      "sha256": "79fd406a7ec74be2a688d5740b88fed2fe81c02c3671de6dcb880cdfa2f987a2"
+      "bytes": 2586254,
+      "sha256": "3a7fb7aaef654403914dd0258449c94aee3b7cf1ffe15cbc249c0d5f4fed69dc"
     },
     "Revised_Manuscript_Clean.pdf": {
       "pages": 16,
-      "bytes": 4809533,
-      "sha256": "dc29e56300861c7bbca15b828ad4af71b154f725e61707e55376484feda106d1"
+      "bytes": 4598502,
+      "sha256": "3e000acf5ea8d5192d8536c26aeb67592cbd7383b68c554089b75784cb25de16"
     },
     "Revised_Manuscript_Marked.pdf": {
       "pages": 16,
-      "bytes": 4810916,
-      "sha256": "2a13623d69100e97b5387b52b2dc5a48269acf662fe45fedcd25feb95f704ebc"
+      "bytes": 4599850,
+      "sha256": "e45d7be9af7ee4d73a36047352355ce0351462ee5630c76e442bb5cda147872e"
     },
     "Revised_Manuscript_Marked_Reviewers.pdf": {
       "pages": 16,
-      "bytes": 5134984,
-      "sha256": "a24cc13f372d8d76623f772c8fc3273c17df47d25009b9200c1908a2ba0bf6a9"
+      "bytes": 4923912,
+      "sha256": "967362d99cecc660eb835c10adc423f8a060ee5e92b28b05e1fa8f82904138c9"
     }
   },
   "comments": 19,
@@ -34,7 +34,7 @@
   "response_figures": 4,
   "response_tables": 2,
   "manuscript_references": 44,
-  "canonical_source_sha256": "a364b06c4509a49fd5c935f744b8280972d75cc660b59cd16a09ac7cb1dd6c8c",
+  "canonical_source_sha256": "c4c26ef285ad25ad77e47e23460528262587c1e707b24643c27256f16e2fffb4",
   "checks": {
     "canonical_source_matches": true,
     "marked_and_clean_content_match": true,
@@ -50,7 +50,7 @@
     "changed_pages_visually_reviewed": true
   },
   "figure_2": {
-    "source": "MAPPO\u6846\u67b61114.tif",
+    "source": "MAPPO框架1114.tif",
     "pixel_dimensions": [
       7845,
       3665
