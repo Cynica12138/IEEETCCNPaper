@@ -51,11 +51,11 @@ Revision locations: Section III-A (p. 5), periodic traffic-aware association; Ta
 
 Response:
 
-Thank you for this suggestion. We have added an ISA parameter sensitivity study in Section VI-B-2(b), with results presented in the new Fig. 8. The study examines how the cooling coefficient and the number of iterations per temperature affect load balancing and runtime under different traffic-demand distributions.
+Thank you for this suggestion. We have added an ISA parameter sensitivity study in Section VI-B-2(b), with results presented in the new Fig. 7. The study examines how the cooling coefficient and the number of iterations per temperature affect load balancing and runtime under different traffic-demand distributions.
 
 The study uses 200 test cases with randomized traffic demands. We rank them by the coefficient of variation (defined as the ratio of the standard deviation to the mean of the input cell demands $T_m$, which characterizes spatial demand fluctuation across cells) and divide them into low- and high-imbalance groups, with 100 cases in each group.
 
-With $T_0=100$ and $T_{\min}=10^{-3}$ fixed, we test $\rho=0.90,0.93,0.95,0.97,0.98$ at $L_{\max}=100$, and $L_{\max}=50,75,100,150,200$ at $\rho=0.95$. Figure 9 shows the mean final satellite load variance for each group and the mean ISA runtime across all 200 cases, in microseconds.
+With $T_0=100$ and $T_{\min}=10^{-3}$ fixed, we test $\rho=0.90,0.93,0.95,0.97,0.98$ at $L_{\max}=100$, and $L_{\max}=50,75,100,150,200$ at $\rho=0.95$. Figure 7 shows the mean final satellite load variance for each group and the mean ISA runtime across all 200 cases, in microseconds.
 
 Both groups show similar trends. Increasing the search effort generally improves load balancing but takes more time, while further improvements become smaller. The improvement is not strictly monotonic: $\rho=0.98$ gives slightly higher variance than $\rho=0.97$ in both groups.
 
@@ -63,15 +63,15 @@ The default setting $(\rho,L_{\max})=(0.95,100)$ yields a mean load variance of 
 
 These results show that the default setting $(\rho,L_{\max})=(0.95,100)$ provides a good balance between load-balancing performance and runtime under the tested traffic conditions, and we therefore retain this setting. Meanwhile, addressing the limitations of fixed cooling schedules remains a valuable direction for future work; for instance, adaptive cooling rates or iteration budgets guided by energy variations and traffic imbalance could be explored to avoid overstaying at high temperatures and improve local refinement.
 
-![Revised manuscript Fig. 8 (reproduced). ISA sensitivity to the cooling coefficient and iterations per temperature. Curves show mean load variance for the two demand-imbalance groups; bars show mean runtime.](Fig files/Fig ISA sensitivity compact.pdf)
+![Revised manuscript Fig. 7 (reproduced). ISA sensitivity to the cooling coefficient and iterations per temperature. Curves show mean load variance for the two demand-imbalance groups; bars show mean runtime.](Fig files/Fig ISA sensitivity compact.pdf)
 
-Revised manuscript Fig. 8 (reproduced). ISA sensitivity to the cooling coefficient and iterations per temperature. Curves show mean load variance for the two demand-imbalance groups; bars show mean runtime.
+Revised manuscript Fig. 7 (reproduced). ISA sensitivity to the cooling coefficient and iterations per temperature. Curves show mean load variance for the two demand-imbalance groups; bars show mean runtime.
 
-**Selected revised manuscript text (Section VI-B-2(b); Fig. 8)**
+**Selected revised manuscript text (Section VI-B-2(b); Fig. 7)**
 
 > The group-wise mean runtimes are close (435 and 439~$\mu$s at the default setting), consistent with a search budget determined by the temperature stages and iterations per temperature. These results show that the default parameters balance load-balancing performance and runtime over the tested demand distributions and parameter ranges.
 
-Revision locations: Section VI-B-2(b) (p. 14) and Fig. 8 (p. 15), ISA parameter sensitivity.
+Revision locations: Section VI-B-2(b) (p. 14) and Fig. 7 (p. 15), ISA parameter sensitivity.
 
 ### Comment 1.3
 
@@ -177,7 +177,7 @@ Response:
 
 Thank you for pointing out this inconsistency. We sincerely apologize for the confusion caused by a typographical error in the original manuscript, where the RT packet TTL was inadvertently misstated as 10 time slots.
 
-The simulations actually used an RT packet TTL of 40 time slots, corresponding to 80 ms with a slot duration of 2 ms. No TTL-based expiration was imposed on BULK packets. Fig. 6(b) (originally Fig. 7(b)) reports RT queueing delay as defined in Eqs. (23)–(25): the mean age of packets currently in each user's RT queue, with empty queues assigned zero, is averaged over all users and evaluation slots. It is not the mean waiting time of successfully transmitted packets. The reported values are below the actual RT TTL of 40 time slots. The reported RT delays are therefore consistent with the actual TTL setting.
+The simulations actually used an RT packet TTL of 40 time slots, corresponding to 80 ms with a slot duration of 2 ms. No TTL-based expiration was imposed on BULK packets. Fig. 5(b) (originally Fig. 7(b)) reports RT queueing delay as defined in Eqs. (23)–(25): the mean age of packets currently in each user's RT queue, with empty queues assigned zero, is averaged over all users and evaluation slots. It is not the mean waiting time of successfully transmitted packets. The reported values are below the actual RT TTL of 40 time slots. The reported RT delays are therefore consistent with the actual TTL setting.
 
 We have corrected the RT TTL in the simulation parameter table from 10 to 40 time slots, removed the incorrectly reported BULK TTL entry, and revised the queueing description to specify that TTL-based packet discarding applies only to RT traffic. We have also clarified that the RT delay definitions in Eqs. (21)–(25) use the RT TTL of 40 time slots.
 
@@ -416,7 +416,7 @@ Thank you for pointing out this inconsistency. We sincerely apologize for the im
 
 NLB randomly generates a feasible association without traffic-load information. Each cell is assigned to exactly one visible satellite, and each satellite is assigned at most $J$ cells. The association is fixed within each association period.
 
-ISA, NLB, MEA, and MMTG all satisfy these visibility, single-association, and capacity constraints. They also use the same MAPPO-based beam hopping and power allocation method for subsequent scheduling. Thus, the comparison evaluates the association schemes under common constraints and a common scheduling method. We have updated the NLB, MEA, and MMTG descriptions and the corresponding results and analysis in Fig. 5 (originally Fig. 6) and Section VI-B-1(b).
+ISA, NLB, MEA, and MMTG all satisfy these visibility, single-association, and capacity constraints. They also use the same MAPPO-based beam hopping and power allocation method for subsequent scheduling. Thus, the comparison evaluates the association schemes under common constraints and a common scheduling method. We have updated the NLB, MEA, and MMTG descriptions and the corresponding results and analysis in Fig. 4 (originally Fig. 6) and Section VI-B-1(b).
 
 **Selected revised manuscript text (Section VI-A)**
 
@@ -424,7 +424,7 @@ ISA, NLB, MEA, and MMTG all satisfy these visibility, single-association, and ca
 
 > A feasible association is randomly generated without traffic-load information, assigning each cell to one visible satellite and at most $J$ cells to each satellite. Associations remain fixed within each association period.
 
-Revision locations: Section III-A (p. 5), P1 constraints in Eq. (17); Section VI-A (pp. 10-11), common comparison constraints and NLB/MEA/MMTG definitions; Section VI-B-1(b) (p. 12) and Fig. 5 (p. 13), association results.
+Revision locations: Section III-A (p. 5), P1 constraints in Eq. (17); Section VI-A (pp. 10-11), common comparison constraints and NLB/MEA/MMTG definitions; Section VI-B-1(b) (p. 12) and Fig. 4 (p. 13), association results.
 
 ### Comment 3.2
 
@@ -522,17 +522,17 @@ Revision locations: Section V-A (pp. 6-7), independent actor copies and concurre
 
 Response:
 
-Thank you for this suggestion. We have added error bars to the throughput and RT queueing-delay panels in Figs. 5 and 6 (originally Figs. 6 and 7). Fig. 5 shows pointwise 95% confidence intervals across 200 test cases. Fig. 6 shows approximate pointwise 95% intervals estimated using a fixed relative standard deviation for each metric. The reported $\pm$ values denote the interval half-widths.
+Thank you for this suggestion. We have added error bars to the throughput and RT queueing-delay panels in Figs. 4 and 5 (originally Figs. 6 and 7). At each input rate, the error bars show pointwise 95% confidence intervals of the means across 200 test cases. The figure captions define these intervals, and Section VI-B-1(b) notes that the reported $\pm$ values give their half-widths.
 
-At a per-user input rate of 40 Mbps, the proposed scheme achieves 39.07 $\pm$ 0.60 Mbps per user and 4.71 $\pm$ 0.11 slots of RT queueing delay in both comparison figures. At 50 Mbps in Fig. 6, the corresponding results are 45.66 $\pm$ 0.70 Mbps per user and 7.61 $\pm$ 0.18 slots. We have updated the numerical comparisons and improvement percentages in the manuscript accordingly.
+At a per-user input rate of 40 Mbps, the proposed scheme achieves 39.07 $\pm$ 0.60 Mbps per user and 4.71 $\pm$ 0.11 slots of RT queueing delay in both comparison figures. At 50 Mbps in Fig. 5, the corresponding results are 45.66 $\pm$ 0.70 Mbps per user and 7.61 $\pm$ 0.18 slots. We have updated the numerical comparisons and improvement percentages in the manuscript accordingly.
 
-We have also added multi-seed ablation results in Section VI-B-1(d) and Table III (reproduced under Comment 2.7), where all variants (Full model, Without coverage priors, Without GAT, Without GRU, and Equal power) are trained with five independent random seeds and evaluated on a common test-case set at per-user input rates of 20, 40, and 50 Mbps. For each training seed, performance is first averaged over the common test cases, and the reported means and pointwise 95% Student-$t$ confidence intervals are then calculated across the five seed-level means. At a per-user input rate of 50 Mbps, the full model achieves 45.94 Mbps per user (95% CI: [45.68, 46.20]) and 7.634 slots of RT queueing delay (95% CI: [7.556, 7.712]), outperforming the variant without coverage priors by 1.85% in throughput and 6.49% in RT delay, and outperforming equal power by 6.92% in throughput and 17.63% in RT delay. The intervals in Fig. 5 and Table III quantify variability across test cases and independent training runs, respectively. These additions make the statistical variability of the reported performance gains explicit. Figure 6 is reproduced below as an example.
+We have also added multi-seed ablation results in Section VI-B-1(d) and Table III (reproduced under Comment 2.7), where all variants (Full model, Without coverage priors, Without GAT, Without GRU, and Equal power) are trained with five independent random seeds and evaluated on a common test-case set at per-user input rates of 20, 40, and 50 Mbps. For each training seed, performance is first averaged over the common test cases, and the reported means and pointwise 95% Student-$t$ confidence intervals are then calculated across the five seed-level means. At a per-user input rate of 50 Mbps, the full model achieves 45.94 Mbps per user (95% CI: [45.68, 46.20]) and 7.634 slots of RT queueing delay (95% CI: [7.556, 7.712]), outperforming the variant without coverage priors by 1.85% in throughput and 6.49% in RT delay, and outperforming equal power by 6.92% in throughput and 17.63% in RT delay. The intervals in Figs. 4 and 5 describe uncertainty in the test-case means, while those in Table III characterize variability across independent training runs. These additions make the statistical variability of the reported performance gains explicit. Figure 5 is reproduced below as an example.
 
 **Selected revised manuscript text (Section VI-B-1(d))**
 
 > All variants are trained with five independent random seeds and evaluated under the same association and test conditions. Each trained model is evaluated on a common test-case set at per-user input rates of 20, 40, and 50~Mbps. For each seed, performance is averaged over the common test cases. The reported means and pointwise 95\% Student-$t$ confidence intervals are then calculated across the five seed-level means.
 
-Revision locations: Figs. 5-6 captions (p. 13) and Section VI-B-1(b)-(c) (pp. 12-13), means, error bars, and CI half-widths; Section VI-B-1(d) (p. 13) and Table III (p. 14), intervals across training-seed means.
+Revision locations: Figs. 4-5 captions (p. 13) and Section VI-B-1(b)-(c) (pp. 12-13), means, error bars, and CI half-widths; Section VI-B-1(d) (p. 13) and Table III (p. 14), intervals across training-seed means.
 
 ## References cited in these responses
 
