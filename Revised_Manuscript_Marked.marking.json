@@ -545,7 +545,7 @@
     {
       "block": 399,
       "kind": "prose",
-      "preview": "Fig.~\\ref{fig:ablation-performance} compares the proposed method with four ablation variants: without coverage priors, without GAT, without GRU, and with equal "
+      "preview": "Table~\\ref{tab:ablation-performance} compares the proposed method with four ablation variants: without coverage priors, without GAT, without GRU, and with equal "
     },
     {
       "block": 401,
@@ -554,8 +554,8 @@
     },
     {
       "block": 403,
-      "kind": "figure*",
-      "preview": "\\begin{figure*}[!t] \\centering \\includegraphics[width=\\textwidth]{Fig files/Fig ablation.pdf} \\caption{Ablation results of the proposed method: (a) throughput p"
+      "kind": "table*",
+      "preview": "\\begin{table*}[!t] \\centering \\caption{Ablation Results at Different Per-User Input Rates} \\label{tab:ablation-performance} \\input{Ablation_Table} \\end{tabl"
     },
     {
       "block": 405,

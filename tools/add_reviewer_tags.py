@@ -32,10 +32,10 @@ ANCHORS = [
  ('Fig. 6.', 'R3-C1,R3-C6'),
  ('Fig. 7.', 'R2-C1,R3-C6'),
  ('3) Ablation Analysis:', 'R2-C7'),
- ('Fig. 8. Ablation results of the proposed method', 'R1-C4,R2-C5,R2-C7,R3-C6'),
+ ('Ablation Results at Different Per-User Input Rates', 'R1-C4,R2-C5,R2-C7,R3-C6'),
  ('4) Hotspot-Reversal Sensitivity:', 'R1-C1'),
  ('5) ISA Parameter Sensitivity:', 'R1-C2'),
- ('Fig. 9.', 'R1-C2'),
+ ('Fig. 8.', 'R1-C2'),
  ('After inference optimization via ONNX Runtime', 'R1-C6,R3-C5'),
  ('7) Action-Delay Sensitivity:', 'R1-C6'),
 ]

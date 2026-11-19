@@ -14,7 +14,7 @@ Response:
 
 Thank you for this comment. We would like to clarify that the proposed cell-satellite association is traffic-aware and updated periodically. At the beginning of each association period, the NOCC obtains the cell traffic demands, and ISA recomputes the association using these demands. The association is held fixed only within each period, while beam hopping and power allocation are adjusted slot by slot. We apologize for not stating this clearly in the original manuscript, where the 100-slot association period was inadvertently omitted from Table II; we have now added this parameter to the table.
 
-Demand may still change between association updates. To evaluate this effect, we have added a controlled hotspot-reversal test in Section VI-B-4 and Table III to summarize its results. Table R1-1 below provides a concise summary in this response.
+Demand may still change between association updates. To evaluate this effect, we have added a controlled hotspot-reversal test in Section VI-B-4 and Table IV to summarize its results. Table R1-1 below provides a concise summary in this response.
 
 
 The test uses 200 cases, each with 144 cells and 300 users. The cells are divided into groups A and B, with 150 users in each group. After 50 evaluation slots, the per-user input rates of the two groups are exchanged between 40 and 20 Mbps. User locations and the network-wide mean input load remain unchanged.
@@ -39,11 +39,11 @@ Note that this instantaneous demand swap represents an extreme stress test desig
 
 > It should be noted that Problem~P1 is solved periodically at the start of each association period. The association remains fixed within each period to balance demand-collection latency and traffic adaptability, while slot-wise beam hopping and power allocation handle shorter-timescale queue fluctuations.
 
-**Selected revised manuscript text (Section VI-B-4; Table III)**
+**Selected revised manuscript text (Section VI-B-4; Table IV)**
 
 > With the association fixed, reversal reduces throughput by 7.66\% and increases RT delay by 8.45\%. After updating the association, throughput and delay are within 0.88\% and 2.18\% of their pre-reversal values, respectively. The degradation reflects the limited adaptability of fixed association to changing spatial demands. Nevertheless, most of the pre-reversal performance is retained, suggesting an acceptable performance loss under this abrupt demand shift, while updating the association can largely restore the pre-reversal performance.
 
-Revision locations: Section III-A (p. 5), periodic traffic-aware association; Table II (p. 11), 100-slot association period; Section VI-B-4 and Table III (p. 14), hotspot-reversal test.
+Revision locations: Section III-A (p. 5), periodic traffic-aware association; Table II (p. 11), 100-slot association period; Section VI-B-4 (pp. 13-14) and Table IV (p. 14), hotspot-reversal test.
 
 ### Comment 1.2
 
@@ -51,7 +51,7 @@ Revision locations: Section III-A (p. 5), periodic traffic-aware association; Ta
 
 Response:
 
-Thank you for this suggestion. We have added an ISA parameter sensitivity study in Section VI-B-5, with results presented in the new Fig. 9. The study examines how the cooling coefficient and the number of iterations per temperature affect load balancing and runtime under different traffic-demand distributions.
+Thank you for this suggestion. We have added an ISA parameter sensitivity study in Section VI-B-5, with results presented in the new Fig. 8. The study examines how the cooling coefficient and the number of iterations per temperature affect load balancing and runtime under different traffic-demand distributions.
 
 The study uses 200 test cases with randomized traffic demands. We rank them by the coefficient of variation (defined as the ratio of the standard deviation to the mean of the input cell demands $T_m$, which characterizes spatial demand fluctuation across cells) and divide them into low- and high-imbalance groups, with 100 cases in each group.
 
@@ -63,15 +63,15 @@ The default setting $(\rho,L_{\max})=(0.95,100)$ yields a mean load variance of 
 
 These results show that the default setting $(\rho,L_{\max})=(0.95,100)$ provides a good balance between load-balancing performance and runtime under the tested traffic conditions, and we therefore retain this setting. Meanwhile, addressing the limitations of fixed cooling schedules remains a valuable direction for future work; for instance, adaptive cooling rates or iteration budgets guided by energy variations and traffic imbalance could be explored to avoid overstaying at high temperatures and improve local refinement.
 
-![Revised manuscript Fig. 9 (reproduced). ISA sensitivity to the cooling coefficient and iterations per temperature. Curves show mean load variance for the two demand-imbalance groups; bars show mean runtime.](Fig files/Fig ISA sensitivity compact.pdf)
+![Revised manuscript Fig. 8 (reproduced). ISA sensitivity to the cooling coefficient and iterations per temperature. Curves show mean load variance for the two demand-imbalance groups; bars show mean runtime.](Fig files/Fig ISA sensitivity compact.pdf)
 
-Revised manuscript Fig. 9 (reproduced). ISA sensitivity to the cooling coefficient and iterations per temperature. Curves show mean load variance for the two demand-imbalance groups; bars show mean runtime.
+Revised manuscript Fig. 8 (reproduced). ISA sensitivity to the cooling coefficient and iterations per temperature. Curves show mean load variance for the two demand-imbalance groups; bars show mean runtime.
 
-**Selected revised manuscript text (Section VI-B-5; Fig. 9)**
+**Selected revised manuscript text (Section VI-B-5; Fig. 8)**
 
 > The group-wise mean runtimes are close (435 and 439~$\mu$s at the default setting), consistent with a search budget determined by the temperature stages and iterations per temperature. These results show that the default parameters balance load-balancing performance and runtime over the tested demand distributions and parameter ranges.
 
-Revision locations: Section VI-B-5 (pp. 14-15) and Fig. 9 (p. 15), ISA parameter sensitivity.
+Revision locations: Section VI-B-5 (pp. 14-15) and Fig. 8 (p. 15), ISA parameter sensitivity.
 
 ### Comment 1.3
 
@@ -117,7 +117,7 @@ Fig. R1-4. Controlled pairwise diagnostic of the geometric prior: (a) interferen
 
 
 
-Overall, the physical diagnostic supports a positive correlation between the distance prior and physical interference effects. In addition, although the distance prior $\omega_{ij}^n$ itself is static, the node features, such as queue backlogs, waiting delays, and historical average throughput $\bar\zeta_t^{n,j}$, evolve across time slots in response to beam illumination and interference, so the learned GAT attention scores $e_t^{n,ij}$ and the GRU recurrent hidden states are updated every slot. The ablation results in Fig. 8 confirm that removing either GAT or GRU noticeably degrades throughput and increases RT queueing delay under high loads.
+Overall, the physical diagnostic supports a positive correlation between the distance prior and physical interference effects. In addition, although the distance prior $\omega_{ij}^n$ itself is static, the node features, such as queue backlogs, waiting delays, and historical average throughput $\bar\zeta_t^{n,j}$, evolve across time slots in response to beam illumination and interference, so the learned GAT attention scores $e_t^{n,ij}$ and the GRU recurrent hidden states are updated every slot. The ablation results in Table III confirm that removing either GAT or GRU noticeably degrades throughput and increases RT queueing delay under high loads.
 
 
 
@@ -133,7 +133,7 @@ Overall, the physical diagnostic supports a positive correlation between the dis
 
 
 
-Revision locations: Section V-A-2 (p. 7), geometric distance prior; Eq. (54) (p. 9), weighted attention; Section VI-B (pp. 11-12), physical diagnostic; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), GAT and GRU ablations. Fig. R1-4 is provided in this response.
+Revision locations: Section V-A-2 (p. 7), geometric distance prior; Eq. (54) (p. 9), weighted attention; Section VI-B (pp. 11-12), physical diagnostic; Section VI-B-3 (p. 13) and Table III (p. 14), GAT and GRU ablations. Fig. R1-4 is provided in this response.
 
 ### Comment 1.5
 
@@ -338,7 +338,7 @@ where $\xi_1$ and $\xi_2$ weight the distance and common-visibility priors, resp
 
 
 
-To evaluate the effectiveness of the newly introduced coverage degree and common-visibility prior, we have added a joint coverage-prior ablation in Section VI-B-3, with results presented in the new Fig. 8 and reproduced below in our response to Comment 2.7. This experiment sets the actor's coverage-degree feature $v_j^n$ to zero and removes the common-visibility prior $\bar c_{ij}^n$ from GAT attention, with all variants trained across five independent seeds under identical association and testing conditions. At a per-user input rate of 50 Mbps, the full method achieves 1.85% higher throughput and 6.49% lower RT queueing delay than the variant without coverage priors, confirming the scheduling gain brought by these inter-satellite coverage features. In addition, the controlled pairwise diagnostic in Section VI-B, shown in Fig. R1-4 under Comment 1.4 with reference beam power $P_{\mathrm{tot}}/K_{\max}$ and single-RB reference bandwidth $\Delta B=B_{\mathrm{tot}}/N_{\mathrm{RB}}$, yields mean scenario-wise Spearman correlations of 0.546 (95% CI: [0.536, 0.557]) and 0.437 (95% CI: [0.426, 0.448]) between the distance prior $\omega_{ij}^n$ and the physical interference-to-signal ratio and relative rate loss, respectively.
+To evaluate the effectiveness of the newly introduced coverage degree and common-visibility prior, we have added a joint coverage-prior ablation in Section VI-B-3, with results presented in the new Table III and reproduced in our response to Comment 2.7. This experiment sets the actor's coverage-degree feature $v_j^n$ to zero and removes the common-visibility prior $\bar c_{ij}^n$ from GAT attention, with all variants trained across five independent seeds under identical association and testing conditions. At a per-user input rate of 50 Mbps, the full method achieves 1.85% higher throughput and 6.49% lower RT queueing delay than the variant without coverage priors, confirming the scheduling gain brought by these inter-satellite coverage features. In addition, the controlled pairwise diagnostic in Section VI-B, shown in Fig. R1-4 under Comment 1.4 with reference beam power $P_{\mathrm{tot}}/K_{\max}$ and single-RB reference bandwidth $\Delta B=B_{\mathrm{tot}}/N_{\mathrm{RB}}$, yields mean scenario-wise Spearman correlations of 0.546 (95% CI: [0.536, 0.557]) and 0.437 (95% CI: [0.426, 0.448]) between the distance prior $\omega_{ij}^n$ and the physical interference-to-signal ratio and relative rate loss, respectively.
 
 
 
@@ -352,7 +352,7 @@ We have also highlighted this low-overhead multi-satellite visibility design in 
 
 > Both $v_j^n$ and $\bar c_{ij}^n$ lie in $[0,1]$. The normalized common-visibility prior $\bar c_{ij}^n$ denotes the fraction of other satellites that cover both candidate cells $i$ and $j$. Together with the distance prior $\omega_{ij}^n$, it guides GAT feature aggregation using geometric proximity and shared potential interferers. The NOCC computes both coverage summaries once per association period and distributes them with the association update. This gives each actor a lightweight representation of potential inter-satellite interference without slot-level inter-satellite signaling for these summaries.
 
-Revision locations: Section I (pp. 2-3), third contribution bullet; Section V-A-1 (p. 7), global features; Section V-A-2 (pp. 7-8), node features, fully connected local graph, and masks; Eq. (54) and Fig. 2 (p. 9), weighted attention; Algorithm 2 (p. 10); Table I (p. 11); Section VI-B (pp. 11-12), diagnostic; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), joint coverage-prior ablation; Section VI-B-6 (p. 15), prior-construction complexity.
+Revision locations: Section I (pp. 2-3), third contribution bullet; Section V-A-1 (p. 7), global features; Section V-A-2 (pp. 7-8), node features, fully connected local graph, and masks; Eq. (54) and Fig. 2 (p. 9), weighted attention; Algorithm 2 (p. 10); Table I (p. 11); Section VI-B (pp. 11-12), diagnostic; Section VI-B-3 (p. 13) and Table III (p. 14), joint coverage-prior ablation; Section VI-B-6 (pp. 14-15), prior-construction complexity.
 
 ### Comment 2.6
 
@@ -390,7 +390,7 @@ Revision locations: Section II-A (p. 4), PF/RB allocation; Section II-B (p. 4), 
 
 Response:
 
-Thank you for this suggestion. We have added an ablation study in Section VI-B-3, with results presented in the new Fig. 8. The study compares the proposed method with four variants: Without coverage priors, Without GAT, Without GRU, and Equal power. In the variant without coverage priors, the actor's coverage-degree feature is set to zero and the common-visibility attention term is removed, while the distance prior is retained. This experiment assesses the joint contribution of the two coverage priors.
+Thank you for this suggestion. We have added an ablation study in Section VI-B-3, with results presented in the new Table III. The study compares the proposed method with four variants: Without coverage priors, Without GAT, Without GRU, and Equal power. In the variant without coverage priors, the actor's coverage-degree feature is set to zero and the common-visibility attention term is removed, while the distance prior is retained. This experiment assesses the joint contribution of the two coverage priors.
 
 All variants use the same association and testing conditions and are trained with five independent random seeds. Each trained model is evaluated on a common test-case set at per-user input rates of 20, 40, and 50 Mbps. For each training seed, performance is first averaged over the common test cases. The mean and pointwise 95% Student-$t$ confidence interval are then calculated across the five training-seed means, reflecting variability between independent training runs.
 
@@ -398,15 +398,23 @@ At a per-user input rate of 50 Mbps, the full model achieves 45.94 Mbps per user
 
 The results support the joint contribution of the coverage priors and the benefits of graph aggregation, temporal modeling, and learned power allocation under the tested conditions.
 
-![Revised manuscript Fig. 8 (reproduced). Ablation results for coverage priors, GAT, GRU, and learned power allocation. Error bars show pointwise 95% confidence intervals across five independent training-seed means.](Fig files/Fig ablation.pdf)
+**Revised manuscript Table III (reproduced). Ablation Results at Different Per-User Input Rates**
 
-Revised manuscript Fig. 8 (reproduced). Ablation results for coverage priors, GAT, GRU, and learned power allocation. Error bars show pointwise 95% confidence intervals across five independent training-seed means.
+| Method | Throughput at 20 Mbps (Mbps/user) | Throughput at 40 Mbps (Mbps/user) | Throughput at 50 Mbps (Mbps/user) | RT delay at 20 Mbps (slots) | RT delay at 40 Mbps (slots) | RT delay at 50 Mbps (slots) |
+|:--|--:|--:|--:|--:|--:|--:|
+| Proposed scheme | 19.19 ± 0.20 | 38.25 ± 0.21 | 45.94 ± 0.26 | 2.262 ± 0.043 | 4.694 ± 0.050 | 7.634 ± 0.078 |
+| Without coverage priors | 19.11 ± 0.21 | 37.86 ± 0.20 | 45.11 ± 0.27 | 2.298 ± 0.044 | 4.944 ± 0.052 | 8.164 ± 0.062 |
+| Without GAT | 18.94 ± 0.19 | 35.93 ± 0.14 | 42.20 ± 0.22 | 2.386 ± 0.055 | 5.578 ± 0.058 | 9.622 ± 0.122 |
+| Without GRU | 18.81 ± 0.20 | 35.45 ± 0.25 | 41.61 ± 0.27 | 2.430 ± 0.044 | 5.704 ± 0.055 | 9.834 ± 0.143 |
+| Equal power | 19.01 ± 0.18 | 36.58 ± 0.25 | 42.97 ± 0.32 | 2.342 ± 0.051 | 5.342 ± 0.090 | 9.268 ± 0.092 |
+
+Mean ± half-width of the pointwise 95% Student-$t$ confidence interval across five independent training seeds.
 
 **Selected revised manuscript text (Section VI-B-3)**
 
 > All variants are trained with five independent random seeds and evaluated under the same association and test conditions. Each trained model is evaluated on a common test-case set at per-user input rates of 20, 40, and 50~Mbps. For each seed, performance is averaged over the common test cases. The reported means and pointwise 95\% Student-$t$ confidence intervals are then calculated across the five seed-level means.
 
-Revision locations: Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), four ablation variants and confidence intervals across independent training seeds.
+Revision locations: Section VI-B-3 (p. 13) and Table III (p. 14), four ablation variants and confidence intervals across independent training seeds.
 
 ## Reviewer 3
 
@@ -534,7 +542,7 @@ Thank you for this suggestion. We have added error bars to the throughput and RT
 
 At a per-user input rate of 40 Mbps, the proposed scheme achieves 39.07 $\pm$ 0.60 Mbps per user and 4.71 $\pm$ 0.11 slots of RT queueing delay in both comparison figures. At 50 Mbps in Fig. 7, the corresponding results are 45.66 $\pm$ 0.70 Mbps per user and 7.61 $\pm$ 0.18 slots. We have updated the numerical comparisons and improvement percentages in the manuscript accordingly.
 
-We have also added multi-seed ablation results in Section VI-B-3 and Fig. 8 (reproduced under Comment 2.7), where all variants (Full model, Without coverage priors, Without GAT, Without GRU, and Equal power) are trained with five independent random seeds and evaluated on a common test-case set at per-user input rates of 20, 40, and 50 Mbps. For each training seed, performance is first averaged over the common test cases, and the reported means and pointwise 95% Student-$t$ confidence intervals are then calculated across the five seed-level means. At a per-user input rate of 50 Mbps, the full model achieves 45.94 Mbps per user (95% CI: [45.68, 46.20]) and 7.634 slots of RT queueing delay (95% CI: [7.556, 7.712]), outperforming the variant without coverage priors by 1.85% in throughput and 6.49% in RT delay, and outperforming equal power by 6.92% in throughput and 17.63% in RT delay. The intervals in Figs. 6 and 7 describe uncertainty in the test-case means, while those in Fig. 8 characterize variability across independent training runs. These additions make the statistical variability of the reported performance gains explicit. Figure 7 is reproduced below as an example.
+We have also added multi-seed ablation results in Section VI-B-3 and Table III (reproduced under Comment 2.7), where all variants (Full model, Without coverage priors, Without GAT, Without GRU, and Equal power) are trained with five independent random seeds and evaluated on a common test-case set at per-user input rates of 20, 40, and 50 Mbps. For each training seed, performance is first averaged over the common test cases, and the reported means and pointwise 95% Student-$t$ confidence intervals are then calculated across the five seed-level means. At a per-user input rate of 50 Mbps, the full model achieves 45.94 Mbps per user (95% CI: [45.68, 46.20]) and 7.634 slots of RT queueing delay (95% CI: [7.556, 7.712]), outperforming the variant without coverage priors by 1.85% in throughput and 6.49% in RT delay, and outperforming equal power by 6.92% in throughput and 17.63% in RT delay. The intervals in Figs. 6 and 7 describe uncertainty in the test-case means, while those in Table III characterize variability across independent training runs. These additions make the statistical variability of the reported performance gains explicit. Figure 7 is reproduced below as an example.
 
 **Selected revised manuscript text (Section VI-B; Figs. 6 and 7)**
 
@@ -544,7 +552,7 @@ We have also added multi-seed ablation results in Section VI-B-3 and Fig. 8 (rep
 
 > All variants are trained with five independent random seeds and evaluated under the same association and test conditions. Each trained model is evaluated on a common test-case set at per-user input rates of 20, 40, and 50~Mbps. For each seed, performance is averaged over the common test cases. The reported means and pointwise 95\% Student-$t$ confidence intervals are then calculated across the five seed-level means.
 
-Revision locations: Section VI-B (p. 12), test-case confidence intervals; Section VI-B-2(b)-(d) (pp. 12-13) and Figs. 6-7 (p. 13), means and error bars; Section VI-B-3 (pp. 13-14) and Fig. 8 (p. 14), intervals across training-seed means.
+Revision locations: Section VI-B (p. 12), test-case confidence intervals; Section VI-B-2(b)-(d) (pp. 12-13) and Figs. 6-7 (pp. 13-14), means and error bars; Section VI-B-3 (p. 13) and Table III (p. 14), intervals across training-seed means.
 
 ## References cited in these responses
 

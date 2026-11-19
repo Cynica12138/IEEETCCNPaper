@@ -224,9 +224,9 @@
       "R3-C6"
     ],
     "side": "left",
-    "desired_y": 457.800272,
+    "desired_y": 591.336272,
     "height": 19,
-    "y": 457.800272
+    "y": 591.336272
   },
   {
     "page": 13,
@@ -240,8 +240,8 @@
     "y": 320.796983
   },
   {
-    "page": 15,
-    "anchor": "Fig. 8. Ablation results of the proposed method",
+    "page": 14,
+    "anchor": "Ablation Results at Different Per-User Input Rates",
     "ids": [
       "R1-C4",
       "R2-C5",
@@ -249,9 +249,9 @@
       "R3-C6"
     ],
     "side": "left",
-    "desired_y": 329.032272,
+    "desired_y": 68.001272,
     "height": 33,
-    "y": 329.032272
+    "y": 68.001272
   },
   {
     "page": 13,
@@ -271,42 +271,42 @@
       "R1-C2"
     ],
     "side": "right",
-    "desired_y": 57.782983,
+    "desired_y": 340.957983,
     "height": 12,
-    "y": 57.782983
+    "y": 340.957983
   },
   {
     "page": 15,
-    "anchor": "Fig. 9.",
+    "anchor": "Fig. 8.",
     "ids": [
       "R1-C2"
     ],
     "side": "left",
-    "desired_y": 607.765272,
+    "desired_y": 304.959272,
     "height": 12,
-    "y": 607.765272
+    "y": 304.959272
   },
   {
-    "page": 14,
+    "page": 15,
     "anchor": "After inference optimization via ONNX Runtime",
     "ids": [
       "R1-C6",
       "R3-C5"
     ],
-    "side": "right",
-    "desired_y": 476.114357,
+    "side": "left",
+    "desired_y": 364.083357,
     "height": 19,
-    "y": 476.114357
+    "y": 364.083357
   },
   {
-    "page": 14,
+    "page": 15,
     "anchor": "7) Action-Delay Sensitivity:",
     "ids": [
       "R1-C6"
     ],
-    "side": "right",
-    "desired_y": 643.586983,
+    "side": "left",
+    "desired_y": 531.533983,
     "height": 12,
-    "y": 643.586983
+    "y": 531.533983
   }
 ]

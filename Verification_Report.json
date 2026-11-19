@@ -4,37 +4,37 @@
   "pdfs": {
     "Response_to_Reviewers_EN.pdf": {
       "pages": 24,
-      "bytes": 2502663,
-      "sha256": "8ce98f423ba8f78cbaf2b2fbb5897ffd10d463f96eb8e9fa1ecfa3cbb37d420a"
+      "bytes": 2477595,
+      "sha256": "125a94d23c5ea9567d72ba3528fc06147c83f0f23c98ab3cbf629ccd7cf1b187"
     },
     "Response_to_Reviewers_EN_Marked.pdf": {
       "pages": 24,
-      "bytes": 2503665,
-      "sha256": "9d85c3461415ca95fcfd47069ff6cb4b81e721d6f12b4a856e8ab51b4a1281c2"
+      "bytes": 2478598,
+      "sha256": "a4cc9082d820d8e472be1857fde01d2365bd438dbeb7c3640bf55a1ad0ed7dde"
     },
     "Revised_Manuscript_Clean.pdf": {
       "pages": 16,
-      "bytes": 4535058,
-      "sha256": "94e9d681f99efb43e99787dc1db421674a6f67884647a6e8865e947b41397ad0"
+      "bytes": 4497134,
+      "sha256": "4f6ca2caf54f63ec7222b8515ff544f99a3ce8f6c986f7b6a41fc0db47cf00fe"
     },
     "Revised_Manuscript_Marked.pdf": {
       "pages": 16,
-      "bytes": 4536393,
-      "sha256": "8791092a6ac83cd8fcc0d0ab5f706220965cbb8f4af466b4acb6a9330abb4c23"
+      "bytes": 4498542,
+      "sha256": "4ffa3b93fbc80ab151919070b0503517b8d16d172590c2de4762c35377a27a1e"
     },
     "Revised_Manuscript_Marked_Reviewers.pdf": {
       "pages": 16,
-      "bytes": 4853446,
-      "sha256": "1272f6a49fa59e76eb677205d3b19597b5de48f1d333208e6a2607a1e75c1dda"
+      "bytes": 4819558,
+      "sha256": "a4c4e0d63a90720a301a8efb3e57258ef6c1fc5a0c6d734f210740adbe5ebf3b"
     }
   },
   "comments": 19,
   "reviewer_tags": 27,
   "selected_manuscript_excerpts": 32,
-  "response_figures": 5,
-  "response_tables": 1,
+  "response_figures": 4,
+  "response_tables": 2,
   "manuscript_references": 44,
-  "canonical_source_sha256": "6fb5dde60ef6fb5b2cabe73ad5586ce4c5d80cae30cee51ddf73b4f145f2eea5",
+  "canonical_source_sha256": "aa17e55a10a67294c1fba491de2c895e5bc8ec3e31ce17153fa18a892428d7a0",
   "checks": {
     "canonical_source_matches": true,
     "marked_and_clean_content_match": true,
@@ -57,9 +57,22 @@
     ],
     "export_dpi": 600,
     "manuscript_page": 9,
-    "response_page": 12,
+    "response_page": 13,
     "png_matches_source_pixels": true,
-    "pdfs_match_source_pixels": true,
-    "all_other_page_regions_render_identically": true
+    "pdfs_match_source_pixels": true
+  },
+  "ablation_table": {
+    "number": "III",
+    "manuscript_page": 14,
+    "response_page": 17,
+    "method_count": 5,
+    "input_rates_mbps_per_user": [
+      20,
+      40,
+      50
+    ],
+    "training_seed_count": 5,
+    "metric_count": 2,
+    "all_30_mean_and_ci_pairs_match_original_statistics": true
   }
 }

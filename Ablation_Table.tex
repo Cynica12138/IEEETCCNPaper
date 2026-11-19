@@ -1,0 +1,20 @@
+\begingroup
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccccc@{}}
+\hline
+& \multicolumn{3}{c}{Throughput per user (Mbps)} & \multicolumn{3}{c}{RT queueing delay (slots)} \\
+\cline{2-4}\cline{5-7}
+Method & 20 Mbps & 40 Mbps & 50 Mbps & 20 Mbps & 40 Mbps & 50 Mbps \\
+\hline
+Proposed scheme & $19.19 \pm 0.20$ & $38.25 \pm 0.21$ & $45.94 \pm 0.26$ & $2.262 \pm 0.043$ & $4.694 \pm 0.050$ & $7.634 \pm 0.078$ \\
+Without coverage priors & $19.11 \pm 0.21$ & $37.86 \pm 0.20$ & $45.11 \pm 0.27$ & $2.298 \pm 0.044$ & $4.944 \pm 0.052$ & $8.164 \pm 0.062$ \\
+Without GAT & $18.94 \pm 0.19$ & $35.93 \pm 0.14$ & $42.20 \pm 0.22$ & $2.386 \pm 0.055$ & $5.578 \pm 0.058$ & $9.622 \pm 0.122$ \\
+Without GRU & $18.81 \pm 0.20$ & $35.45 \pm 0.25$ & $41.61 \pm 0.27$ & $2.430 \pm 0.044$ & $5.704 \pm 0.055$ & $9.834 \pm 0.143$ \\
+Equal power & $19.01 \pm 0.18$ & $36.58 \pm 0.25$ & $42.97 \pm 0.32$ & $2.342 \pm 0.051$ & $5.342 \pm 0.090$ & $9.268 \pm 0.092$ \\
+\hline
+\end{tabular*}
+\par\smallskip
+\noindent\parbox{\linewidth}{\raggedright Mean $\pm$ half-width of the pointwise 95\% Student-$t$ confidence interval across five independent training seeds.}\par
+\endgroup
