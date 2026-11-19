@@ -4,28 +4,28 @@
   "pdfs": {
     "Response_to_Reviewers_EN.pdf": {
       "pages": 24,
-      "bytes": 2583013,
-      "sha256": "5758fbda49f871d792eec528048b3a4fcfc5cb2ba7a805b31ee6c38b675e7e34"
+      "bytes": 2836006,
+      "sha256": "60cd6f29cf3b571313b7586556271e585510bed3c4798e2108a17adb83830eed"
     },
     "Response_to_Reviewers_EN_Marked.pdf": {
       "pages": 24,
-      "bytes": 2585804,
-      "sha256": "d2a43176e439b896801a93621690ca9d95947819e163ae97a7cc11f7f98e8d62"
+      "bytes": 2838797,
+      "sha256": "79fd406a7ec74be2a688d5740b88fed2fe81c02c3671de6dcb880cdfa2f987a2"
     },
     "Revised_Manuscript_Clean.pdf": {
       "pages": 16,
-      "bytes": 4599326,
-      "sha256": "d342ba0e28c0247f4d64715fbc556434b1a73ecd8416f78a37e88f0566834f92"
+      "bytes": 4809533,
+      "sha256": "dc29e56300861c7bbca15b828ad4af71b154f725e61707e55376484feda106d1"
     },
     "Revised_Manuscript_Marked.pdf": {
       "pages": 16,
-      "bytes": 4600709,
-      "sha256": "397f2494c00fc0038c4e6241e84aae878a4c577735f5bf97ad95bd3cc1c520bd"
+      "bytes": 4810916,
+      "sha256": "2a13623d69100e97b5387b52b2dc5a48269acf662fe45fedcd25feb95f704ebc"
     },
     "Revised_Manuscript_Marked_Reviewers.pdf": {
       "pages": 16,
-      "bytes": 4924782,
-      "sha256": "3ab7a402153cb6de3f6ca6ae481e68ac5832d7ffcbe080d819662a1d61ec9ede"
+      "bytes": 5134984,
+      "sha256": "a24cc13f372d8d76623f772c8fc3273c17df47d25009b9200c1908a2ba0bf6a9"
     }
   },
   "comments": 19,
@@ -75,7 +75,7 @@
     "metric_count": 2,
     "all_30_mean_and_ci_pairs_match_original_statistics": true
   },
-  "figure_6": {
+  "figure_5": {
     "manuscript_page": 13,
     "response_page": 23,
     "panels": {
