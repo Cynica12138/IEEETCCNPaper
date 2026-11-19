@@ -201,9 +201,9 @@
       "R3-C6"
     ],
     "side": "right",
-    "desired_y": 457.800272,
+    "desired_y": 482.305272,
     "height": 19,
-    "y": 457.800272
+    "y": 482.305272
   },
   {
     "page": 12,
@@ -237,9 +237,9 @@
       "R1-C2"
     ],
     "side": "left",
-    "desired_y": 390.001983,
+    "desired_y": 425.866983,
     "height": 12,
-    "y": 390.001983
+    "y": 425.866983
   },
   {
     "page": 15,
@@ -259,21 +259,21 @@
       "R1-C1"
     ],
     "side": "left",
-    "desired_y": 703.362983,
+    "desired_y": 739.227983,
     "height": 12,
-    "y": 703.362983
+    "y": 739.227983
   },
   {
-    "page": 14,
+    "page": 15,
     "anchor": "After inference optimization via ONNX Runtime",
     "ids": [
       "R1-C6",
       "R3-C5"
     ],
-    "side": "right",
-    "desired_y": 715.218357,
+    "side": "left",
+    "desired_y": 444.145357,
     "height": 19,
-    "y": 715.218357
+    "y": 444.145357
   },
   {
     "page": 15,

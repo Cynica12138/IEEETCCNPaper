@@ -695,19 +695,25 @@ After inference optimization via ONNX Runtime export and single-step GRU executi
 
 \Needspace{4\baselineskip}\textbf{Response:}\par
 
-Thank you for this suggestion. We have added error bars to the throughput and RT queueing-delay panels in Figs. 5 and 6 (originally Figs. 6 and 7). At each input rate, the error bars show pointwise 95\% confidence intervals of the means across 200 test cases. The figure captions define these intervals, and Section VI-B-1(b) notes that the reported $\pm$ values give their half-widths.
+Thank you for this suggestion. We have added error bars to the throughput and RT queueing-delay panels in Figs. 5 and 6 (originally Figs. 6 and 7). Fig. 5 shows pointwise 95\% confidence intervals across 200 test cases. Fig. 6 shows approximate pointwise 95\% intervals estimated using a fixed relative standard deviation for each metric. The reported $\pm$ values denote the interval half-widths.
 \par
 
 At a per-user input rate of 40 Mbps, the proposed scheme achieves 39.07 $\pm$ 0.60 Mbps per user and 4.71 $\pm$ 0.11 slots of RT queueing delay in both comparison figures. At 50 Mbps in Fig. 6, the corresponding results are 45.66 $\pm$ 0.70 Mbps per user and 7.61 $\pm$ 0.18 slots. We have updated the numerical comparisons and improvement percentages in the manuscript accordingly.
 \par
 
-We have also added multi-seed ablation results in Section VI-B-1(d) and Table III (reproduced under Comment 2.7), where all variants (Full model, Without coverage priors, Without GAT, Without GRU, and Equal power) are trained with five independent random seeds and evaluated on a common test-case set at per-user input rates of 20, 40, and 50 Mbps. For each training seed, performance is first averaged over the common test cases, and the reported means and pointwise 95\% Student-$t$ confidence intervals are then calculated across the five seed-level means. At a per-user input rate of 50 Mbps, the full model achieves 45.94 Mbps per user (95\% CI: [45.68, 46.20]) and 7.634 slots of RT queueing delay (95\% CI: [7.556, 7.712]), outperforming the variant without coverage priors by 1.85\% in throughput and 6.49\% in RT delay, and outperforming equal power by 6.92\% in throughput and 17.63\% in RT delay. The intervals in Figs. 5 and 6 describe uncertainty in the test-case means, while those in Table III characterize variability across independent training runs. These additions make the statistical variability of the reported performance gains explicit. Figure 6 is reproduced below as an example.
+We have also added multi-seed ablation results in Section VI-B-1(d) and Table III (reproduced under Comment 2.7), where all variants (Full model, Without coverage priors, Without GAT, Without GRU, and Equal power) are trained with five independent random seeds and evaluated on a common test-case set at per-user input rates of 20, 40, and 50 Mbps. For each training seed, performance is first averaged over the common test cases, and the reported means and pointwise 95\% Student-$t$ confidence intervals are then calculated across the five seed-level means. At a per-user input rate of 50 Mbps, the full model achieves 45.94 Mbps per user (95\% CI: [45.68, 46.20]) and 7.634 slots of RT queueing delay (95\% CI: [7.556, 7.712]), outperforming the variant without coverage priors by 1.85\% in throughput and 6.49\% in RT delay, and outperforming equal power by 6.92\% in throughput and 17.63\% in RT delay. The intervals in Fig. 5 and Table III quantify variability across test cases and independent training runs, respectively. These additions make the statistical variability of the reported performance gains explicit. Figure 6 is reproduced below as an example.
 \par
 
 \Needspace{13\baselineskip}\begin{center}\begin{minipage}{\linewidth}\centering
-\includegraphics[width=0.49\linewidth]{\detokenize{Fig files/Fig 7(a)_ci20261012.png}}\hfill
-\includegraphics[width=0.49\linewidth]{\detokenize{Fig files/Fig 7(b)_ci20261012.png}}\par\vspace{0.5em}
-{\small\raggedright Revised manuscript Fig. 6 (reproduced). Throughput per user and average RT queueing delay for different beam hopping schemes. Error bars indicate pointwise 95\% confidence intervals of the means across 200 test cases.\par}\end{minipage}\end{center}
+\begin{minipage}[b]{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{\detokenize{Fig files/Fig 6(a)_bh20261120.png}}\par
+{\small (a)}\par
+\end{minipage}\hfill
+\begin{minipage}[b]{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{\detokenize{Fig files/Fig 6(b)_bh20261120.png}}\par
+{\small (b)}\par
+\end{minipage}\par\vspace{0.5em}
+{\small\raggedright Revised manuscript Fig. 6 (reproduced). Throughput per user and average RT queueing delay for different beam hopping schemes. Error bars show approximate pointwise 95\% intervals estimated using a fixed relative standard deviation for each metric. Insets enlarge selected curves around 30 and 35~Mbps.\par}\end{minipage}\end{center}
 
 \Needspace{7\baselineskip}{\small\textbf{Selected revised manuscript text (Section VI-B-1(d), p. 13)}\par}
 

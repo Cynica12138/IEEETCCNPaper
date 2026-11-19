@@ -535,7 +535,7 @@
     {
       "block": 396,
       "kind": "figure",
-      "preview": "\\begin{figure}[!t] \\centering \\includegraphics[width=\\columnwidth]{Fig files/Fig 7(a)_ci20261012.png} \\vspace{0.5em} \\includegraphics[width=\\columnwidth]{Fig fi"
+      "preview": "\\begin{figure}[!t] \\centering \\subfloat[]{\\includegraphics[width=\\columnwidth]{Fig files/Fig 6(a)_bh20261120.png}} \\vspace{0.5em} \\subfloat[]{\\includegraphi"
     },
     {
       "block": 398,

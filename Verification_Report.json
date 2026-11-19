@@ -4,28 +4,28 @@
   "pdfs": {
     "Response_to_Reviewers_EN.pdf": {
       "pages": 24,
-      "bytes": 2466879,
-      "sha256": "e891f48ef37ce554d457285c2f618156c41be229e16205074f3dfcc138987b7f"
+      "bytes": 2592233,
+      "sha256": "2a872551f3c3c2d5ae11c7b4daa84b7eff3220df4b3bc830b304d55165e11065"
     },
     "Response_to_Reviewers_EN_Marked.pdf": {
       "pages": 24,
-      "bytes": 2469565,
-      "sha256": "5ee17058c0b557600be971be8e8c7b47b465f5c97c07c09a2c7737a35001377d"
+      "bytes": 2594862,
+      "sha256": "7f9c97c1dd0b0491d379739c22c440112fe29deb47f027c281b9883448189efc"
     },
     "Revised_Manuscript_Clean.pdf": {
       "pages": 16,
-      "bytes": 4496180,
-      "sha256": "3c29b0a882cbb90b405ee058e0690ffda5bdfc3649bf73cd80dfc04ab63ec578"
+      "bytes": 4591778,
+      "sha256": "9eebb2ace47ba2bbd8f27d65b4f5dc5d2241062b930bd953afcbb509ed437f12"
     },
     "Revised_Manuscript_Marked.pdf": {
       "pages": 16,
-      "bytes": 4497609,
-      "sha256": "71fe524a9978732bf7a8e3860ae9236b4421e8b6f556826bb069186f96058646"
+      "bytes": 4593184,
+      "sha256": "d8d139d5537ccd0e15fe8f72aee3902074ba06b968d7c0dd2810023548a57424"
     },
     "Revised_Manuscript_Marked_Reviewers.pdf": {
       "pages": 16,
-      "bytes": 4815622,
-      "sha256": "557f21ad9b1632c5ac2d324e7cf6d12735d8d3561d7b174466044b1171bcf942"
+      "bytes": 4911630,
+      "sha256": "c8c2e2ee077a09a43c7b04160cd23aeb77762f86b224a35e741f4f162ca32012"
     }
   },
   "comments": 19,
@@ -34,7 +34,7 @@
   "response_figures": 4,
   "response_tables": 2,
   "manuscript_references": 44,
-  "canonical_source_sha256": "39abd868df828201eaeaef6e48de87c689b539e15587938fd0a254dda1a94679",
+  "canonical_source_sha256": "65aa125bff526904e3b58fa38e310ba3a1fe9737bf97039e76bb45521ea81bbe",
   "checks": {
     "canonical_source_matches": true,
     "marked_and_clean_content_match": true,
@@ -74,5 +74,30 @@
     "training_seed_count": 5,
     "metric_count": 2,
     "all_30_mean_and_ci_pairs_match_original_statistics": true
+  },
+  "figure_6": {
+    "manuscript_page": 13,
+    "response_page": 23,
+    "panels": {
+      "a": "plotmappo/plotThroughput.png",
+      "b": "plotmappo/plotDelay.png"
+    },
+    "shown_input_rates_mbps_per_user": [
+      10,
+      15,
+      20,
+      25,
+      30,
+      35,
+      40,
+      45,
+      50
+    ],
+    "pdfs_match_source_pixels": true,
+    "subfigure_labels": "typeset in LaTeX",
+    "pixel_dimensions": [
+      1767,
+      1314
+    ]
   }
 }
