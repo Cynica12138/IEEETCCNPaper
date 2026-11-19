@@ -24,14 +24,14 @@
   },
   {
     "page": 4,
-    "anchor": "User-level resource allocation uses",
+    "anchor": "Within an illuminated cell, RBs are assigned",
     "ids": [
       "R2-C6"
     ],
     "side": "left",
-    "desired_y": 177.119357,
+    "desired_y": 142.686357,
     "height": 12,
-    "y": 177.119357
+    "y": 142.686357
   },
   {
     "page": 4,
@@ -155,9 +155,9 @@
       "R2-C4"
     ],
     "side": "left",
-    "desired_y": 142.586357,
+    "desired_y": 178.884357,
     "height": 12,
-    "y": 142.586357
+    "y": 178.884357
   },
   {
     "page": 10,
@@ -166,9 +166,9 @@
       "R1-C3"
     ],
     "side": "left",
-    "desired_y": 612.311357,
+    "desired_y": 691.307357,
     "height": 12,
-    "y": 612.311357
+    "y": 691.307357
   },
   {
     "page": 11,
@@ -176,10 +176,10 @@
     "ids": [
       "R3-C1"
     ],
-    "side": "right",
-    "desired_y": 93.486357,
+    "side": "left",
+    "desired_y": 411.830357,
     "height": 12,
-    "y": 93.486357
+    "y": 411.830357
   },
   {
     "page": 12,
@@ -189,9 +189,9 @@
       "R2-C5"
     ],
     "side": "left",
-    "desired_y": 95.257357,
+    "desired_y": 141.370357,
     "height": 19,
-    "y": 95.257357
+    "y": 141.370357
   },
   {
     "page": 12,
@@ -200,9 +200,9 @@
       "R3-C6"
     ],
     "side": "left",
-    "desired_y": 69.639357,
+    "desired_y": 117.459357,
     "height": 12,
-    "y": 69.639357
+    "y": 117.459357
   },
   {
     "page": 13,
@@ -217,30 +217,30 @@
     "y": 482.305272
   },
   {
-    "page": 13,
+    "page": 14,
     "anchor": "Fig. 7.",
     "ids": [
       "R2-C1",
       "R3-C6"
     ],
-    "side": "right",
+    "side": "left",
     "desired_y": 457.800272,
     "height": 19,
     "y": 457.800272
   },
   {
-    "page": 14,
+    "page": 13,
     "anchor": "3) Ablation Analysis:",
     "ids": [
       "R2-C7"
     ],
-    "side": "left",
-    "desired_y": 368.958983,
+    "side": "right",
+    "desired_y": 320.796983,
     "height": 12,
-    "y": 368.958983
+    "y": 320.796983
   },
   {
-    "page": 14,
+    "page": 15,
     "anchor": "Fig. 8. Ablation results of the proposed method",
     "ids": [
       "R1-C4",
@@ -254,15 +254,15 @@
     "y": 329.032272
   },
   {
-    "page": 14,
+    "page": 13,
     "anchor": "4) Hotspot-Reversal Sensitivity:",
     "ids": [
       "R1-C1"
     ],
-    "side": "left",
-    "desired_y": 667.496983,
+    "side": "right",
+    "desired_y": 619.676983,
     "height": 12,
-    "y": 667.496983
+    "y": 619.676983
   },
   {
     "page": 14,
@@ -271,9 +271,9 @@
       "R1-C2"
     ],
     "side": "right",
-    "desired_y": 679.451983,
+    "desired_y": 57.782983,
     "height": 12,
-    "y": 679.451983
+    "y": 57.782983
   },
   {
     "page": 15,
@@ -282,31 +282,31 @@
       "R1-C2"
     ],
     "side": "left",
-    "desired_y": 304.959272,
+    "desired_y": 607.765272,
     "height": 12,
-    "y": 304.959272
+    "y": 607.765272
   },
   {
-    "page": 15,
+    "page": 14,
     "anchor": "After inference optimization via ONNX Runtime",
     "ids": [
       "R1-C6",
       "R3-C5"
     ],
-    "side": "left",
-    "desired_y": 703.263357,
+    "side": "right",
+    "desired_y": 476.114357,
     "height": 19,
-    "y": 703.263357
+    "y": 476.114357
   },
   {
-    "page": 15,
+    "page": 14,
     "anchor": "7) Action-Delay Sensitivity:",
     "ids": [
       "R1-C6"
     ],
     "side": "right",
-    "desired_y": 471.767983,
+    "desired_y": 643.586983,
     "height": 12,
-    "y": 471.767983
+    "y": 643.586983
   }
 ]

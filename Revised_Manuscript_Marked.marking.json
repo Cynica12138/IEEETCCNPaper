@@ -55,12 +55,7 @@
     {
       "block": 79,
       "kind": "prose",
-      "preview": "The total transmission power of a single satellite is denoted by $P_{\\mathrm{tot}}$. The bandwidth assigned to user $u$ at slot $t$ is denoted by $B_u(t)$. The "
-    },
-    {
-      "block": 81,
-      "kind": "prose",
-      "preview": "User-level resource allocation uses proportional-fair (PF) scheduling~\\cite{refPFclassic,refPFrb}. Each illuminated beam divides $B_{\\mathrm{tot}}$ into $N_{\\ma"
+      "preview": "Let $P_{\\mathrm{tot}}$ and $P_t^{n,k}$ denote the total transmit power per satellite and the power allocated by satellite $n$ to beam $k$, respectively, with $P_t^{n,k}=0$ for inactive beams."
     },
     {
       "block": 92,
@@ -81,11 +76,6 @@
       "block": 98,
       "kind": "equation",
       "preview": "\\begin{equation} R_t^u = B_u(t)\\log_2(1+\\mathrm{SINR}_t^u). \\label{eq:rate} \\end{equation}"
-    },
-    {
-      "block": 99,
-      "kind": "prose",
-      "preview": "The model assumes a frequency-flat channel and uniform power spectral density; users without allocated RBs have $R_t^u=0$."
     },
     {
       "block": 101,
@@ -405,7 +395,7 @@
     {
       "block": 316,
       "kind": "prose",
-      "preview": "For PPO updates, $\\widetilde a_t^n=(\\mathbf j_t^n,\\mathbf y_t^n)$ records the ordered selections $\\mathbf j_t^n=(j_1,\\ldots,j_K)$ and selected-cell Gaussian sam"
+      "preview": "For PPO updates, we define the sampled action $\\widetilde a_t^n=(\\mathbf j_t^n,\\mathbf y_t^n)$ to distinguish the stored sampling outputs from the executed acti"
     },
     {
       "block": 317,

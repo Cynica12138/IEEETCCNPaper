@@ -13,7 +13,7 @@ from reportlab.lib.colors import Color, white
 ANCHORS = [
  ('To support ubiquitous connectivity', 'R1-C5'),
  ('Each satellite can cover at most J cells and activate at most', 'R2-C3,R3-C2'),
- ('User-level resource allocation uses', 'R2-C6'),
+ ('Within an illuminated cell, RBs are assigned', 'R2-C6'),
  ('RT packets have a time-to-live', 'R2-C1,R2-C6'),
  ('The association remains fixed', 'R1-C1'),
  ('The overall utility combines', 'R2-C2'),

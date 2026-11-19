@@ -1,31 +1,31 @@
 {
-  "date": "2026-11-18",
+  "date": "2026-11-19",
   "manuscript_id": "TCCN-TP-26-1155",
   "pdfs": {
     "Response_to_Reviewers_EN.pdf": {
       "pages": 24,
-      "bytes": 2501330,
-      "sha256": "658e021958992c3fe2a21fcd5e5b36cdad1bb78d3aaeb51bdc596141b46b15c2"
+      "bytes": 2502663,
+      "sha256": "8ce98f423ba8f78cbaf2b2fbb5897ffd10d463f96eb8e9fa1ecfa3cbb37d420a"
     },
     "Response_to_Reviewers_EN_Marked.pdf": {
       "pages": 24,
-      "bytes": 2502232,
-      "sha256": "9e0c92777ded438c21402e0acdf97c8b34d4317749315c063cee0076a3cd8d71"
+      "bytes": 2503665,
+      "sha256": "9d85c3461415ca95fcfd47069ff6cb4b81e721d6f12b4a856e8ab51b4a1281c2"
     },
     "Revised_Manuscript_Clean.pdf": {
       "pages": 16,
-      "bytes": 4535125,
-      "sha256": "f49b6c6f7fd7358e4b849e55f52fd4f134ff0130589dea0fea4dfc5a3d8c6a68"
+      "bytes": 4535056,
+      "sha256": "aae8a923941be54e06b8bf49d22e0011934316d55c79e23a91abd85ce8808494"
     },
     "Revised_Manuscript_Marked.pdf": {
       "pages": 16,
-      "bytes": 4536478,
-      "sha256": "d6a3121c562e83f871c50a7d5b9ed18f250607bae4af79d68c0a38af41e4228e"
+      "bytes": 4536394,
+      "sha256": "b3362b5503ec6f91440f3b4f93c6cc758abc71fb1e8a30c16675ef77821ad0a3"
     },
     "Revised_Manuscript_Marked_Reviewers.pdf": {
       "pages": 16,
-      "bytes": 4854174,
-      "sha256": "3271416520585740be4659e3e84b6f21ef4a6bae1c74f51b7894f5ac3a65aa76"
+      "bytes": 4853475,
+      "sha256": "e42b5aab1919a4b5e4ea25a8c198d2d1f9caad5146518997d5b7a86fb718cf52"
     }
   },
   "comments": 19,
@@ -34,7 +34,7 @@
   "response_figures": 5,
   "response_tables": 1,
   "manuscript_references": 44,
-  "canonical_source_sha256": "91bcafa620e92db0dc74eba734f0d1d0a91a996c6bb49fe3f35a39141ee0c4ed",
+  "canonical_source_sha256": "2aa42c1625504b270a22e3b394802cb4261b40d26369c917409513705626f869",
   "checks": {
     "canonical_source_matches": true,
     "marked_and_clean_content_match": true,
@@ -50,7 +50,7 @@
     "changed_pages_visually_reviewed": true
   },
   "figure_2": {
-    "source": "MAPPO框架1114.tif",
+    "source": "MAPPO\u6846\u67b61114.tif",
     "pixel_dimensions": [
       7845,
       3665

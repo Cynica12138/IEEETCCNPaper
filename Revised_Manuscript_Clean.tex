@@ -150,9 +150,7 @@ where $\vartheta_{n,k,u}$ denotes the off-axis angle between the $k$-th beam of 
 
 For the user terminal receive antenna, the 3GPP NTN handheld UE antenna model is adopted, and the receive antenna is approximated as an omnidirectional antenna element with an element gain of 0~dBi~\cite{ref29}. Since 0~dBi corresponds to a linear gain of 1, the receive antenna gain is set to $G_R^{n,u}=1$.
 
-Let $P_{\mathrm{tot}}$, $B_u(t)$, and $P_t^{n,k}$ denote the total transmit power per satellite, the bandwidth assigned to user $u$ at slot $t$, and the power allocated by satellite $n$ to beam $k$, respectively, with zero power for inactive beams. Assuming each beam distributes its allocated power $P_t^{n,k}$ uniformly across the system bandwidth $B_{\mathrm{tot}}$, the power of beam $k$ on satellite $n$ over the bandwidth occupied by user $u$ is $P_t^{n,k,u}=P_t^{n,k}B_u(t)/B_{\mathrm{tot}}$ for both serving and interfering beams.
-
-User-level resource allocation uses proportional-fair (PF) scheduling~\cite{refPFclassic,refPFrb}. Each illuminated beam divides $B_{\mathrm{tot}}$ into $N_{\mathrm{RB}}$ equal-bandwidth resource blocks (RBs), with $\Delta B=B_{\mathrm{tot}}/N_{\mathrm{RB}}$. Each RB is assigned to the user with the highest ratio of estimated RB rate to historical average throughput among users with a nonempty RT or bulk (BULK) queue. A positive lower bound is applied to the denominator to avoid division by zero. Historical throughput is the mean successfully transmitted data rate over the preceding 50~slots, including zero-throughput slots. The user's allocated bandwidth is $B_u(t)=n_u(t)\Delta B$, where $n_u(t)$ is its assigned RB count; users assigned no RBs receive zero service.
+Let $P_{\mathrm{tot}}$ and $P_t^{n,k}$ denote the total transmit power per satellite and the power allocated by satellite $n$ to beam $k$, respectively, with $P_t^{n,k}=0$ for inactive beams. Each illuminated beam divides the system bandwidth $B_{\mathrm{tot}}$ into $N_{\mathrm{RB}}$ equal-bandwidth resource blocks (RBs) and allocates $P_t^{n,k}$ equally across all RBs. Within an illuminated cell, RBs are assigned to users with nonempty RT or bulk (BULK) queues via proportional-fair (PF) scheduling~\cite{refPFclassic,refPFrb}: each RB is allocated to the active user with the highest ratio of estimated RB rate to historical average throughput, averaged over the preceding 50~slots (including zero-throughput slots) with a positive lower bound to avoid division by zero. Let $B_u(t)$ denote the total bandwidth of the RBs assigned to user $u$ at slot $t$; the power of beam $k$ on satellite $n$ over this bandwidth is $P_t^{n,k,u}=P_t^{n,k}B_u(t)/B_{\mathrm{tot}}$ for both serving and interfering beams, while users assigned no RBs receive zero service ($R_t^u=0$).
 
 
 To improve spectrum utilization, full frequency reuse is adopted, and co-channel interference among satellite beams must be considered. When user $u$ is served by beam $k$ of satellite $n$ at time slot $t$, the total interference consists of intra-satellite interference and inter-satellite interference, which is expressed as
@@ -202,7 +200,6 @@ R_t^u
 B_u(t)\log_2(1+\mathrm{SINR}_t^u).
 \label{eq:rate}
 \end{equation}
-The model assumes a frequency-flat channel and uniform power spectral density; users without allocated RBs have $R_t^u=0$.
 
 Since simultaneously illuminated adjacent or overlapping beams may cause non-negligible inter-beam interference, both intra-satellite and inter-satellite interference are explicitly included in the physical transmission model used to evaluate beam hopping and power allocation.
 
@@ -620,7 +617,7 @@ The graph-enhanced features of all candidate cells are then stacked in a fixed o
 \end{equation}
 The spatially enhanced observation matrix $\hat{\mathbf O}_t^n$ is flattened and projected through a fully connected layer before being passed to the GRU. The GRU then processes these projected features to capture temporal dependencies in traffic and service states, and feeds its output to the beam-selection and power-allocation heads.
 
-On top of the actor backbone, hybrid action heads are designed for joint beam hopping and power allocation. The discrete branch outputs preference scores for all candidate cells and applies the action mask to suppress infeasible cells. During training, exactly $K$ cells are sampled sequentially without replacement from the masked categorical distributions, where at each step the masked logits are renormalized over the remaining unselected cells so that the sequence order follows the sampling order. During testing, the $K$ cells with the highest masked logits are selected deterministically. No cell is selected when $K=0$. The continuous branch outputs Gaussian parameters for power allocation as
+On top of the actor backbone, hybrid action heads are designed for joint beam hopping and power allocation. The discrete branch outputs preference scores for all candidate cells and applies the action mask to suppress infeasible cells. During training, an ordered sequence of $K$ cells $\mathbf j_t^n=(j_1,\ldots,j_K)$ is sampled sequentially without replacement from the masked categorical distributions, with the masked logits renormalized over the remaining unselected cells at each step, yielding $b_t^{n,j}=1$ for $j\in\{j_1,\ldots,j_K\}$ and $0$ otherwise. During testing, the $K$ cells with the highest masked logits are selected deterministically. No cell is selected when $K=0$. The continuous branch outputs Gaussian parameters for power allocation as
 \begin{equation}
 \mu_t^n=\mathbf W_{\mu}\tanh(\mathbf W_{\mathrm{h}}\mathbf h_t^n+\mathbf b_{\mu}),
 \label{eq:mappo-mu}
@@ -635,9 +632,9 @@ On top of the actor backbone, hybrid action heads are designed for joint beam ho
 where $\mathbf W_{\mathrm{h}}$ projects the hidden state, $\mathbf W_{\mu}$ and $\mathbf W_{\sigma}$ are output projection matrices, and $\mathbf b_{\mu}$ and $\mathbf b_{\sigma}$ are bias vectors of the shared actor's continuous action head. The positive bounds $\sigma_{\min}$ and $\sigma_{\max}$ specify the minimum and maximum Gaussian standard deviations.
 During training, a latent variable is sampled from the corresponding Gaussian distribution for each selected cell $j$ as
 \begin{equation}
-y_t^{n,j}\sim\operatorname{Normal}\big(\mu_t^{n,j},(\sigma_t^{n,j})^2\big).
+y_t^{n,j}\sim\operatorname{Normal}\big(\mu_t^{n,j},(\sigma_t^{n,j})^2\big),
 \end{equation}
-The final power allocation ratio is then obtained through Softmax normalization,
+and the selected-cell samples are collected into $\mathbf y_t^n=\{y_t^{n,j}\}_{b_t^{n,j}=1}$. The final power allocation ratio is then obtained through Softmax normalization,
 \begin{equation}
 p_t^{n,j}=
 \frac{\exp(y_t^{n,j})}
@@ -646,7 +643,7 @@ p_t^{n,j}=
 \label{eq:mappo-power}
 \end{equation}
 During testing, the Gaussian mean $\mu_t^{n,j}$ replaces $y_t^{n,j}$ in \eqref{eq:mappo-power}, yielding deterministic power ratios for the cells selected by masked Top-$K$.
-For $m=\chi_n(j)$, $b_t^{n,j}=x_t^{n,m}$ and $p_t^{n,j}=p_t^{n,m}$. If beam $k$ serves this node, $P_t^{n,k}=P_{\mathrm{tot}}p_t^{n,j}$ and, under uniform power spectral density, $P_t^{n,k,u}=P_t^{n,k}B_u(t)/B_{\mathrm{tot}}$, as in \eqref{eq:sinr}.
+For $m=\chi_n(j)$, $b_t^{n,j}=x_t^{n,m}$ and $p_t^{n,j}=p_t^{n,m}$; if beam $k$ serves this cell, its allocated power is $P_t^{n,k}=P_{\mathrm{tot}}p_t^{n,j}$, which is divided equally across RBs for rate evaluation in \eqref{eq:sinr}--\eqref{eq:rate}.
 
 The centralized critic uses a multilayer perceptron to estimate the value from the global cell-feature input,
 \begin{equation}
@@ -654,7 +651,7 @@ V_\phi(s_t)=f_\phi(s_t),
 \end{equation}
 where $f_\phi(\cdot)$ denotes the value network parameterized by $\phi$. The network-wide features provide context for value estimation during policy updates.
 
-For PPO updates, $\widetilde a_t^n=(\mathbf j_t^n,\mathbf y_t^n)$ records the ordered selections $\mathbf j_t^n=(j_1,\ldots,j_K)$ and selected-cell Gaussian samples $\mathbf y_t^n$. Cell selection and Softmax deterministically map these samples to the executed action $a_t^n=(b_t^n,p_t^n)$. With $\mathbf j_{<i}$ denoting previous selections, the sampled-action log-probability is
+For PPO updates, we define the sampled action $\widetilde a_t^n=(\mathbf j_t^n,\mathbf y_t^n)$ to distinguish the stored sampling outputs from the executed action $a_t^n=(b_t^n,p_t^n)$, which is deterministically obtained from $\widetilde a_t^n$ via cell selection and Softmax. With $\mathbf j_{<i}$ denoting previous selections, the sampled-action log-probability is
 \begin{equation}
 \begin{aligned}
 \log\pi_{\theta}(\widetilde a_t^n|o_t^n)
