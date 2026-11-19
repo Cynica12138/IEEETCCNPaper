@@ -27,7 +27,6 @@ ANCHORS = [
  ('For PPO updates', 'R2-C4'),
  ('Offline trajectories are collected', 'R1-C3'),
  ('All compared association schemes', 'R3-C1'),
- ('Error bars in Figs.', 'R3-C6'),
  ('Fig. 5.', 'R3-C1,R3-C6'),
  ('Fig. 6.', 'R2-C1,R3-C6'),
  ('d) Ablation analysis:', 'R2-C7'),
@@ -35,8 +34,8 @@ ANCHORS = [
  ('b) ISA parameters', 'R1-C2'),
  ('Fig. 8.', 'R1-C2'),
  ('c) Hotspot-reversal sensitivity:', 'R1-C1'),
- ('d) Action-delay sensitivity:', 'R1-C6'),
  ('After inference optimization via ONNX Runtime', 'R1-C6,R3-C5'),
+ ('Single-Thread Policy Inference Latency Across Processors', 'R1-C6,R3-C5'),
 ]
 
 def norm(s):

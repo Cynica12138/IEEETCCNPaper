@@ -182,17 +182,6 @@
     "y": 411.830357
   },
   {
-    "page": 12,
-    "anchor": "Error bars in Figs.",
-    "ids": [
-      "R3-C6"
-    ],
-    "side": "left",
-    "desired_y": 332.942357,
-    "height": 12,
-    "y": 332.942357
-  },
-  {
     "page": 13,
     "anchor": "Fig. 5.",
     "ids": [
@@ -217,15 +206,15 @@
     "y": 457.800272
   },
   {
-    "page": 13,
+    "page": 12,
     "anchor": "d) Ablation analysis:",
     "ids": [
       "R2-C7"
     ],
-    "side": "left",
-    "desired_y": 534.682983,
+    "side": "right",
+    "desired_y": 727.272983,
     "height": 12,
-    "y": 534.682983
+    "y": 727.272983
   },
   {
     "page": 14,
@@ -248,9 +237,9 @@
       "R1-C2"
     ],
     "side": "left",
-    "desired_y": 413.911983,
+    "desired_y": 390.001983,
     "height": 12,
-    "y": 413.911983
+    "y": 390.001983
   },
   {
     "page": 15,
@@ -270,31 +259,32 @@
       "R1-C1"
     ],
     "side": "left",
-    "desired_y": 727.272983,
+    "desired_y": 703.362983,
     "height": 12,
-    "y": 727.272983
+    "y": 703.362983
   },
   {
     "page": 14,
-    "anchor": "d) Action-delay sensitivity:",
-    "ids": [
-      "R1-C6"
-    ],
-    "side": "right",
-    "desired_y": 595.765983,
-    "height": 12,
-    "y": 595.765983
-  },
-  {
-    "page": 15,
     "anchor": "After inference optimization via ONNX Runtime",
     "ids": [
       "R1-C6",
       "R3-C5"
     ],
-    "side": "left",
-    "desired_y": 507.524357,
+    "side": "right",
+    "desired_y": 715.218357,
     "height": 19,
-    "y": 507.524357
+    "y": 715.218357
+  },
+  {
+    "page": 15,
+    "anchor": "Single-Thread Policy Inference Latency Across Processors",
+    "ids": [
+      "R1-C6",
+      "R3-C5"
+    ],
+    "side": "left",
+    "desired_y": 362.455272,
+    "height": 19,
+    "y": 362.455272
   }
 ]
