@@ -70,7 +70,7 @@
     {
       "block": 95,
       "kind": "prose",
-      "preview": "where $\\kappa$ is the Boltzmann constant and $T_{\\mathrm{noise}}$ is the equivalent noise temperature."
+      "preview": "with $\\kappa$ denoting the Boltzmann constant and $T_{\\mathrm{noise}}$ the equivalent noise temperature."
     },
     {
       "block": 98,

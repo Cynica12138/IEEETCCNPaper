@@ -198,7 +198,7 @@ where
 \begin{equation}\color{revisionblue}
 N_u(t)=\kappa T_{\mathrm{noise}}B_u(t),
 \end{equation}
-\revbegin{}where $\kappa$ is the Boltzmann constant and $T_{\mathrm{noise}}$ is the equivalent noise temperature.\revend{}
+\revbegin{}with $\kappa$ denoting the Boltzmann constant and $T_{\mathrm{noise}}$ the equivalent noise temperature.\revend{}
 
 According to the SINR expression, the achievable transmission rate of user $u$ at time slot $t$ is expressed as
 \begin{equation}\color{revisionblue}
@@ -690,7 +690,7 @@ r_t(\theta)=
 \frac{\pi_{\theta}(\widetilde a_t^n|o_t^n)}
 {\pi_{\theta^{\mathrm{old}}}(\widetilde a_t^n|o_t^n)},
 \end{equation}
-\revbegin{}where $\hat A_t$ is the advantage estimate, $\epsilon$ is the PPO clipping coefficient, and $\beta_d,\beta_c$ are entropy weights. $H_d$ sums the stepwise masked categorical entropies along sampled sequences; $H_c$ sums the selected-cell Gaussian differential entropies. Both are averaged over the mini-batch, with zero contributions when $K=0$. PPO reevaluates the stored sequences and Gaussian samples without resampling, using the same stepwise masks and recurrent observation context.\revend{}
+\revbegin{}and $\hat A_t$ is the advantage estimate, $\epsilon$ is the PPO clipping coefficient, and $\beta_d,\beta_c$ are entropy weights. $H_d$ sums the stepwise masked categorical entropies along sampled sequences; $H_c$ sums the selected-cell Gaussian differential entropies. Both are averaged over the mini-batch, with zero contributions when $K=0$. PPO reevaluates the stored sequences and Gaussian samples without resampling, using the same stepwise masks and recurrent observation context.\revend{}
 
 The critic is updated by minimizing the value loss
 \begin{equation}
