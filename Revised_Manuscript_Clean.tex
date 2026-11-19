@@ -847,12 +847,12 @@ All compared association schemes, including ISA, NLB, MEA, and MMTG, assign each
 
 \subsection{Result Analysis}
 \label{subsec:result-analysis}
-Per-user input rates combine RT and BULK traffic. Throughput rates are obtained by dividing delivered data volumes by the evaluation duration; per-user throughput is then averaged over users and expressed in Mbps. RT queueing delay follows the queue-age definitions in \eqref{eq:rt-queue-age}--\eqref{eq:long-term-queue-age}: current packet ages are averaged within each user's RT queue, with zero assigned to empty queues, and then over users and slots. Error bars in Figs.~\ref{fig:association-performance} and~\ref{fig:bh-performance} are pointwise 95\% confidence intervals (CIs) across 200 test-case means at each input rate.
+Per-user input rates combine RT and BULK traffic. Throughput rates are obtained by dividing delivered data volumes by the evaluation duration; per-user throughput is then averaged over users and expressed in Mbps. RT queueing delay follows the queue-age definitions in \eqref{eq:rt-queue-age}--\eqref{eq:long-term-queue-age}: current packet ages are averaged within each user's RT queue, with zero assigned to empty queues, and then over users and slots. Unless otherwise stated, the reward weight is set to $\alpha=0.7$, as justified in the sensitivity analysis below. Error bars in Figs.~\ref{fig:association-performance} and~\ref{fig:bh-performance} are pointwise 95\% confidence intervals (CIs) across 200 test-case means at each input rate.
 
-A controlled pairwise diagnostic evaluates the distance prior $\omega_{ij}^n$ using the antenna and channel models over 200 independent scenarios with 300 users each, with reference beam power $P_{\mathrm{tot}}/K_{\max}$ and single-RB reference bandwidth $\Delta B=B_{\mathrm{tot}}/N_{\mathrm{RB}}$. For each candidate cell pair, victim-cell user rates are evaluated with and without co-channel illumination from the other cell while keeping the serving signal and noise fixed. Its mean scenario-wise Spearman correlations with the resulting physical interference-to-signal ratio and relative rate loss are 0.546 (95\% scenario-level bootstrap CI: [0.536, 0.557]) and 0.437 (95\% scenario-level bootstrap CI: [0.426, 0.448]), respectively. These results support the use of the distance weight as a geometric prior under the tested conditions.
+\subsubsection{Performance Comparison}
+The proposed framework is evaluated in terms of training convergence, cell-satellite association, beam hopping performance, and module ablations.
 
-\subsubsection{Convergence Analysis}
-
+\textit{a) Convergence behavior:}
 The training behavior of the proposed MAPPO algorithm is evaluated in terms of average reward, total throughput, and average RT queueing delay. Two ablation variants, i.e., MAPPO without GAT and MAPPO without GRU, are also compared.
 
 As shown in Fig.~\ref{fig:reward-convergence}, the proposed scheme achieves the fastest reward growth and converges to the highest average reward. At the early training stage, the reward fluctuates significantly because the agents are still exploring the environment. As training proceeds, the proposed scheme rapidly improves and becomes stable after about 500 episodes. In contrast, the two ablation variants converge more slowly and finally obtain lower rewards. Removing GAT eliminates graph-based aggregation of candidate-cell features using the distance and common-visibility priors. The variant without GRU omits recurrent modeling of traffic arrivals and queue backlogs.
@@ -875,23 +875,7 @@ Similar trends can be observed in Fig.~\ref{fig:training-metrics}(a) and Fig.~\r
 \label{fig:training-metrics}
 \end{figure}
 
-\subsubsection{Performance Analysis}
-
-To further evaluate the proposed framework under different settings and comparison scenarios, the performance results are analyzed as follows.
-
-\textit{a) Performance under different weight coefficients:}
-To analyze the impact of the reward weight coefficient $\alpha$, the per-user input traffic rate is fixed at 40~Mbps, while the number of users is randomly varied from 100 to 500. Results are averaged over 200 test cases. As shown in Fig.~\ref{fig:alpha-performance}(a) and Fig.~\ref{fig:alpha-performance}(b), increasing $\alpha$ improves average user throughput at the cost of higher average RT queueing delay. Across the tested range, throughput rises from approximately 29 to 39.3~Mbps, while RT delay increases from approximately 4.4 to 5.6~slots. Above $\alpha=0.7$, further throughput gains are small, whereas the delay increases more rapidly. Therefore, $\alpha=0.7$ is selected as the throughput--delay compromise for subsequent comparisons.
-
-\begin{figure}[!t]
-\centering
-\subfloat[]{\includegraphics[width=0.48\columnwidth]{Fig files/Fig 5(a)_five20261012.png}}
-\hfill
-\subfloat[]{\includegraphics[width=0.48\columnwidth]{Fig files/Fig 5(b)_five20261012.png}}
-\caption{Effect of the reward weight coefficient $\alpha$ on (a) throughput per user and (b) average RT queueing delay.}
-\label{fig:alpha-performance}
-\end{figure}
-
-\textit{b) Performance under different cell-satellite association schemes:}
+\textit{b) Cell-satellite association schemes:}
 Given the beam hopping scheduling scheme in Algorithm~\ref{alg:mappo}, Fig.~\ref{fig:association-performance}(a) and Fig.~\ref{fig:association-performance}(b) compare throughput per user and average RT queueing delay under different cell-satellite association schemes over 200 test cases. Throughput differences among several schemes are small at low input rates, and some alternatives attain lower RT delay. As the traffic load increases, throughput and delay both increase, and the advantage of ISA becomes more pronounced. At 40~Mbps, ISA achieves 39.07\,$\pm$\,0.60~Mbps per user, which is 30.06\%, 17.33\%, and 7.34\% higher than NLB, MEA, and MMTG, respectively. Its RT queueing delay is 4.71\,$\pm$\,0.11~slots, which is 53.50\%, 40.98\%, and 9.94\% lower than these schemes, respectively. The reported $\pm$ values denote the half-widths of the 95\% confidence intervals. At this input rate, ISA has the highest mean throughput and lowest mean RT delay among the compared association schemes.
 
 \begin{figure}[!t]
@@ -903,19 +887,10 @@ Given the beam hopping scheduling scheme in Algorithm~\ref{alg:mappo}, Fig.~\ref
 \label{fig:association-performance}
 \end{figure}
 
-% \begin{figure}[!t]
-% \centering
-% \includegraphics[width=\columnwidth]{Fig files/Fig 7.png}
-% \caption{Average satellite load distribution under the proposed association scheme and the MMTG scheme.}
-% \label{fig:load-distribution}
-% \end{figure}
-
-\textit{c) Long-term network throughput under different BH schemes:}
+\textit{c) Beam hopping schemes:}
 Given the cell-satellite association strategy in Algorithm~\ref{alg:isa}, Fig.~\ref{fig:bh-performance}(a) compares throughput per user under different beam hopping schemes over 200 test cases. As the per-user input traffic rate increases, all schemes achieve higher throughput, while the performance gap becomes larger under high-load conditions. P-BH achieves the lowest throughput because its fixed periodic hopping pattern cannot adapt to dynamic traffic variations. QLF-BH and USWGP-BH improve performance by considering queue length or service weight, while PPO-BH, QMIX-BH, and MADDPG-BH further enhance resource allocation through deep reinforcement learning. Differences among several schemes are small at low input rates, whereas MAPPO-BH achieves higher mean throughput at larger input rates. At 50~Mbps, MAPPO-BH achieves 45.66\,$\pm$\,0.70~Mbps per user, which is approximately 31.43\%, 25.99\%, 16.78\%, 13.67\%, 9.81\%, and 9.10\% higher than P-BH, QLF-BH, USWGP-BH, PPO-BH, MADDPG-BH, and QMIX-BH, respectively.
 
-\textit{d) Long-term average delay under different BH schemes:}
-Given the cell-satellite association strategy in Algorithm~\ref{alg:isa}, Fig.~\ref{fig:bh-performance}(b) shows average RT queueing delay under different BH schemes over 200 test cases. As the traffic load increases, the delay of all schemes increases. MAPPO-BH does not attain the lowest mean delay at every low-load point, but its advantage becomes more pronounced at higher loads. P-BH exhibits the highest delay because it cannot dynamically adjust beam resources according to traffic variations. QLF-BH and USWGP-BH reduce delay to some extent, while PPO-BH, QMIX-BH, and MADDPG-BH further improve delay control through state-aware DRL-based scheduling. At 50~Mbps, the RT queueing delay of MAPPO-BH is 7.61\,$\pm$\,0.18~slots, which is approximately 79.81\%, 72.92\%, 59.59\%, 37.98\%, 24.13\%, and 21.14\% lower than P-BH, QLF-BH, USWGP-BH, PPO-BH, QMIX-BH, and MADDPG-BH, respectively. These results indicate that MAPPO-BH alleviates queue backlog under the tested high-load conditions.
-
+Fig.~\ref{fig:bh-performance}(b) shows average RT queueing delay under different BH schemes over 200 test cases. As the traffic load increases, the delay of all schemes increases. MAPPO-BH does not attain the lowest mean delay at every low-load point, but its advantage becomes more pronounced at higher loads. P-BH exhibits the highest delay because it cannot dynamically adjust beam resources according to traffic variations. QLF-BH and USWGP-BH reduce delay to some extent, while PPO-BH, QMIX-BH, and MADDPG-BH further improve delay control through state-aware DRL-based scheduling. At 50~Mbps, the RT queueing delay of MAPPO-BH is 7.61\,$\pm$\,0.18~slots, which is approximately 79.81\%, 72.92\%, 59.59\%, 37.98\%, 24.13\%, and 21.14\% lower than P-BH, QLF-BH, USWGP-BH, PPO-BH, QMIX-BH, and MADDPG-BH, respectively. These results indicate that MAPPO-BH alleviates queue backlog under the tested high-load conditions.
 
 \begin{figure}[!t]
 \centering
@@ -926,7 +901,7 @@ Given the cell-satellite association strategy in Algorithm~\ref{alg:isa}, Fig.~\
 \label{fig:bh-performance}
 \end{figure}
 
-\subsubsection{Ablation Analysis}
+\textit{d) Ablation analysis:}
 Table~\ref{tab:ablation-performance} compares the proposed method with four ablation variants: without coverage priors, without GAT, without GRU, and with equal power allocation. In the variant without coverage priors, the actor's coverage-degree feature is set to zero, and attention uses only the learned score and the distance prior. This variant evaluates the joint contribution of the two coverage priors. All variants are trained with five independent random seeds and evaluated under the same association and test conditions. Each trained model is evaluated on a common test-case set at per-user input rates of 20, 40, and 50~Mbps. For each seed, performance is averaged over the common test cases. The reported means and pointwise 95\% Student-$t$ confidence intervals are then calculated across the five seed-level means.
 
 The full model has the highest mean throughput and lowest mean RT queueing delay at all three tested rates. At 50~Mbps, it achieves 45.94~Mbps per user (95\% CI: [45.68, 46.20]) and 7.634~slots of RT delay (95\% CI: [7.556, 7.712]). Relative to the variant without coverage priors, throughput increases by 1.85\% and RT delay decreases by 6.49\%; relative to equal power, the improvements are 6.92\% and 17.63\%. Removing GAT or GRU causes larger degradation at this load than jointly removing the coverage priors. These results show the benefits of coverage priors, GAT, GRU, and learned power allocation under the tested conditions.
@@ -938,8 +913,37 @@ The full model has the highest mean throughput and lowest mean RT queueing delay
 \input{Ablation_Table}
 \end{table*}
 
-\subsubsection{Hotspot-Reversal Sensitivity}
-The hotspot-reversal test comprises 200 test cases, each containing 144 cells and 300 users. In each test case, the cells are partitioned into groups A and B, each containing 150 users. After 50 evaluation slots, the per-user input rates of the two groups are exchanged between 40 and 20~Mbps, while user locations and the network-wide mean input load remain unchanged. Two matched settings are compared: one uses the initial association throughout the test, and the other updates it immediately after reversal using ISA and the changed demands. Table~\ref{tab:hotspot-reversal} reports the performance averaged over the test cases for the 50~slots before reversal and the following 50~slots in each case. The actor parameters remain fixed, and queues are not reset at reversal or association update. RT queueing delay is reported in slots.
+\subsubsection{Sensitivity Analysis}
+To assess parameter trade-offs and operational robustness, we evaluate sensitivity to the reward weight $\alpha$, ISA hyperparameters, abrupt hotspot reversal, and cross-slot action delay.
+
+\textit{a) Reward weight coefficient $\alpha$:}
+To examine how the reward weight $\alpha$ trades off user throughput against RT queueing delay and to select a balanced default setting, the per-user input traffic rate is fixed at 40~Mbps, while the number of users is randomly varied from 100 to 500. Results are averaged over 200 test cases. As shown in Fig.~\ref{fig:alpha-performance}(a) and Fig.~\ref{fig:alpha-performance}(b), increasing $\alpha$ improves average user throughput at the cost of higher average RT queueing delay. Across the tested range, throughput rises from approximately 29 to 39.3~Mbps, while RT delay increases from approximately 4.4 to 5.6~slots. Above $\alpha=0.7$, further throughput gains are small, whereas the delay increases more rapidly. Therefore, $\alpha=0.7$ is selected as the default throughput--delay compromise for the performance comparisons.
+
+\begin{figure}[!t]
+\centering
+\subfloat[]{\includegraphics[width=0.48\columnwidth]{Fig files/Fig 5(a)_five20261012.png}}
+\hfill
+\subfloat[]{\includegraphics[width=0.48\columnwidth]{Fig files/Fig 5(b)_five20261012.png}}
+\caption{Effect of the reward weight coefficient $\alpha$ on (a) throughput per user and (b) average RT queueing delay.}
+\label{fig:alpha-performance}
+\end{figure}
+
+\textit{b) ISA parameters $(\rho, L_{\max})$:}
+To evaluate how the ISA cooling coefficient $\rho$ and per-temperature iteration count $L_{\max}$ balance load-balancing accuracy against runtime across different demand-imbalance levels, ISA is evaluated on 200 randomized traffic-demand test cases, ranked by the coefficient of variation (the ratio of the standard deviation to the mean) of the input cell demands $T_m$ and divided into low- and high-imbalance groups (100 cases per group). With~$T_0=100$ and $T_{\min}=10^{-3}$ fixed, Fig.~\ref{fig:isa-sensitivity}(a) varies $\rho\in\{0.90,0.93,0.95,0.97,0.98\}$ at $L_{\max}=100$, and Fig.~\ref{fig:isa-sensitivity}(b) varies $L_{\max}\in\{50,75,100,150,200\}$ at $\rho=0.95$.
+
+Both groups exhibit similar mean sensitivity trends. Slower cooling initially reduces load variance, but the variance at $\rho=0.98$ is slightly higher than at $\rho=0.97$. Increasing $L_{\max}$ reduces variance with diminishing improvements and higher runtime. The default setting $(\rho,L_{\max})=(0.95,100)$ yields a mean variance of 12656~$(\mathrm{Mbps})^2$ and a mean runtime of 437~$\mu$s across all 200 cases. Relative to this setting, $\rho=0.97$ reduces variance by 1.86\% but increases runtime by 61.78\%; $L_{\max}=200$ reduces variance by 3.76\% but increases runtime by 90.62\%.
+
+The group-wise mean runtimes are close (435 and 439~$\mu$s at the default setting), consistent with a search budget determined by the temperature stages and iterations per temperature. These results show that the default parameters balance load-balancing performance and runtime over the tested conditions.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{Fig files/Fig ISA sensitivity compact.pdf}
+\caption{ISA parameter sensitivity: (a) varying the cooling coefficient with $L_{\max}=100$; (b) varying the iterations per temperature with $\rho=0.95$. Curves use the left axis and show mean satellite load variance over 100 cases per demand-imbalance group; gray bars use the right axis and show mean runtime over all 200 cases.}
+\label{fig:isa-sensitivity}
+\end{figure*}
+
+\textit{c) Hotspot-reversal sensitivity:}
+To evaluate the robustness of periodic cell-satellite association when spatial traffic hotspots shift abruptly between association updates, we conduct a hotspot-reversal test comprising 200 test cases, each containing 144 cells and 300 users. In each test case, the cells are partitioned into groups A and B, each containing 150 users. After 50 evaluation slots, the per-user input rates of the two groups are exchanged between 40 and 20~Mbps, while user locations and the network-wide mean input load remain unchanged. Two matched settings are compared: one uses the initial association throughout the test, and the other updates it immediately after reversal using ISA and the changed demands. Table~\ref{tab:hotspot-reversal} reports the performance averaged over the test cases for the 50~slots before reversal and the following 50~slots in each case. The actor parameters remain fixed, and queues are not reset at reversal or association update. RT queueing delay is reported in slots.
 
 \begin{table}[t]
 \centering
@@ -961,27 +965,13 @@ After reversal (updated) & 27.18 & 3.75 \\
 
 With the association fixed, reversal reduces throughput by 7.66\% and increases RT delay by 8.45\%. After updating the association, throughput and delay are within 0.88\% and 2.18\% of their pre-reversal values, respectively. The degradation reflects the limited adaptability of fixed association to changing spatial demands. Nevertheless, most of the pre-reversal performance is retained, suggesting an acceptable performance loss under this abrupt demand shift, while updating the association can largely restore the pre-reversal performance.
 
-\subsubsection{ISA Parameter Sensitivity}
-ISA is evaluated on 200 randomized traffic-demand test cases, ranked by the coefficient of variation (the ratio of the standard deviation to the mean) of the input cell demands $T_m$ and divided into low- and high-imbalance groups (100 cases per group). With~$T_0=100$ and $T_{\min}=10^{-3}$ fixed, Fig.~\ref{fig:isa-sensitivity}(a) varies $\rho\in\{0.90,0.93,0.95,0.97,0.98\}$ at $L_{\max}=100$, and Fig.~\ref{fig:isa-sensitivity}(b) varies $L_{\max}\in\{50,75,100,150,200\}$ at $\rho=0.95$.
-
-Both groups exhibit similar mean sensitivity trends. Slower cooling initially reduces load variance, but the variance at $\rho=0.98$ is slightly higher than at $\rho=0.97$. Increasing $L_{\max}$ reduces variance with diminishing improvements and higher runtime. The default setting $(\rho,L_{\max})=(0.95,100)$ yields a mean variance of 12656~$(\mathrm{Mbps})^2$ and a mean runtime of 437~$\mu$s across all 200 cases. Relative to this setting, $\rho=0.97$ reduces variance by 1.86\% but increases runtime by 61.78\%; $L_{\max}=200$ reduces variance by 3.76\% but increases runtime by 90.62\%.
-
-The group-wise mean runtimes are close (435 and 439~$\mu$s at the default setting), consistent with a search budget determined by the temperature stages and iterations per temperature. These results show that the default parameters balance load-balancing performance and runtime over the tested conditions.
-
-\begin{figure*}[!t]
-\centering
-\includegraphics[width=\textwidth]{Fig files/Fig ISA sensitivity compact.pdf}
-\caption{ISA parameter sensitivity: (a) varying the cooling coefficient with $L_{\max}=100$; (b) varying the iterations per temperature with $\rho=0.95$. Curves use the left axis and show mean satellite load variance over 100 cases per demand-imbalance group; gray bars use the right axis and show mean runtime over all 200 cases.}
-\label{fig:isa-sensitivity}
-\end{figure*}
+\textit{d) Action-delay sensitivity:}
+To quantify how cross-slot decision lag caused by onboard inference or control latency degrades scheduling performance as queues and channels evolve, we evaluate action delays of 0, 1, and 2~slots (0, 2, and 4~ms) at per-user total input rates of 20 and 50~Mbps, with 200 test instances per condition. Actions are generated by the fixed trained policy and applied after the specified delay. At each input rate, relative changes for the 1- and 2-slot delays are computed against the corresponding zero-delay baseline. Equal-weight averaging of these four relative changes yields an 8.7\% decrease in network throughput and an 18.2\% increase in average RT queueing delay. These results quantify the performance sensitivity to decision delays in the tested scenarios.
 
 \subsubsection{Complexity Analysis}
 The computational cost comprises long-timescale cell-satellite association and short-timescale online MAPPO execution. For Algorithm~\ref{alg:isa}, greedy initialization requires $O(MN)$ and annealing requires $O(N_{\mathrm{temp}}L_{\max})$ with $N_{\mathrm{temp}}=\log_{\rho}(T_{\min}/T_{0})$, giving $O(MN+N_{\mathrm{temp}}L_{\max})$ overall. During online execution, the per-slot actor complexity per satellite is dominated by GAT encoding, GRU modeling, and the hybrid action heads, and is $O(J^{2}d_{g}+Jd_{g}d_h+d_h(6J+3)+Jd_h)$, where $d_h$ is the GRU hidden size. Computing the common-visibility matrix and coverage degrees from each satellite's $(N-1)\times J$ visibility submatrix requires $O((N-1)J^2)$ operations per association period.
 
 After inference optimization via ONNX Runtime export and single-step GRU execution, policy inference latency was measured on Kylin Linux on a Phytium D2000/8 CPU (ARM64, 8 cores/8 threads, up to 2.30~GHz) with a single thread. All 16 satellites share the trained actor weights and perform batched single-step GRU inference to output beam selection and continuous power allocation. Averaged over 300~slots after a 30-slot warm-up from observation readiness to action output, per-slot latency for all 16 satellites is 0.854~ms, well below the 2~ms slot duration with clear computational margin. Under concurrent onboard deployment, each satellite runs only its local actor; however, radiation-hardened processors may use lower clock frequencies, and dwell or slot duration can be adapted in practice.
-
-\subsubsection{Action-Delay Sensitivity}
-The action-delay evaluation considers action delays of 0, 1, and 2~slots (0, 2, and 4~ms) at per-user total input rates of 20 and 50~Mbps, with 200 test instances per condition. Actions are generated by the fixed trained policy and applied after the specified delay. At each input rate, relative changes for the 1- and 2-slot delays are computed against the corresponding zero-delay baseline. Equal-weight averaging of these four relative changes yields an 8.7\% decrease in network throughput and an 18.2\% increase in average RT queueing delay. These results quantify the performance sensitivity to decision delays in the tested scenarios.
 
 \section{CONCLUSION}
 \label{sec:conclusion}

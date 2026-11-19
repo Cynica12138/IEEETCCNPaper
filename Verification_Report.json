@@ -1,40 +1,40 @@
 {
-  "date": "2026-11-19",
+  "date": "2026-11-20",
   "manuscript_id": "TCCN-TP-26-1155",
   "pdfs": {
     "Response_to_Reviewers_EN.pdf": {
-      "pages": 24,
-      "bytes": 2477595,
-      "sha256": "125a94d23c5ea9567d72ba3528fc06147c83f0f23c98ab3cbf629ccd7cf1b187"
+      "pages": 25,
+      "bytes": 2468403,
+      "sha256": "4cb8a2a8d66b513fc0c9f2805e2917bb106d3cbff06966b8be326f73f4998e1c"
     },
     "Response_to_Reviewers_EN_Marked.pdf": {
-      "pages": 24,
-      "bytes": 2478598,
-      "sha256": "a4cc9082d820d8e472be1857fde01d2365bd438dbeb7c3640bf55a1ad0ed7dde"
+      "pages": 25,
+      "bytes": 2470730,
+      "sha256": "ff1c023b204e331cd460047b1ca6b4bd0d1a83e7cf601e23d6efde752d7526db"
     },
     "Revised_Manuscript_Clean.pdf": {
       "pages": 16,
-      "bytes": 4497134,
-      "sha256": "4f6ca2caf54f63ec7222b8515ff544f99a3ce8f6c986f7b6a41fc0db47cf00fe"
+      "bytes": 4496635,
+      "sha256": "681df864a5eb94278d1db1f362e28f4919dfee8bfa82416c8cc166770daf7026"
     },
     "Revised_Manuscript_Marked.pdf": {
       "pages": 16,
-      "bytes": 4498542,
-      "sha256": "4ffa3b93fbc80ab151919070b0503517b8d16d172590c2de4762c35377a27a1e"
+      "bytes": 4498027,
+      "sha256": "9e6f4e4e7d3e92a5d92addde88716d9f05958a1b8b5396706c06cae9041d408f"
     },
     "Revised_Manuscript_Marked_Reviewers.pdf": {
       "pages": 16,
-      "bytes": 4819558,
-      "sha256": "a4c4e0d63a90720a301a8efb3e57258ef6c1fc5a0c6d734f210740adbe5ebf3b"
+      "bytes": 4816735,
+      "sha256": "ee6a035dc52a701cd58fbfc6622193a671db600df758b62a87aecd48ddca446d"
     }
   },
   "comments": 19,
-  "reviewer_tags": 27,
-  "selected_manuscript_excerpts": 32,
+  "reviewer_tags": 26,
+  "selected_manuscript_excerpts": 31,
   "response_figures": 4,
   "response_tables": 2,
   "manuscript_references": 44,
-  "canonical_source_sha256": "aa17e55a10a67294c1fba491de2c895e5bc8ec3e31ce17153fa18a892428d7a0",
+  "canonical_source_sha256": "6c1d3a7474820ad04de43d2ef9553d0ce63b0d3d2b6cc85be004c4b536453d44",
   "checks": {
     "canonical_source_matches": true,
     "marked_and_clean_content_match": true,

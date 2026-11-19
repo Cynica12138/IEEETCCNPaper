@@ -27,17 +27,16 @@ ANCHORS = [
  ('For PPO updates', 'R2-C4'),
  ('Offline trajectories are collected', 'R1-C3'),
  ('All compared association schemes', 'R3-C1'),
- ('A controlled pairwise diagnostic evaluates', 'R1-C4,R2-C5'),
  ('Error bars in Figs.', 'R3-C6'),
- ('Fig. 6.', 'R3-C1,R3-C6'),
- ('Fig. 7.', 'R2-C1,R3-C6'),
- ('3) Ablation Analysis:', 'R2-C7'),
+ ('Fig. 5.', 'R3-C1,R3-C6'),
+ ('Fig. 6.', 'R2-C1,R3-C6'),
+ ('d) Ablation analysis:', 'R2-C7'),
  ('Ablation Results at Different Per-User Input Rates', 'R1-C4,R2-C5,R2-C7,R3-C6'),
- ('4) Hotspot-Reversal Sensitivity:', 'R1-C1'),
- ('5) ISA Parameter Sensitivity:', 'R1-C2'),
+ ('b) ISA parameters', 'R1-C2'),
  ('Fig. 8.', 'R1-C2'),
+ ('c) Hotspot-reversal sensitivity:', 'R1-C1'),
+ ('d) Action-delay sensitivity:', 'R1-C6'),
  ('After inference optimization via ONNX Runtime', 'R1-C6,R3-C5'),
- ('7) Action-Delay Sensitivity:', 'R1-C6'),
 ]
 
 def norm(s):

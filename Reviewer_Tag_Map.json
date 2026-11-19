@@ -183,30 +183,18 @@
   },
   {
     "page": 12,
-    "anchor": "A controlled pairwise diagnostic evaluates",
-    "ids": [
-      "R1-C4",
-      "R2-C5"
-    ],
-    "side": "left",
-    "desired_y": 141.370357,
-    "height": 19,
-    "y": 141.370357
-  },
-  {
-    "page": 12,
     "anchor": "Error bars in Figs.",
     "ids": [
       "R3-C6"
     ],
     "side": "left",
-    "desired_y": 117.459357,
+    "desired_y": 332.942357,
     "height": 12,
-    "y": 117.459357
+    "y": 332.942357
   },
   {
     "page": 13,
-    "anchor": "Fig. 6.",
+    "anchor": "Fig. 5.",
     "ids": [
       "R3-C1",
       "R3-C6"
@@ -217,27 +205,27 @@
     "y": 482.305272
   },
   {
-    "page": 14,
-    "anchor": "Fig. 7.",
+    "page": 13,
+    "anchor": "Fig. 6.",
     "ids": [
       "R2-C1",
       "R3-C6"
     ],
-    "side": "left",
-    "desired_y": 591.336272,
+    "side": "right",
+    "desired_y": 457.800272,
     "height": 19,
-    "y": 591.336272
+    "y": 457.800272
   },
   {
     "page": 13,
-    "anchor": "3) Ablation Analysis:",
+    "anchor": "d) Ablation analysis:",
     "ids": [
       "R2-C7"
     ],
-    "side": "right",
-    "desired_y": 320.796983,
+    "side": "left",
+    "desired_y": 534.682983,
     "height": 12,
-    "y": 320.796983
+    "y": 534.682983
   },
   {
     "page": 14,
@@ -254,26 +242,15 @@
     "y": 68.001272
   },
   {
-    "page": 13,
-    "anchor": "4) Hotspot-Reversal Sensitivity:",
-    "ids": [
-      "R1-C1"
-    ],
-    "side": "right",
-    "desired_y": 619.676983,
-    "height": 12,
-    "y": 619.676983
-  },
-  {
     "page": 14,
-    "anchor": "5) ISA Parameter Sensitivity:",
+    "anchor": "b) ISA parameters",
     "ids": [
       "R1-C2"
     ],
-    "side": "right",
-    "desired_y": 340.957983,
+    "side": "left",
+    "desired_y": 413.911983,
     "height": 12,
-    "y": 340.957983
+    "y": 413.911983
   },
   {
     "page": 15,
@@ -287,6 +264,28 @@
     "y": 304.959272
   },
   {
+    "page": 14,
+    "anchor": "c) Hotspot-reversal sensitivity:",
+    "ids": [
+      "R1-C1"
+    ],
+    "side": "left",
+    "desired_y": 727.272983,
+    "height": 12,
+    "y": 727.272983
+  },
+  {
+    "page": 14,
+    "anchor": "d) Action-delay sensitivity:",
+    "ids": [
+      "R1-C6"
+    ],
+    "side": "right",
+    "desired_y": 595.765983,
+    "height": 12,
+    "y": 595.765983
+  },
+  {
     "page": 15,
     "anchor": "After inference optimization via ONNX Runtime",
     "ids": [
@@ -294,19 +293,8 @@
       "R3-C5"
     ],
     "side": "left",
-    "desired_y": 364.083357,
+    "desired_y": 507.524357,
     "height": 19,
-    "y": 364.083357
-  },
-  {
-    "page": 15,
-    "anchor": "7) Action-Delay Sensitivity:",
-    "ids": [
-      "R1-C6"
-    ],
-    "side": "left",
-    "desired_y": 531.533983,
-    "height": 12,
-    "y": 531.533983
+    "y": 507.524357
   }
 ]
