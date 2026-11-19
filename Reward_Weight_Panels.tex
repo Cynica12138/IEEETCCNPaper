@@ -1,0 +1,13 @@
+% Keep the plotted data and ticks from the original panels. Coordinates are
+% measured in pixels in the original 72-dpi images (1767 pixels wide).
+\newcommand{\rewardweightpanel}[2]{%
+  \setlength{\unitlength}{\dimexpr.48\columnwidth/1767\relax}%
+  \begin{picture}(1767,1316)
+    \put(75,90){\includegraphics[trim=75bp 90bp 0 0,clip,width=\dimexpr1692\unitlength\relax]{#1}}%
+    \put(950,43){\makebox(0,0){\sffamily\fontsize{5.5}{6.5}\selectfont Trade-off coefficient \(\alpha\)}}%
+    \put(38,720){\makebox(0,0){\rotatebox[origin=c]{90}{\sffamily\fontsize{5.5}{6.5}\selectfont #2}}}%
+  \end{picture}%
+}
+\subfloat[]{\rewardweightpanel{Fig files/Fig 5(a)_five20261012.png}{Throughput per user (Mbps)}}%
+\hfill
+\subfloat[]{\rewardweightpanel{Fig files/Fig 5(b)_five20261012.png}{Average delay (time slots)}}%

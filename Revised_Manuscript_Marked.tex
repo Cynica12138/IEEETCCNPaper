@@ -872,25 +872,16 @@ To evaluate the effectiveness of the proposed framework, the proposed scheme is 
 \revbegin{}\textit{a) Convergence behavior:}
 The training behavior of the proposed MAPPO algorithm is evaluated in terms of average reward, total throughput, and average RT queueing delay. Two ablation variants, i.e., MAPPO without GAT and MAPPO without GRU, are also compared.\revend{}
 
-\revbegin{}As shown in Fig.~\ref{fig:reward-convergence}, the proposed scheme achieves the fastest reward growth and converges to the highest average reward. At the early training stage, the reward fluctuates significantly because the agents are still exploring the environment. As training proceeds, the proposed scheme rapidly improves and becomes stable after about 500 episodes. In contrast, the two ablation variants converge more slowly and finally obtain lower rewards. Removing GAT eliminates graph-based aggregation of candidate-cell features using the distance and common-visibility priors. The variant without GRU omits recurrent modeling of traffic arrivals and queue backlogs.\revend{}
+\revbegin{}As shown in Fig.~\ref{fig:training-metrics}(a), the proposed scheme achieves the fastest reward growth and converges to the highest average reward. At the early training stage, the reward fluctuates significantly because the agents are still exploring the environment. As training proceeds, the proposed scheme rapidly improves and becomes stable after about 500 episodes. In contrast, the two ablation variants converge more slowly and finally obtain lower rewards. Removing GAT eliminates graph-based aggregation of candidate-cell features using the distance and common-visibility priors. The variant without GRU omits recurrent modeling of traffic arrivals and queue backlogs.\revend{}
 
-\revbegin{}Similar trends can be observed in Fig.~\ref{fig:training-metrics}(a) and Fig.~\ref{fig:training-metrics}(b). The proposed scheme achieves the highest total throughput and the lowest average RT queueing delay after convergence. The performance degradation of the two ablation variants supports the use of GAT for spatial feature aggregation and GRU for temporal modeling in beam selection and power allocation. These results demonstrate the convergence behavior of the proposed MAPPO algorithm and the contributions of both modules under the tested conditions.\revend{}
+\revbegin{}Similar trends can be observed in Fig.~\ref{fig:training-metrics}(b) and Fig.~\ref{fig:training-metrics}(c). The proposed scheme achieves the highest total throughput and the lowest average RT queueing delay after convergence. The performance degradation of the two ablation variants supports the use of GAT for spatial feature aggregation and GRU for temporal modeling in beam selection and power allocation. These results demonstrate the convergence behavior of the proposed MAPPO algorithm and the contributions of both modules under the tested conditions.\revend{}
 
-\begin{figure}[!t]
+\begin{figure*}[!t]
 \centering
-\includegraphics[width=\columnwidth]{Fig files/Fig 3_five20261012.png}
-\revbegin{}\caption{Convergence of the average reward during MAPPO training.}\revend{}
-\label{fig:reward-convergence}
-\end{figure}
-
-\begin{figure}[!t]
-\centering
-\subfloat[]{\includegraphics[width=0.48\columnwidth]{Fig files/Fig 4(a)_five20261012.png}}
-\hfill
-\subfloat[]{\includegraphics[width=0.48\columnwidth]{Fig files/Fig 4(b)_five20261012.png}}
-\revbegin{}\caption{Training convergence in terms of (a) total throughput and (b) average RT queueing delay.}\revend{}
+\input{Training_Convergence_Panels}
+\revbegin{}\caption{Training convergence of the proposed MAPPO scheme and the variants without GAT or GRU: (a) average reward, (b) total throughput, and (c) average RT queueing delay.}\revend{}
 \label{fig:training-metrics}
-\end{figure}
+\end{figure*}
 
 \revbegin{}\textit{b) Cell-satellite association schemes:}
 Given the beam hopping scheduling scheme in Algorithm~\ref{alg:mappo}, Fig.~\ref{fig:association-performance}(a) and Fig.~\ref{fig:association-performance}(b) compare throughput per user and average RT queueing delay under different cell-satellite association schemes over 200 test cases. Throughput differences among several schemes are small at low input rates, and some alternatives attain lower RT delay. As the traffic load increases, throughput and delay both increase, and the advantage of ISA becomes more pronounced. At 40~Mbps, ISA achieves 39.07\,$\pm$\,0.60~Mbps per user, which is 30.06\%, 17.33\%, and 7.34\% higher than NLB, MEA, and MMTG, respectively. Its RT queueing delay is 4.71\,$\pm$\,0.11~slots, which is 53.50\%, 40.98\%, and 9.94\% lower than these schemes, respectively. The reported $\pm$ values denote the half-widths of the 95\% confidence intervals. At this input rate, ISA has the highest mean throughput and lowest mean RT delay among the compared association schemes.\revend{}
@@ -914,7 +905,7 @@ Given the cell-satellite association strategy in Algorithm~\ref{alg:isa}, Fig.~\
 \subfloat[]{\includegraphics[width=\columnwidth]{Fig files/Fig 6(a)_bh20261120.png}}
 \vspace{0.5em}
 \subfloat[]{\includegraphics[width=\columnwidth]{Fig files/Fig 6(b)_bh20261120.png}}
-\revbegin{}\caption{Performance of different beam hopping schemes: (a) throughput per user and (b) average RT queueing delay. Error bars show approximate pointwise 95\% intervals estimated using a fixed relative standard deviation for each metric. Insets enlarge selected curves around 30 and 35~Mbps.}\revend{}
+\revbegin{}\caption{Performance of different beam hopping schemes: (a) throughput per user and (b) average RT queueing delay. Error bars indicate pointwise 95\% confidence intervals of the means across 200 test cases. Insets enlarge selected curves around 30 and 35~Mbps.}\revend{}
 \label{fig:bh-performance}
 \end{figure}
 
@@ -940,9 +931,7 @@ We first investigate how the reward weight $\alpha$ trades off user throughput a
 
 \begin{figure}[!t]
 \centering
-\subfloat[]{\includegraphics[width=0.48\columnwidth]{Fig files/Fig 5(a)_five20261012.png}}
-\hfill
-\subfloat[]{\includegraphics[width=0.48\columnwidth]{Fig files/Fig 5(b)_five20261012.png}}
+\input{Reward_Weight_Panels}
 \revbegin{}\caption{Effect of the reward weight coefficient $\alpha$ on (a) throughput per user and (b) average RT queueing delay.}\revend{}
 \label{fig:alpha-performance}
 \end{figure}
