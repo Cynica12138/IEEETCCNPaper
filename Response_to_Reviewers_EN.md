@@ -69,7 +69,7 @@ Revised manuscript Fig. 7 (reproduced). ISA sensitivity to the cooling coefficie
 
 **Selected revised manuscript text (Section VI-B-2(b); Fig. 7)**
 
-> The group-wise mean runtimes are close (435 and 439~$\mu$s at the default setting), consistent with a search budget determined by the temperature stages and iterations per temperature. These results show that the default parameters balance load-balancing performance and runtime over the tested demand distributions and parameter ranges.
+> The group-wise mean runtimes are close (435 and 439~$\mu$s at the default setting), consistent with a search budget determined by the temperature stages and iterations per temperature. These results show that the default parameters balance load-balancing performance and runtime over the tested conditions.
 
 Revision locations: Section VI-B-2(b) (p. 14) and Fig. 7 (p. 15), ISA parameter sensitivity.
 
@@ -147,7 +147,7 @@ Thank you for recommending these studies. We have added a paragraph to the Intro
 
 > To support ubiquitous connectivity, He et al.~[5] provided a comprehensive roadmap of technical routes, challenges, and key technologies for direct-to-smartphone communications in 6G non-terrestrial networks. Related advances in satellite transmission include rate-splitting multiple access (RSMA) for IoT communications in satellite and aerial-integrated networks~[6], joint beamforming in refracting reconfigurable intelligent surface (RIS)-aided satellite-terrestrial relay networks to reduce transmit power under user rate constraints~[7], and self-powered absorptive RIS for secure satellite-terrestrial transmissions~[8]. Beyond communication resources, Cui et al.~[9] demonstrated notable latency reductions in hybrid geostationary Earth orbit (GEO)--LEO satellite-assisted IoT networks through joint task offloading and communication and computing resource allocation, while~[10] effectively integrated beam hopping with computing offloading to lower task-processing latency in multi-satellite LEO systems. Alongside these advances, satellite resources must also be adapted to heterogeneous and time-varying traffic demands.
 
-Revision locations: Section I (p. 1), the paragraph beginning "To support ubiquitous connectivity"; manuscript References [5]-[10] (p. 16).
+Revision locations: Section I (p. 1), the paragraph beginning "To support ubiquitous connectivity"; manuscript References [5]-[10] (pp. 15-16).
 
 ### Comment 1.6
 
